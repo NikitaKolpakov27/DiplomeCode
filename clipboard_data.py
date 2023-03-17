@@ -92,7 +92,7 @@ def get_file_from_clipboard():
 
                 if hash_file(data) in conf_hashes:
                     print("WARNING!")
-                    tools.conf_info_detected()
+                    tools.conf_info_detected(data)
                     root.clipboard_clear()
                     break
             else:

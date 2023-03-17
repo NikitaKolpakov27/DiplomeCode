@@ -49,8 +49,17 @@ def is_file_confidential(path_to_file):
         print("This file (" + path_to_file + ") has no confidential data")
         return False
 
-def conf_info_detected():
-    print("Conf file detected at: ", datetime.datetime.now(), " by ", socket.gethostname())
+def conf_info_detected(data):
+    detection_date = datetime.datetime.now()
+    detection_date_right_format = str(datetime.datetime.date(datetime.datetime.now()))
+    message = " ".join(["Conf file (", data, " ) detected at: ", str(detection_date), " by ", socket.gethostname(), "\n"])
+    print(message)
+
+    file_name = detection_date_right_format + "_" + socket.gethostname()
+    path = "./Logs/" + file_name + ".txt"
+    with open(path, "a") as file:
+        file.write(str(message))
+
 
 
 if __name__ == "__main__":
