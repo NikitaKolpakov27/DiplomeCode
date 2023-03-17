@@ -1,17 +1,21 @@
-import time
-
-import pyperclip
 from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler, FileSystemEvent
+from watchdog.events import FileSystemEventHandler
 
 import clipboard_data
+import tools
 
 
 class MyHandler(FileSystemEventHandler):
     def on_any_event(self, event):
+        print()
 
         if not event.is_directory:
-            print(event.event_type, " file -- ", event.src_path)
+            conf_file = tools.is_file_confidential(event.src_path)
+
+            if conf_file:
+                print(event.event_type, " file (CONFIDENTIAL) -- ", event.src_path)
+            else:
+                print(event.event_type, " file -- ", event.src_path)
         else:
             print(event.event_type, " directory -- ", event.src_path)
 
@@ -49,16 +53,6 @@ if __name__ == "__main__":
 
     while True:
         try:
-            # last_data = None
-            #
-            # while True:
-            #     data = pyperclip.paste()
-            #
-            #     if data != last_data and len(data) != 0:
-            #         print("==========БУФЕР ОБМЕНА (текст):========= \n", data, "\n=================")
-            #
-            #     last_data = data
-            clipboard_data.get_file_from_clipboard()
-
+            clipboard_data.get_data_from_clipboard()
         except KeyboardInterrupt:
             observer.stop()
