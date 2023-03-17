@@ -1,4 +1,29 @@
 import re
+import os
+
+import clipboard_data
+import tools
+
+def write_file_to_db(elem):
+
+    text_conf = tools.is_file_confidential(elem)
+    hash_elem = clipboard_data.hash_file(elem)
+
+    with open("./fileDatabase", "a") as file:
+        file.write(elem + "-----" + hash_elem + "-----" + str(text_conf) + "\n")
+
+    file.close()
+
+
+def get_file_hashes(directory='D:\\На новый ноут\\Учёба\\TEST FOLDER'):
+    file_list = list()
+
+    for (dir_path, dir_names, file_names) in os.walk(directory):
+        file_list += [os.path.join(dir_path, file) for file in file_names]
+
+    for elem in file_list:
+        write_file_to_db(elem)
+
 
 #Работает!!!
 def phone_number_match(msg):
@@ -42,4 +67,8 @@ def passport_data_match(msg):
 
 
 if __name__ == "__main__":
-    passport_data_match("89 52 548167")
+    # passport_data_match("89 52 548167")
+    # get_file_hashes("D:\\На новый ноут\\Учёба\\TEST FOLDER")
+
+    cond1 = os.path.isabs("dsa")
+    print(cond1)

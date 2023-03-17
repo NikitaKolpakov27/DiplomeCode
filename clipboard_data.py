@@ -11,7 +11,9 @@ import tkinter as tk
 #Функция, формирующая массив из хешей конфиденциальных файлов
 import tools
 
-
+"""
+    Функция, возвращающая хэши конфиденциальных файлов
+"""
 def get_conf_hashes():
     raw_array = []
     conf_hashes_array = []
@@ -24,11 +26,15 @@ def get_conf_hashes():
 
     for i in range(0, len(raw_array)):
 
-        if int(raw_array[i][2]) == 1:
+        if raw_array[i][2] == "True\n":
             conf_hashes_array.append(raw_array[i][1])
 
     return conf_hashes_array
 
+
+"""
+    Функция, которая хэширует файлы
+"""
 def hash_file(filename):
     if path.isfile(filename) is False:
         raise Exception("File not found for hash operation")
@@ -65,26 +71,6 @@ def from_pic_to_str(pic_path, bs4_path):
 #     decodeit.write(base64.b64decode((byte)))
 #     decodeit.close()
 
-def set_rand_pic_id(length=16):
-    letters_and_digits = string.ascii_letters + string.digits
-    return ''.join(random.sample(letters_and_digits, length))
-
-def save_clipboard_image(img):
-    rgb_im = img.convert('RGB')
-    rgb_im.save("./folder/clipboard_img.jpg")
-    from_pic_to_str("./folder/clipboard_img.jpg", "./bin_data/BIN_clipboard_img.bin")
-
-def get_pic_from_clipboard():
-    im = ImageGrab.grabclipboard()
-
-    if isinstance(im, list):
-        print(im[0])
-        img = Image.open(im[0])
-        save_clipboard_image(img)
-    else:
-        im.show()
-        save_clipboard_image(im)
-
 def get_file_from_clipboard():
     last_data = None
 
@@ -95,16 +81,22 @@ def get_file_from_clipboard():
         root = tk.Tk()
         root.withdraw()
         data = root.clipboard_get()
+        data_type = tools.is_string_path(data)
 
         if data != last_data and len(data) != 0:
-            print(data)
-            print(hash_file(data))
 
-            if hash_file(data) in conf_hashes:
-                print("Alarm!")
-                tools.conf_info_detected()
-                root.clipboard_clear()
-                break
+            if data_type:
+
+                print(data)
+                print(hash_file(data))
+
+                if hash_file(data) in conf_hashes:
+                    print("WARNING!")
+                    tools.conf_info_detected()
+                    root.clipboard_clear()
+                    break
+            else:
+                print(data)
 
         last_data = data
 
@@ -118,24 +110,6 @@ def get_text_data_from_clipboard():
         if data != last_data and len(data) != 0:
             print(data)
             print("Last data: ", last_data)
-
-#Сюда заходит постоянно, потому что pyperclip.paste(), когда считывает картинки, data = "" и условие data != last_data
-#всегда выполняется
-        # elif data != last_data and len(data) == 0:
-        #     get_pic_from_clipboard()
-        #
-        #     if last_data is not None:
-        #         with open("./bin_data/BIN_clipboard_img.bin", "r") as file:
-        #             data = file.read(100)
-        #
-        #         if data == last_data:
-        #             flag = True
-        #
-        #     else:
-        #         with open("./bin_data/BIN_clipboard_img.bin", "r") as file:
-        #             data = file.read(100)
-        #
-        #     print("Last data: ", last_data)
 
         last_data = data
 
