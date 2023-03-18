@@ -19,6 +19,7 @@ def get_data_from_clipboard():
 
                 print(data)
 
+                print(tools.hash_file(data))
                 if tools.hash_file(data) in conf_hashes:
                     print("WARNING!")
                     tools.conf_info_detected(data)

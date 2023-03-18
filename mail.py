@@ -36,15 +36,6 @@ def other():
 
     # Получение заголовков письма
         email_message = email.message_from_string(raw_email_string)
-    # print("=========ЗАГОЛОВКИ ПИСЬМА==========")
-    #
-    # print("FROM: ", email.utils.parseaddr(email_message['From']))
-    # print("TO: ", email_message['To'])
-    # print("DATE: ", email_message['Date'])
-    # print("SUBJECT: ", email_message['Subject'])
-    # print("MESSAGE_ID: ", email_message['Message-Id'])
-    #
-    # print("==================================")
         letter_data += "=========ЗАГОЛОВКИ ПИСЬМА=========="
         letter_data += "FROM: " + str(email.utils.parseaddr(email_message['From']))
         letter_data += "TO: " + str(email_message['To'])

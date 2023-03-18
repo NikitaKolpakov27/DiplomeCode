@@ -5,9 +5,9 @@ import socket
 import test
 
 
-"""
-    Записывает в БД данные по файлам (имя, хэши и статус конфиденциальности (булево значение))
-"""
+def update_db():
+    open('./fileDatabase', 'w').close()
+    get_file_hashes()
 
 
 def write_file_to_db(elem):
@@ -21,12 +21,8 @@ def write_file_to_db(elem):
     file.close()
 
 
-"""
-    Для каждого из файлов в выбранном каталоге высчитывает его хэш-сумму и записывает остальные данные в БД    
-"""
 
-
-def get_file_hashes(directory='D:\\На новый ноут\\Учёба\\TEST FOLDER'):
+def get_file_hashes(directory='D:\\РќР° РЅРѕРІС‹Р№ РЅРѕСѓС‚\\РЈС‡С‘Р±Р°\\TEST FOLDER'):
     file_list = list()
 
     for (dir_path, dir_names, file_names) in os.walk(directory):
@@ -35,10 +31,6 @@ def get_file_hashes(directory='D:\\На новый ноут\\Учёба\\TEST FOLDER'):
     for elem in file_list:
         write_file_to_db(elem)
 
-
-"""
-    Возвращает хэши конфиденциальных файлов
-"""
 
 
 def get_conf_hashes():
@@ -59,9 +51,6 @@ def get_conf_hashes():
     return conf_hashes_array
 
 
-"""
-    Функция, которая хэширует файлы
-"""
 
 
 def hash_file(filename):
@@ -79,9 +68,6 @@ def hash_file(filename):
     return h_sha256.hexdigest()
 
 
-"""
-    Проверяет, является ли строка путем к файлу или директории
-"""
 
 
 def is_string_path(st):
@@ -93,10 +79,6 @@ def is_string_path(st):
     else:
         return False
 
-
-"""
-    Проверяет, является ли файл конфиденциальным (на основе регулярных выражений и классификации текста)
-"""
 
 
 def is_file_confidential(path_to_file):
@@ -134,11 +116,6 @@ def is_file_confidential(path_to_file):
     else:
         print("This file (" + path_to_file + ") has no confidential data")
         return False
-
-
-"""
-    Вызывается, когда факт копирования конфиденциального файла был подтвержден
-"""
 
 
 def conf_info_detected(data):

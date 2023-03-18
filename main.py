@@ -47,6 +47,7 @@ if __name__ == "__main__":
 
     observer.schedule(event_handler, path=selected_path, recursive=True)
     observer.start()
+    tools.update_db()
 
     print("Текущая директория: ", selected_path)
     print("==================================")
