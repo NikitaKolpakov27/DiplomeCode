@@ -10,7 +10,7 @@ class MyHandler(FileSystemEventHandler):
         print()
 
         if not event.is_directory:
-            conf_file = tools.is_file_confidential(event.src_path)
+            conf_file = tools.is_file_or_text_confidential(False, event.src_path)
 
             if conf_file:
                 print(event.event_type, " file (CONFIDENTIAL) -- ", event.src_path)

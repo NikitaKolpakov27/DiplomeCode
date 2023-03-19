@@ -2,7 +2,7 @@ import datetime
 import hashlib
 import os
 import socket
-import test
+import reg_exp_conf
 
 
 def update_db():
@@ -12,7 +12,7 @@ def update_db():
 
 def write_file_to_db(elem):
 
-    text_conf = is_file_confidential(elem)
+    text_conf = is_file_or_text_confidential(False, elem)
     hash_elem = hash_file(elem)
 
     with open("./fileDatabase", "a") as file:
@@ -80,24 +80,27 @@ def is_string_path(st):
         return False
 
 
-
-def is_file_confidential(path_to_file):
+def is_file_or_text_confidential(is_text, path_to_file):
     text = ""
-    file = open(path_to_file, "r")
 
-    while True:
-        line = file.readline()
+    if not is_text:
+        file = open(path_to_file, "r")
 
-        if not line:
-            break
+        while True:
+            line = file.readline()
 
-        text += line.strip() + " "
-    file.close()
+            if not line:
+                break
 
-    cond1 = test.mail_match(text)
-    cond2 = test.phone_number_match(text)
-    cond3 = test.passport_data_match(text)
-    cond4 = test.credit_card_match(text)
+            text += line.strip() + " "
+        file.close()
+    else:
+        text = path_to_file
+
+    cond1 = reg_exp_conf.mail_match(text)
+    cond2 = reg_exp_conf.phone_number_match(text)
+    cond3 = reg_exp_conf.passport_data_match(text)
+    cond4 = reg_exp_conf.credit_card_match(text)
 
     if cond1 or cond2 or cond3 or cond4:
         type_conf_data = ""
@@ -111,10 +114,12 @@ def is_file_confidential(path_to_file):
         if cond4:
             type_conf_data += "Credit card info "
 
-        print("This file (" + path_to_file + ") may contain confidential data! TYPE = ", type_conf_data)
+        if not is_text:
+            print("This file (" + path_to_file + ") may contain confidential data! TYPE = ", type_conf_data)
         return True
     else:
-        print("This file (" + path_to_file + ") has no confidential data")
+        if not is_text:
+            print("This file (" + path_to_file + ") has no confidential data")
         return False
 
 
@@ -132,5 +137,5 @@ def conf_info_detected(data):
 
 
 if __name__ == "__main__":
-    is_file_confidential("Hello! My new neighbor is pretty nice guy. Maybe i should to talk to him soon.")
-    is_file_confidential("Hi! I just found out that her number is +79525481672! Take your chance and call her now!!!")
+    is_file_or_text_confidential(True, "Hello! My new neighbor is pretty nice guy. Maybe i should to talk to him soon.")
+    is_file_or_text_confidential(True, "Hi! I just found out that her number is +79525481672! Take your chance and call her now!!!")
