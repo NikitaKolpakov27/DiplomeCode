@@ -4,7 +4,6 @@ import tools
 
 class MyHandler(FileSystemEventHandler):
     def on_any_event(self, event):
-        print()
 
         if not event.is_directory:
             conf_file = tools.is_file_or_text_confidential(False, event.src_path)
@@ -20,22 +19,13 @@ class MyHandler(FileSystemEventHandler):
         pass
 
     def on_deleted(self, event):
-
-        if tools.is_file_or_text_confidential(False, event.src_path):
-            print("|||WARNING||| This file is CONFIDENTIAL and it has been deleted!!!")
-            tools.conf_info_detected(event.src_path, "Deleting")
+        pass
 
     def on_modified(self, event):
-
-        if tools.is_file_or_text_confidential(False, event.src_path):
-            print("|||WARNING||| This file is CONFIDENTIAL and it has been modified!!!")
-            tools.conf_info_detected(event.src_path, "Modifying")
+        pass
 
     def on_moved(self, event):
-
-        if tools.is_file_or_text_confidential(False, event.src_path):
-            print("|||WARNING||| This file is CONFIDENTIAL and it has been moved!!!")
-            tools.conf_info_detected(event.src_path, "Moving")
+        pass
 
     def on_closed(self, event):
         pass

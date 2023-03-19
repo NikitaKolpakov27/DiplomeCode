@@ -2,6 +2,7 @@ import tkinter as tk
 import tools
 
 def get_data_from_clipboard():
+    data = ""
     last_data = None
 
     conf_hashes = tools.get_conf_hashes()
@@ -10,7 +11,14 @@ def get_data_from_clipboard():
 
         root = tk.Tk()
         root.withdraw()
-        data = root.clipboard_get()
+
+        try:
+            data = root.clipboard_get()
+        except Exception as e:
+            if e == "CLIPBOARD selection doesn't exist or form \"STRING\" not defined":
+                print("Clipboard is empty")
+                break
+
         data_type = tools.is_string_path(data)
 
         if data != last_data and len(data) != 0:

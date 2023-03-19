@@ -1,0 +1,1 @@
+Actions (Modifying) with conf file ( D:\На новый ноут\Учёба\TEST FOLDER\doc1.txt  ) were detected at:  2023-03-19 22:21:41.173661  by  LAPTOP-KLK2MD3E 

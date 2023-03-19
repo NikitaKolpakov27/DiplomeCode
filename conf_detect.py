@@ -108,15 +108,18 @@ lrc = LogisticRegression(solver='liblinear', penalty='l1')
 rfc = RandomForestClassifier(n_estimators=31, random_state=111)
 
 #create a dictionary of variables and models
-clfs = {'SVC' : svc,'KN' : knc, 'NB': mnb, 'DT': dtc, 'LR': lrc, 'RF': rfc}
+clfs = {'SVC': svc, 'KN': knc, 'NB': mnb, 'DT': dtc, 'LR': lrc, 'RF': rfc}
+
 #fit the data onto the models
 def train(clf, features, targets):
     clf.fit(features, targets)
 
 def predict(clf, features):
     return (clf.predict(features))
+
 pred_scores_word_vectors = []
-for k,v in clfs.items():
+
+for k, v in clfs.items():
     train(v, X_train, y_train)
     pred = predict(v, X_test)
     pred_scores_word_vectors.append((k, [accuracy_score(y_test , pred)]))

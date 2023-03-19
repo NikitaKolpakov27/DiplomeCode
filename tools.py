@@ -11,7 +11,6 @@ def update_db():
 
 
 def write_file_to_db(elem):
-
     text_conf = is_file_or_text_confidential(False, elem)
     hash_elem = hash_file(elem)
 
@@ -78,15 +77,23 @@ def is_file_or_text_confidential(is_text, path_to_file):
     text = ""
 
     if not is_text:
-        file = open(path_to_file, "r")
 
-        while True:
-            line = file.readline()
+        try:
 
-            if not line:
-                break
+            file = open(path_to_file, "r")
 
-            text += line.strip() + " "
+            while True:
+                line = file.readline()
+
+                if not line:
+                    break
+
+                text += line.strip() + " "
+
+        except FileNotFoundError:
+            print("Couldn't find file. Maybe, it was deleted!")
+            return True
+
         file.close()
     else:
         text = path_to_file
@@ -123,10 +130,12 @@ def conf_info_detected(data, action):
     detection_date = datetime.datetime.now()
     detection_date_right_format = str(datetime.datetime.date(datetime.datetime.now()))
     message = " ".join(
-        ["Actions (" + action + ") with conf file (", data, " ) were detected at: ", str(detection_date), " by ", socket.gethostname(), "\n"])
+        ["Actions (" + action + ") with conf file (", data, " ) were detected at: ", str(detection_date), " by ",
+         socket.gethostname(), "\n"])
     print(message)
 
-    file_name = detection_date_right_format + "_" + socket.gethostname()
+    file_name = detection_date_right_format + "_" + str(detection_date.hour) + "_" + str(detection_date.minute) \
+                + "_" + str(detection_date.second) + "_" + socket.gethostname()
     path = "./Reports/" + file_name + ".txt"
     with open(path, "a") as file:
         file.write(str(message))
@@ -134,4 +143,5 @@ def conf_info_detected(data, action):
 
 if __name__ == "__main__":
     is_file_or_text_confidential(True, "Hello! My new neighbor is pretty nice guy. Maybe i should to talk to him soon.")
-    is_file_or_text_confidential(True, "Hi! I just found out that her number is +79525481672! Take your chance and call her now!!!")
+    is_file_or_text_confidential(True,
+                                 "Hi! I just found out that her number is +79525481672! Take your chance and call her now!!!")
