@@ -15,27 +15,27 @@ def get_data_from_clipboard():
 
         if data != last_data and len(data) != 0:
 
+            # Проверка, является ли текст в буфере путем к файлу или нет
             if data_type:
 
-                print(data)
+                print("Буфер -> ", data)
 
-                print(tools.hash_file(data))
                 if tools.hash_file(data) in conf_hashes:
                     print("WARNING!")
-                    tools.conf_info_detected(data)
+                    tools.conf_info_detected(data, "Copy")
                     root.clipboard_clear()
                     break
             else:
-                print(data)
+
+                conf_res = tools.is_file_or_text_confidential(True, data)
+
+                if conf_res:
+                    print("Буфер -> ", "[This text has confidential data!!!]")
+                else:
+                    print("Буфер -> ", data)
 
         last_data = data
 
 
 if __name__ == "__main__":
-    pass
-    # get_text_data_from_clipboard()
-    # md5txt = hash_file("D:\\На новый ноут\\Учёба\\TEST FOLDER\\bithc.txt")
-    # print("needed text: ", md5txt)
-    #
     get_data_from_clipboard()
-    # get_pic_from_clipboard()

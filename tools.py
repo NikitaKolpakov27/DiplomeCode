@@ -21,7 +21,6 @@ def write_file_to_db(elem):
     file.close()
 
 
-
 def get_file_hashes(directory='D:\\На новый ноут\\Учёба\\TEST FOLDER'):
     file_list = list()
 
@@ -30,7 +29,6 @@ def get_file_hashes(directory='D:\\На новый ноут\\Учёба\\TEST FO
 
     for elem in file_list:
         write_file_to_db(elem)
-
 
 
 def get_conf_hashes():
@@ -51,8 +49,6 @@ def get_conf_hashes():
     return conf_hashes_array
 
 
-
-
 def hash_file(filename):
     if os.path.isfile(filename) is False:
         raise Exception("File not found for hash operation")
@@ -66,8 +62,6 @@ def hash_file(filename):
             h_sha256.update(chunk)
 
     return h_sha256.hexdigest()
-
-
 
 
 def is_string_path(st):
@@ -115,23 +109,25 @@ def is_file_or_text_confidential(is_text, path_to_file):
             type_conf_data += "Credit card info "
 
         if not is_text:
-            print("This file (" + path_to_file + ") may contain confidential data! TYPE = ", type_conf_data)
+            pass
+            # print("This file (" + path_to_file + ") may contain confidential data! TYPE = ", type_conf_data)
         return True
     else:
         if not is_text:
-            print("This file (" + path_to_file + ") has no confidential data")
+            pass
+            # print("This file (" + path_to_file + ") has no confidential data")
         return False
 
 
-def conf_info_detected(data):
+def conf_info_detected(data, action):
     detection_date = datetime.datetime.now()
     detection_date_right_format = str(datetime.datetime.date(datetime.datetime.now()))
     message = " ".join(
-        ["Conf file (", data, " ) detected at: ", str(detection_date), " by ", socket.gethostname(), "\n"])
+        ["Actions (" + action + ") with conf file (", data, " ) were detected at: ", str(detection_date), " by ", socket.gethostname(), "\n"])
     print(message)
 
     file_name = detection_date_right_format + "_" + socket.gethostname()
-    path = "./Logs/" + file_name + ".txt"
+    path = "./Reports/" + file_name + ".txt"
     with open(path, "a") as file:
         file.write(str(message))
 
