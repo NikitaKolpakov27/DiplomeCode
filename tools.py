@@ -20,7 +20,7 @@ def write_file_to_db(elem):
     file.close()
 
 
-def get_file_hashes(directory='D:\\На новый ноут\\Учёба\\TEST FOLDER'):
+def get_file_hashes(directory='D:\\TEST FOLDER'):
     file_list = list()
 
     for (dir_path, dir_names, file_names) in os.walk(directory):

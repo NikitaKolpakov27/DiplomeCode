@@ -1,0 +1,1 @@
+Actions (Copy) with conf file ( D:/TEST FOLDER/newfold/doc1.txt  ) were detected at:  2023-03-21 21:55:29.031268  by  LAPTOP-KLK2MD3E 

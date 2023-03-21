@@ -8,7 +8,7 @@ if __name__ == "__main__":
     event_handler = my_handler.MyHandler()
     observer = Observer()
 
-    selected_path = "D:\\На новый ноут\\Учёба\\TEST FOLDER"
+    selected_path = input("Введите директорию: ")
 
     observer.schedule(event_handler, path=selected_path, recursive=True)
     observer.start()

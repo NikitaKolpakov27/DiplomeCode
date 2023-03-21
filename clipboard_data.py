@@ -31,14 +31,12 @@ def get_data_from_clipboard():
                 if tools.hash_file(data) in conf_hashes:
                     print("WARNING!")
                     tools.conf_info_detected(data, "Copy")
-                    root.clipboard_clear()
-                    break
             else:
 
                 conf_res = tools.is_file_or_text_confidential(True, data)
 
                 if conf_res:
-                    print("Буфер -> ", "[This text has confidential data!!!]")
+                    print("Буфер -> ", data, "[This text has confidential data!!!]")
                 else:
                     print("Буфер -> ", data)
 

@@ -2,7 +2,7 @@ import re
 
 
 def phone_number_match(msg):
-    matches = re.findall("[+]?[7-8]{1}[0-9]{10}", msg)
+    matches = re.findall("[+]?[7-8][0-9]{10}", msg)
     # print("Matches: ", matches)
 
     if len(matches) > 0:

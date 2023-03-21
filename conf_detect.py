@@ -1,4 +1,7 @@
 import matplotlib.pyplot as plt
+import string
+import nltk
+import warnings
 import csv
 import sklearn
 import pickle
@@ -11,24 +14,18 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 from wordcloud import WordCloud
 import pandas as pd
-import numpy as np
-import nltk
 from nltk.corpus import stopwords
-from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.model_selection import GridSearchCV,train_test_split,StratifiedKFold,cross_val_score,learning_curve
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 data = pd.read_csv('dataset/spam.csv', encoding='latin-1')
-# data.head()
 
 data = data.drop(["Unnamed: 2", "Unnamed: 3", "Unnamed: 4"], axis=1)
 data = data.rename(columns={"v2" : "text", "v1":"label"})
-# print(data[1990:2000])
-# print(data['label'].value_counts())
 
-import nltk
+
 nltk.download("punkt")
-import warnings
 warnings.filterwarnings('ignore')
 
 ham_words = ''
@@ -52,29 +49,26 @@ for val in data[data['label'] == 'ham'].text:
 spam_wordcloud = WordCloud(width=500, height=300).generate(spam_words)
 ham_wordcloud = WordCloud(width=500, height=300).generate(ham_words)
 
-#Spam Word cloud
-# plt.figure( figsize=(10,8), facecolor='w')
-# plt.imshow(spam_wordcloud)
-# plt.axis("off")
-# plt.tight_layout(pad=0)
-# plt.show()
-#
-# #Creating Ham wordcloud
-# plt.figure( figsize=(10,8), facecolor='g')
-# plt.imshow(ham_wordcloud)
-# plt.axis("off")
-# plt.tight_layout(pad=0)
-# plt.show()
+# Spam Word cloud
+plt.figure( figsize=(10,8), facecolor='w')
+plt.imshow(spam_wordcloud)
+plt.axis("off")
+plt.tight_layout(pad=0)
+plt.show()
 
-data = data.replace(['ham','spam'],[0, 1])
-# print(data.head(10))
+# Creating Ham wordcloud
+plt.figure( figsize=(10,8), facecolor='g')
+plt.imshow(ham_wordcloud)
+plt.axis("off")
+plt.tight_layout(pad=0)
+plt.show()
+
+data = data.replace(['ham', 'spam'], [0, 1])
 
 nltk.download('stopwords')
 
 #remove the punctuations and stopwords
-import string
 def text_process(text):
-
     text = text.translate(str.maketrans('', '', string.punctuation))
     text = [word for word in text.split() if word.lower() not in stopwords.words('english')]
 
@@ -87,8 +81,6 @@ text = pd.DataFrame(data['text'])
 label = pd.DataFrame(data['label'])
 
 #convert the text data into vectors
-from sklearn.feature_extraction.text import TfidfVectorizer
-
 vectorizer = TfidfVectorizer()
 vectors = vectorizer.fit_transform(data['text'])
 print(vectors.shape)
@@ -132,6 +124,7 @@ def find(x):
         print("Message is SPAM")
     else:
         print("Message is NOT Spam")
+
 
 newtext = ["You just won a free trial on a new game!"]
 integers = vectorizer.transform(newtext)
