@@ -1,6 +1,6 @@
 import imaplib
 import email
-import tools
+import conf_utils
 
 
 def save_letter(data, path):

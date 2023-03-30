@@ -1,5 +1,5 @@
 import tkinter as tk
-import tools
+import conf_utils
 
 def get_data_from_clipboard():
     data = ""
