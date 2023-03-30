@@ -1,0 +1,121 @@
+=========ЗАГОЛОВКИ ПИСЬМА==========
+FROM: ('=?UTF-8?B?0L3QuNC60LjRgtCwINC60L7Qu9C/0LDQutC+0LI=?=', 'nik.kolpakov@inbox.ru')
+TO: =?UTF-8?B?bV9kcnl1Y2hlbmtv?= <m_dryuchenko@mail.ru>
+DATE: Sat, 13 Jun 2020 22:27:27 +0300
+SUBJECT: =?UTF-8?B?TGFiIDQgdmFyIDQudHh0?=
+MESSAGE_ID: <1592076447.668599295@f730.i.mail.ru>
+
+
+=====ТЕЛО ПИСЬМА==========='NoneType' object has no attribute 'decode'
+=====ТЕЛО ПИСЬМА==========='NoneType' object has no attribute 'decode'#include <iostream>
+#include <string>
+#include <utility>
+#include <fstream>
+#include <sstream>
+#include <vector>
+using namespace std;
+
+struct Song {
+
+    enum Status {
+        GOLD = 500000,
+        PLATINUM = 1000000,
+        BRILLIANT = 10000000
+    };
+
+    union features {
+        size_t year_of_foundation;
+        size_t number_of_songs;
+    } feats;
+
+    string musician;
+    string musName;
+    string nameOfPerf;
+    size_t yearSong;
+    size_t sales;
+};
+
+struct MusicShop {
+    vector<Song> song;
+};
+
+vector<Song> song;
+void addSong(string musician_temp, string musName_temp, string perform, size_t sales, size_t year, size_t
+foundation_year, size_t number_of_songs) {
+    song[year].musician = move(musician_temp);
+    song[year].musName = move(musName_temp);
+    song[year].nameOfPerf = move(perform);
+    song[year].sales = sales;
+    song[year].yearSong = year;
+    song[year].feats.year_of_foundation = foundation_year;
+    song[year].feats.number_of_songs = number_of_songs;
+}
+
+void getSong(size_t year) {
+    int st = song[year].sales;
+    string stat;
+    if (st >= song[year].GOLD && st < song[year].PLATINUM) {
+        stat = "Gold";
+    } else if (st >= song[year].PLATINUM && st < song[year].BRILLIANT) {
+        stat = "Platinum";
+    } else if (st >= song[year].BRILLIANT) {
+        stat = "Brilliant";
+    }
+
+    if (year < song.size() && song[year].yearSong == year) {
+        cout << "Музыкант\\группа: " << song[year].musician + " " << "; песня - " << song[year].musName + " "
+             << "; вид исполнения - " << song[year].nameOfPerf << " " << "; дата релиза - " << song[year].yearSong
+             << "Статус: " << stat << endl;
+        cout << "Особенности группы\\музыканта: " << "Год начала карьеры -  " << song[year].feats.year_of_foundation <<
+        "Количество песен - " << song[year].feats.number_of_songs << endl;
+
+    }
+}
+
+int main() {
+
+    system("chcp 65001");
+
+    ifstream f1;
+    f1.open("f1.txt");
+    if (!f1.is_open()) {
+        cout << "Файл не смог открыться" << endl;
+    } else {
+        cout << "Файл был открыт" << endl;
+        string str;
+        while (getline(f1, str)) {
+            getline(f1, str);
+            string musicin, nameMuz, perform;
+            size_t year, sales, yearFound, numSongs;
+            istringstream isstr(str);
+            isstr >> musicin >> nameMuz >> perform >> sales >> year >> yearFound >> numSongs;
+            addSong(musicin, nameMuz, perform, sales, year, yearFound, numSongs);
+        }
+    }
+
+    f1.close();
+
+
+    ofstream f2;
+    f2.open("f2.txt");
+    if (!f2.is_open()) {
+        cout << "Файл не смог открыться" << endl;
+    } else {
+        cout << "Файл был открыт" << endl;
+        cout << "Введите данные:" << endl;
+        string data;
+        cin >> data;
+        f2 << data;
+    }
+    f2.close();
+
+
+    cout << endl << "Введите дату релиза:" << endl;
+    size_t year;
+    cin >> year;
+    getSong(year);
+
+}
+
+
+

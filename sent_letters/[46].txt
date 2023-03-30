@@ -1,0 +1,23 @@
+=========ЗАГОЛОВКИ ПИСЬМА==========
+FROM: ('=?UTF-8?B?0L3QuNC60LjRgtCwINC60L7Qu9C/0LDQutC+0LI=?=', 'nik.kolpakov@inbox.ru')
+TO: =?UTF-8?B?c2FuZG9yZTI0?= <sandore24@bk.ru>
+DATE: Thu, 26 Mar 2020 21:55:06 +0300
+SUBJECT: None
+MESSAGE_ID: <1585248906.219105137@f431.i.mail.ru>
+
+
+=====ТЕЛО ПИСЬМА===========
+
+Роллтон
+--
+Отправлено из Mail.ru для Android
+=====ТЕЛО ПИСЬМА===========
+
+Роллтон
+--
+Отправлено из Mail.ru для Android
+<HTML><BODY><p style='margin-top: 0px;' dir="ltr"><br>
+&#1056;&#1086;&#1083;&#1083;&#1090;&#1086;&#1085;<br>
+--<br>
+&#1054;&#1090;&#1087;&#1088;&#1072;&#1074;&#1083;&#1077;&#1085;&#1086; &#1080;&#1079; Mail.ru &#1076;&#1083;&#1103; Android</p>
+</BODY></HTML>

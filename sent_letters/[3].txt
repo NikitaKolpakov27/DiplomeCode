@@ -1,0 +1,20 @@
+=========ЗАГОЛОВКИ ПИСЬМА==========
+FROM: ('=?UTF-8?B?0JrQvtC70L/QsNC60L7QsiDQnS7QoS4=?=', 'nik.kolpakov@inbox.ru')
+TO: volodina_a_a@inbox.ru
+DATE: Thu, 23 Jun 2022 16:39:45 +0300
+SUBJECT: =?UTF-8?B?0JTQvtC60YPQvNC10L3RgtCw0YbQuNGPLnJhcg==?=
+MESSAGE_ID: <1655991585.411263812@f722.i.mail.ru>
+
+
+=====ТЕЛО ПИСЬМА===========
+
+
+К этому письму приложены ссылки на следующие файлы:
+
+
+1. Документация.rar: (40.1 Мб)
+
+Ссылка для скачивания файлов:
+https://cloud.mail.ru/stock/k1VEpmKwztamxUw12hZj8oq5
+Файлы будут храниться до 20.12.2022
+

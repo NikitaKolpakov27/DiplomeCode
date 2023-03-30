@@ -1,0 +1,11 @@
+=========«¿√ŒÀŒ¬ » œ»—‹Ã¿==========
+FROM: ('=?UTF-8?B?0JrQvtC70L/QsNC60L7QsiDQnS7QoS4=?=', 'nik.kolpakov@inbox.ru')
+TO: =?UTF-8?B?enNhX3p1ZXY=?= <zsa_zuev@mail.ru>
+DATE: Thu, 14 Oct 2021 17:49:38 +0300
+SUBJECT: =?UTF-8?B?0JfQsNC00LDRh9CwIDQuMi41LiDQmtC+0LvQv9Cw0LrQvtCyINCdLtChLi5w?=
+ =?UTF-8?B?ZGY=?=
+MESSAGE_ID: <1634222978.101216687@f121.i.mail.ru>
+
+
+=====“≈ÀŒ œ»—‹Ã¿==========='NoneType' object has no attribute 'decode'
+=====“≈ÀŒ œ»—‹Ã¿==========='NoneType' object has no attribute 'decode''utf-8' codec can't decode byte 0xe2 in position 10: invalid continuation byte

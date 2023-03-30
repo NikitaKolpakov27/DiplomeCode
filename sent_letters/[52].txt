@@ -1,0 +1,23 @@
+=========ЗАГОЛОВКИ ПИСЬМА==========
+FROM: ('=?UTF-8?B?0L3QuNC60LjRgtCwINC60L7Qu9C/0LDQutC+0LI=?=', 'nik.kolpakov@inbox.ru')
+TO: sandore24@bk.ru
+DATE: Sat, 15 Feb 2020 13:05:23 +0300
+SUBJECT: None
+MESSAGE_ID: <1581761123.698117120@f192.i.mail.ru>
+
+
+=====ТЕЛО ПИСЬМА===========
+Забыт пароль
+ 
+Логин в системе - kolpakov_n_s
+ 
+Номер студенческого билета - 16190087
+ 
+=====ТЕЛО ПИСЬМА===========
+Забыт пароль
+ 
+Логин в системе - kolpakov_n_s
+ 
+Номер студенческого билета - 16190087
+ 
+<HTML><BODY><div>Забыт пароль</div><div>&nbsp;</div><div>Логин в системе -&nbsp;kolpakov_n_s</div><div>&nbsp;</div><div>Номер студенческого билета&nbsp;-&nbsp;16190087</div><div>&nbsp;</div></BODY></HTML>

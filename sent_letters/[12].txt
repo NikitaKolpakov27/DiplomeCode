@@ -1,0 +1,15 @@
+=========ЗАГОЛОВКИ ПИСЬМА==========
+FROM: ('=?UTF-8?B?0JrQvtC70L/QsNC60L7QsiDQnS7QoS4=?=', 'nik.kolpakov@inbox.ru')
+TO: dmytro.pomohaiev@netcracker.com,
+	QATACourseGroup@netcracker.com
+DATE: Mon, 07 Feb 2022 20:05:37 +0300
+SUBJECT: =?UTF-8?B?W0VEVUNUUl1bVEFdW1cyMl0gTmlraXRhIEtvbHBha292IC0gUHJhY3RpY2Uw?=
+MESSAGE_ID: <1644253537.446413324@f313.i.mail.ru>
+
+
+=====ТЕЛО ПИСЬМА===========
+Дмитрий, здравствуйте. Загрузил 1-ю практику, вроде всё хорошо, но по поводу 0-ой есть проблемы. Не получается задать относительный путь для .bat файлов. Я их немного изменил, и хотелось бы узнать, как сделать правильно.
+ 
+С уважением,
+--
+Никита Колпаков

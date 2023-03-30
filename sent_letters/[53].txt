@@ -1,0 +1,19 @@
+=========ЗАГОЛОВКИ ПИСЬМА==========
+FROM: ('=?UTF-8?B?0L3QuNC60LjRgtCwINC60L7Qu9C/0LDQutC+0LI=?=', 'nik.kolpakov@inbox.ru')
+TO: =?UTF-8?B?a2hvbG9kb3ZhLmVrYXRlcmluYTIwMTU=?= <kholodova.ekaterina2015@yandex.ru>
+DATE: Tue, 05 Nov 2019 19:23:36 +0300
+SUBJECT: =?UTF-8?B?bXVzaWMucmFy?=
+MESSAGE_ID: <1572971016.437525851@f190.i.mail.ru>
+
+
+=====ТЕЛО ПИСЬМА===========
+
+К этому письму приложены ссылки на следующие файлы:
+
+
+1. music.rar: (414.4 Мб)
+
+Ссылка для скачивания файлов:
+https://cloud.mail.ru/stock/nPQwZ9QzzCvR27zX83y3CmHF
+Файлы будут храниться до 03.05.2020
+

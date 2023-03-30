@@ -1,0 +1,1943 @@
+=========ЗАГОЛОВКИ ПИСЬМА==========
+FROM: ('=?UTF-8?B?0L3QuNC60LjRgtCwINC60L7Qu9C/0LDQutC+0LI=?=', 'nik.kolpakov@inbox.ru')
+TO: =?UTF-8?B?bV9kcnl1Y2hlbmtv?= <m_dryuchenko@mail.ru>
+DATE: Sun, 07 Jun 2020 22:58:43 +0300
+SUBJECT: =?UTF-8?B?TGFiIDMgVmFyIDQudHh0LCBMYWIgNCB2YXIgNC50eHQsIExhYiA1IHZhciA1?=
+ =?UTF-8?B?LnR4dNC4INC10YnRkSAzINGE0LDQudC70LA=?=
+MESSAGE_ID: <1591559923.27987363@f301.i.mail.ru>
+
+
+=====ТЕЛО ПИСЬМА==========='NoneType' object has no attribute 'decode'
+=====ТЕЛО ПИСЬМА==========='NoneType' object has no attribute 'decode'#include <fstream>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+	system("chcp 1251");
+
+	string str;
+	ifstream f1("f1.txt");
+
+	while (!f1.eof()) {
+		getline(f1, str);
+		for (int i = 0; i < str.size() - 1; i += 3) {
+			swap(str[i], str[i + 1]);
+		}
+		cout << str;
+	}
+
+	ofstream f2("f2.txt");
+
+	if (!f2.is_open()) {
+		cout << "f2.txt" << endl;
+	}
+	else {
+		f2 << str << endl;
+	}
+
+	return 0;
+
+	
+}
+=====ТЕЛО ПИСЬМА==========='NoneType' object has no attribute 'decode'#include <fstream>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+	system("chcp 1251");
+
+	string str;
+	ifstream f1("f1.txt");
+
+	while (!f1.eof()) {
+		getline(f1, str);
+		for (int i = 0; i < str.size() - 1; i += 3) {
+			swap(str[i], str[i + 1]);
+		}
+		cout << str;
+	}
+
+	ofstream f2("f2.txt");
+
+	if (!f2.is_open()) {
+		cout << "f2.txt" << endl;
+	}
+	else {
+		f2 << str << endl;
+	}
+
+	return 0;
+
+	
+}#include <iostream>
+#include <string>
+#include <utility>
+#include <fstream>
+#include <sstream>
+#include <vector>
+using namespace std;
+
+struct Song {
+    string musician;
+    string musName;
+    unsigned int yearSong;
+    string nameOfPerf;
+};
+
+struct MusicShop {
+    vector<Song> song;
+};
+
+vector<Song> song;
+void addSong(string musician_temp, string musName_temp, string perform, unsigned int year) {
+    song[year].musician = move(musician_temp);
+    song[year].musName = move(musName_temp);
+    song[year].nameOfPerf = move(perform);
+    song[year].yearSong = year;
+}
+
+void getSong(int year) {
+        if (song[year].yearSong == year) {
+            cout << "Музыкант\\группа: " << song[year].musician + " " << "; песня - " << song[year].musName + " "
+                 << "; вид исполнения - " << song[year].nameOfPerf << " " << "; дата релиза - " << song[year].yearSong;
+        }
+}
+
+int main() {
+    ifstream f1;
+    f1.open("f1.txt");
+    if (!f1.is_open()) {
+        cout << "Файл не смог открыться" << endl;
+    } else {
+        cout << "Файл был открыт" << endl;
+        string str;
+        while (getline(f1, str)) {
+            getline(f1, str);
+            string musicin, nameMuz, perform;
+            unsigned int year;
+            istringstream isstr(str);
+            isstr >> musicin >> nameMuz >> perform >> year;
+            addSong(musicin, nameMuz, perform, year);
+        }
+    }
+
+    f1.close();
+
+
+    ofstream f2;
+    f2.open("f2.txt");
+    if (!f2.is_open()) {
+        cout << "Файл не смог открыться" << endl;
+    } else {
+        cout << "Файл был открыт" << endl;
+        cout << "Введите данные:" << endl;
+        string data;
+        cin >> data;
+        f2 << data;
+    }
+    f2.close();
+
+
+    cout << endl << "Введите дату релиза:" << endl;
+    int year;
+    cin >> year;
+    getSong(year);
+
+}
+=====ТЕЛО ПИСЬМА==========='NoneType' object has no attribute 'decode'#include <fstream>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+	system("chcp 1251");
+
+	string str;
+	ifstream f1("f1.txt");
+
+	while (!f1.eof()) {
+		getline(f1, str);
+		for (int i = 0; i < str.size() - 1; i += 3) {
+			swap(str[i], str[i + 1]);
+		}
+		cout << str;
+	}
+
+	ofstream f2("f2.txt");
+
+	if (!f2.is_open()) {
+		cout << "f2.txt" << endl;
+	}
+	else {
+		f2 << str << endl;
+	}
+
+	return 0;
+
+	
+}#include <iostream>
+#include <string>
+#include <utility>
+#include <fstream>
+#include <sstream>
+#include <vector>
+using namespace std;
+
+struct Song {
+    string musician;
+    string musName;
+    unsigned int yearSong;
+    string nameOfPerf;
+};
+
+struct MusicShop {
+    vector<Song> song;
+};
+
+vector<Song> song;
+void addSong(string musician_temp, string musName_temp, string perform, unsigned int year) {
+    song[year].musician = move(musician_temp);
+    song[year].musName = move(musName_temp);
+    song[year].nameOfPerf = move(perform);
+    song[year].yearSong = year;
+}
+
+void getSong(int year) {
+        if (song[year].yearSong == year) {
+            cout << "Музыкант\\группа: " << song[year].musician + " " << "; песня - " << song[year].musName + " "
+                 << "; вид исполнения - " << song[year].nameOfPerf << " " << "; дата релиза - " << song[year].yearSong;
+        }
+}
+
+int main() {
+    ifstream f1;
+    f1.open("f1.txt");
+    if (!f1.is_open()) {
+        cout << "Файл не смог открыться" << endl;
+    } else {
+        cout << "Файл был открыт" << endl;
+        string str;
+        while (getline(f1, str)) {
+            getline(f1, str);
+            string musicin, nameMuz, perform;
+            unsigned int year;
+            istringstream isstr(str);
+            isstr >> musicin >> nameMuz >> perform >> year;
+            addSong(musicin, nameMuz, perform, year);
+        }
+    }
+
+    f1.close();
+
+
+    ofstream f2;
+    f2.open("f2.txt");
+    if (!f2.is_open()) {
+        cout << "Файл не смог открыться" << endl;
+    } else {
+        cout << "Файл был открыт" << endl;
+        cout << "Введите данные:" << endl;
+        string data;
+        cin >> data;
+        f2 << data;
+    }
+    f2.close();
+
+
+    cout << endl << "Введите дату релиза:" << endl;
+    int year;
+    cin >> year;
+    getSong(year);
+
+}#include <iostream>
+
+
+using namespace std;
+
+class VolumeFigure { //Абстрактный класс объёмная фигура
+    virtual double findVolume() = 0;
+    virtual double findGroundSquare() = 0;
+    virtual string getColor() = 0;
+};
+
+
+class Ball : public VolumeFigure { //Шар
+private:
+    double radius;
+    string color = "Green";
+public:
+    Ball(double radius) : radius(radius) {
+
+    }
+
+    double findVolume() override {
+        return (1.33) * 3.14 * (radius * radius * radius);
+    }
+
+    double findGroundSquare() override {
+        return 4 * 3.14 * (radius * radius);
+    }
+
+    string getColor() override {
+        return color;
+    }
+};
+
+class Konus : public VolumeFigure { //Конус
+private:
+    double radius;
+    double height;
+    double formingSideLength;
+    string color = "blue";
+public:
+    Konus(double radius, double height, double fSL)
+    : radius(radius), height(height), formingSideLength(fSL) {
+
+    }
+
+    double findGroundSquare() override {
+        return radius * radius * 3.14;
+    }
+
+    double findVolume() override {
+        return (0.33) * findGroundSquare() * height;
+    }
+
+    double findBackGroundSquare()  {
+        return 3.14 * radius * formingSideLength;
+    }
+
+    double findFullGroundSquare() {
+        return 3.14 * radius * (formingSideLength + radius);
+    }
+
+    string getColor() override {
+        return color;
+    }
+
+
+};
+
+class FlatFigure { //Абстрактный класс плоская фигура
+    virtual int findSquare() = 0;
+    virtual int findPerimeter() = 0; //площадь основания
+    virtual string getColor() = 0;
+};
+
+class Parallelogram : public FlatFigure { //Параллелограмм
+private:
+    int side1;
+    int side2;
+    int height;
+    string color = "blue";
+
+public:
+
+    int findSquare() override {
+        return side1 * height;
+    }
+
+    int findPerimeter() override {
+        return side1 * 2 + side2 * 2;
+    }
+
+    string getColor() override {
+        return color;
+    }
+
+    Parallelogram() {
+
+    }
+
+    Parallelogram(int s1, int s2, int h) : side1(s1), side2(s2), height(h) {
+
+    }
+};
+
+
+class Rectangle : public Parallelogram { //Прямоугольник
+private:
+    int width;
+    int length;
+    string color = "black";
+
+public:
+    int findSquare() override {
+        return width * length;
+    }
+
+    int findPerimeter() override {
+        return width * 2 + length * 2;
+    }
+
+    string getColor() override {
+        return color;
+    }
+
+    Rectangle() {
+
+    }
+
+    Rectangle(int w, int l) : width(w), length(l) {
+
+    }
+
+};
+
+
+
+class Rhombus: public Parallelogram { //Ромб
+private:
+    int side;
+    int height;
+    int diag;
+    string color = "grey";
+public:
+    Rhombus(int side, int height, int diag) : side(side), height(height), diag(diag) {
+
+    }
+
+    int findSquare() override {
+        return (diag * diag) / 2;
+    }
+
+    int findPerimeter() override {
+        return side * 4;
+    }
+
+    string getColor() override {
+        return color;
+    }
+
+};
+
+class Square : public Rectangle { //Квадрат
+private:
+    int side;
+    string color = "Yellow";
+
+public:
+
+    Square(int side) : side(side) {
+
+    }
+
+    int findPerimeter() override {
+        return side * 4;
+    }
+
+    int findSquare() override {
+        return side * side;
+    }
+
+    string getColor() override {
+        return color;
+    }
+};
+
+int main() {
+    system("chcp 65001");
+
+    Square sq(2);
+    Rectangle rec(4, 5);
+    Parallelogram parl(2, 3, 4);
+    Rhombus rh(3, 4, 5);
+    Konus kn(3, 5, 6);
+    Ball ball(4);
+
+    //Нахождение площади
+    cout << "Площадь квадрата со стороной 2: " <<  sq.findSquare() << endl;
+    cout << "Площадь прямоугольника со сторонами 4 и 5: " <<  rec.findSquare() << endl;
+    cout << "Площадь параллелограмма со сторонами 2 и 3 и высотой 4: " <<  parl.findSquare() << endl;
+    cout << "Площадь ромба со стороной 3, высотой 4 и диагональю 5: " <<  rh.findSquare() << endl;
+
+    cout << "\n";
+
+    cout << "Площадь поверхности конуса с радиусом 3, высотой 5 и образующей 6: " << kn.findGroundSquare() << endl;
+    cout << "Площадь боковой поверхности конуса с радиусом 3, высотой 5 и образующей 6: " << kn.findBackGroundSquare() << endl;
+    cout << "Площадь полной поверхности конуса с радиусом 3, высотой 5 и образующей 6: " << kn.findFullGroundSquare() << endl;
+
+    cout << "\n";
+
+    //Нахождение объёма
+    cout << "Объём конуса: " <<  kn.findVolume() << endl;
+    cout << "Объём шара: " <<  ball.findVolume() << endl;
+
+    cout << "\n";
+
+    //Нахождение периметра
+    cout << "Периметр квадрата со стороной 2: " <<  sq.findPerimeter() << endl;
+    cout << "Периметр прямоугольника со сторонами 4 и 5: " <<  rec.findPerimeter() << endl;
+    cout << "Периметр параллелограмма со сторонами 2 и 3 и высотой 4: " <<  parl.findPerimeter() << endl;
+    cout << "Периметр ромба со стороной 3, высотой 4 и диагональю 5: " <<  rh.findPerimeter() << endl;
+
+    cout << "\n";
+
+    //Вывод цвета
+    cout << "Цвет квадрата: " <<  sq.getColor() << endl;
+    cout << "Цвет прямоугольника: " <<  rec.getColor() << endl;
+    cout << "Цвет параллелограмма: " <<  parl.getColor() << endl;
+    cout << "Цвет ромба: " <<  rh.getColor() << endl;
+    cout << "Цвет конуса: " <<  kn.getColor() << endl;
+    cout << "Цвет шара: " <<  ball.getColor() << endl;
+    return 0;
+=====ТЕЛО ПИСЬМА==========='NoneType' object has no attribute 'decode'#include <fstream>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+	system("chcp 1251");
+
+	string str;
+	ifstream f1("f1.txt");
+
+	while (!f1.eof()) {
+		getline(f1, str);
+		for (int i = 0; i < str.size() - 1; i += 3) {
+			swap(str[i], str[i + 1]);
+		}
+		cout << str;
+	}
+
+	ofstream f2("f2.txt");
+
+	if (!f2.is_open()) {
+		cout << "f2.txt" << endl;
+	}
+	else {
+		f2 << str << endl;
+	}
+
+	return 0;
+
+	
+}#include <iostream>
+#include <string>
+#include <utility>
+#include <fstream>
+#include <sstream>
+#include <vector>
+using namespace std;
+
+struct Song {
+    string musician;
+    string musName;
+    unsigned int yearSong;
+    string nameOfPerf;
+};
+
+struct MusicShop {
+    vector<Song> song;
+};
+
+vector<Song> song;
+void addSong(string musician_temp, string musName_temp, string perform, unsigned int year) {
+    song[year].musician = move(musician_temp);
+    song[year].musName = move(musName_temp);
+    song[year].nameOfPerf = move(perform);
+    song[year].yearSong = year;
+}
+
+void getSong(int year) {
+        if (song[year].yearSong == year) {
+            cout << "Музыкант\\группа: " << song[year].musician + " " << "; песня - " << song[year].musName + " "
+                 << "; вид исполнения - " << song[year].nameOfPerf << " " << "; дата релиза - " << song[year].yearSong;
+        }
+}
+
+int main() {
+    ifstream f1;
+    f1.open("f1.txt");
+    if (!f1.is_open()) {
+        cout << "Файл не смог открыться" << endl;
+    } else {
+        cout << "Файл был открыт" << endl;
+        string str;
+        while (getline(f1, str)) {
+            getline(f1, str);
+            string musicin, nameMuz, perform;
+            unsigned int year;
+            istringstream isstr(str);
+            isstr >> musicin >> nameMuz >> perform >> year;
+            addSong(musicin, nameMuz, perform, year);
+        }
+    }
+
+    f1.close();
+
+
+    ofstream f2;
+    f2.open("f2.txt");
+    if (!f2.is_open()) {
+        cout << "Файл не смог открыться" << endl;
+    } else {
+        cout << "Файл был открыт" << endl;
+        cout << "Введите данные:" << endl;
+        string data;
+        cin >> data;
+        f2 << data;
+    }
+    f2.close();
+
+
+    cout << endl << "Введите дату релиза:" << endl;
+    int year;
+    cin >> year;
+    getSong(year);
+
+}#include <iostream>
+
+
+using namespace std;
+
+class VolumeFigure { //Абстрактный класс объёмная фигура
+    virtual double findVolume() = 0;
+    virtual double findGroundSquare() = 0;
+    virtual string getColor() = 0;
+};
+
+
+class Ball : public VolumeFigure { //Шар
+private:
+    double radius;
+    string color = "Green";
+public:
+    Ball(double radius) : radius(radius) {
+
+    }
+
+    double findVolume() override {
+        return (1.33) * 3.14 * (radius * radius * radius);
+    }
+
+    double findGroundSquare() override {
+        return 4 * 3.14 * (radius * radius);
+    }
+
+    string getColor() override {
+        return color;
+    }
+};
+
+class Konus : public VolumeFigure { //Конус
+private:
+    double radius;
+    double height;
+    double formingSideLength;
+    string color = "blue";
+public:
+    Konus(double radius, double height, double fSL)
+    : radius(radius), height(height), formingSideLength(fSL) {
+
+    }
+
+    double findGroundSquare() override {
+        return radius * radius * 3.14;
+    }
+
+    double findVolume() override {
+        return (0.33) * findGroundSquare() * height;
+    }
+
+    double findBackGroundSquare()  {
+        return 3.14 * radius * formingSideLength;
+    }
+
+    double findFullGroundSquare() {
+        return 3.14 * radius * (formingSideLength + radius);
+    }
+
+    string getColor() override {
+        return color;
+    }
+
+
+};
+
+class FlatFigure { //Абстрактный класс плоская фигура
+    virtual int findSquare() = 0;
+    virtual int findPerimeter() = 0; //площадь основания
+    virtual string getColor() = 0;
+};
+
+class Parallelogram : public FlatFigure { //Параллелограмм
+private:
+    int side1;
+    int side2;
+    int height;
+    string color = "blue";
+
+public:
+
+    int findSquare() override {
+        return side1 * height;
+    }
+
+    int findPerimeter() override {
+        return side1 * 2 + side2 * 2;
+    }
+
+    string getColor() override {
+        return color;
+    }
+
+    Parallelogram() {
+
+    }
+
+    Parallelogram(int s1, int s2, int h) : side1(s1), side2(s2), height(h) {
+
+    }
+};
+
+
+class Rectangle : public Parallelogram { //Прямоугольник
+private:
+    int width;
+    int length;
+    string color = "black";
+
+public:
+    int findSquare() override {
+        return width * length;
+    }
+
+    int findPerimeter() override {
+        return width * 2 + length * 2;
+    }
+
+    string getColor() override {
+        return color;
+    }
+
+    Rectangle() {
+
+    }
+
+    Rectangle(int w, int l) : width(w), length(l) {
+
+    }
+
+};
+
+
+
+class Rhombus: public Parallelogram { //Ромб
+private:
+    int side;
+    int height;
+    int diag;
+    string color = "grey";
+public:
+    Rhombus(int side, int height, int diag) : side(side), height(height), diag(diag) {
+
+    }
+
+    int findSquare() override {
+        return (diag * diag) / 2;
+    }
+
+    int findPerimeter() override {
+        return side * 4;
+    }
+
+    string getColor() override {
+        return color;
+    }
+
+};
+
+class Square : public Rectangle { //Квадрат
+private:
+    int side;
+    string color = "Yellow";
+
+public:
+
+    Square(int side) : side(side) {
+
+    }
+
+    int findPerimeter() override {
+        return side * 4;
+    }
+
+    int findSquare() override {
+        return side * side;
+    }
+
+    string getColor() override {
+        return color;
+    }
+};
+
+int main() {
+    system("chcp 65001");
+
+    Square sq(2);
+    Rectangle rec(4, 5);
+    Parallelogram parl(2, 3, 4);
+    Rhombus rh(3, 4, 5);
+    Konus kn(3, 5, 6);
+    Ball ball(4);
+
+    //Нахождение площади
+    cout << "Площадь квадрата со стороной 2: " <<  sq.findSquare() << endl;
+    cout << "Площадь прямоугольника со сторонами 4 и 5: " <<  rec.findSquare() << endl;
+    cout << "Площадь параллелограмма со сторонами 2 и 3 и высотой 4: " <<  parl.findSquare() << endl;
+    cout << "Площадь ромба со стороной 3, высотой 4 и диагональю 5: " <<  rh.findSquare() << endl;
+
+    cout << "\n";
+
+    cout << "Площадь поверхности конуса с радиусом 3, высотой 5 и образующей 6: " << kn.findGroundSquare() << endl;
+    cout << "Площадь боковой поверхности конуса с радиусом 3, высотой 5 и образующей 6: " << kn.findBackGroundSquare() << endl;
+    cout << "Площадь полной поверхности конуса с радиусом 3, высотой 5 и образующей 6: " << kn.findFullGroundSquare() << endl;
+
+    cout << "\n";
+
+    //Нахождение объёма
+    cout << "Объём конуса: " <<  kn.findVolume() << endl;
+    cout << "Объём шара: " <<  ball.findVolume() << endl;
+
+    cout << "\n";
+
+    //Нахождение периметра
+    cout << "Периметр квадрата со стороной 2: " <<  sq.findPerimeter() << endl;
+    cout << "Периметр прямоугольника со сторонами 4 и 5: " <<  rec.findPerimeter() << endl;
+    cout << "Периметр параллелограмма со сторонами 2 и 3 и высотой 4: " <<  parl.findPerimeter() << endl;
+    cout << "Периметр ромба со стороной 3, высотой 4 и диагональю 5: " <<  rh.findPerimeter() << endl;
+
+    cout << "\n";
+
+    //Вывод цвета
+    cout << "Цвет квадрата: " <<  sq.getColor() << endl;
+    cout << "Цвет прямоугольника: " <<  rec.getColor() << endl;
+    cout << "Цвет параллелограмма: " <<  parl.getColor() << endl;
+    cout << "Цвет ромба: " <<  rh.getColor() << endl;
+    cout << "Цвет конуса: " <<  kn.getColor() << endl;
+    cout << "Цвет шара: " <<  ball.getColor() << endl;
+    return 0;#include <iostream>
+#include <vector>
+#include <iterator>
+
+using namespace std;
+
+class Set {
+private:
+    vector <int> my_list;
+public:
+
+    Set() = default;
+
+    ~Set() = default;
+
+    void add(int a) {
+        (my_list).push_back(a);
+    }
+
+    void removeElem(int index) {
+        my_list.erase(my_list.begin() + index);
+    }
+
+    void print() {
+	for (int i = 0; i < my_list.size(); i++) {
+            cout << my_list.at(i) << " ";
+        }
+    }
+
+    friend Set operator+(Set &s1, Set &s2);
+};
+
+Set operator+(Set &s1, Set &s2) {
+    Set temp;
+    Set temp_new;
+    copy(s1.my_list.begin(), s1.my_list.end(), back_inserter(temp_new.my_list));
+    copy(s2.my_list.begin(), s2.my_list.end(), back_inserter(temp_new.my_list));
+    copy(temp_new.my_list.begin(), temp_new.my_list.end(), back_inserter(temp.my_list));
+    return temp;
+}
+
+int main() {
+    system("chcp 65001");
+
+    Set a;
+    a.add(9);
+    a.add(8);
+    a.add(19);
+
+    Set b;
+    b.add(5);
+    b.add(4);
+    b.add(11);
+
+
+    cout << "Множество A: ";
+    a.print();
+    cout << "\n";
+
+    cout << "Множество B: ";
+    b.print();
+    cout << "\n";
+
+    Set c = a + b;
+    cout << "Множество C: ";
+    c.print();
+
+}
+=====ТЕЛО ПИСЬМА==========='NoneType' object has no attribute 'decode'#include <fstream>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+	system("chcp 1251");
+
+	string str;
+	ifstream f1("f1.txt");
+
+	while (!f1.eof()) {
+		getline(f1, str);
+		for (int i = 0; i < str.size() - 1; i += 3) {
+			swap(str[i], str[i + 1]);
+		}
+		cout << str;
+	}
+
+	ofstream f2("f2.txt");
+
+	if (!f2.is_open()) {
+		cout << "f2.txt" << endl;
+	}
+	else {
+		f2 << str << endl;
+	}
+
+	return 0;
+
+	
+}#include <iostream>
+#include <string>
+#include <utility>
+#include <fstream>
+#include <sstream>
+#include <vector>
+using namespace std;
+
+struct Song {
+    string musician;
+    string musName;
+    unsigned int yearSong;
+    string nameOfPerf;
+};
+
+struct MusicShop {
+    vector<Song> song;
+};
+
+vector<Song> song;
+void addSong(string musician_temp, string musName_temp, string perform, unsigned int year) {
+    song[year].musician = move(musician_temp);
+    song[year].musName = move(musName_temp);
+    song[year].nameOfPerf = move(perform);
+    song[year].yearSong = year;
+}
+
+void getSong(int year) {
+        if (song[year].yearSong == year) {
+            cout << "Музыкант\\группа: " << song[year].musician + " " << "; песня - " << song[year].musName + " "
+                 << "; вид исполнения - " << song[year].nameOfPerf << " " << "; дата релиза - " << song[year].yearSong;
+        }
+}
+
+int main() {
+    ifstream f1;
+    f1.open("f1.txt");
+    if (!f1.is_open()) {
+        cout << "Файл не смог открыться" << endl;
+    } else {
+        cout << "Файл был открыт" << endl;
+        string str;
+        while (getline(f1, str)) {
+            getline(f1, str);
+            string musicin, nameMuz, perform;
+            unsigned int year;
+            istringstream isstr(str);
+            isstr >> musicin >> nameMuz >> perform >> year;
+            addSong(musicin, nameMuz, perform, year);
+        }
+    }
+
+    f1.close();
+
+
+    ofstream f2;
+    f2.open("f2.txt");
+    if (!f2.is_open()) {
+        cout << "Файл не смог открыться" << endl;
+    } else {
+        cout << "Файл был открыт" << endl;
+        cout << "Введите данные:" << endl;
+        string data;
+        cin >> data;
+        f2 << data;
+    }
+    f2.close();
+
+
+    cout << endl << "Введите дату релиза:" << endl;
+    int year;
+    cin >> year;
+    getSong(year);
+
+}#include <iostream>
+
+
+using namespace std;
+
+class VolumeFigure { //Абстрактный класс объёмная фигура
+    virtual double findVolume() = 0;
+    virtual double findGroundSquare() = 0;
+    virtual string getColor() = 0;
+};
+
+
+class Ball : public VolumeFigure { //Шар
+private:
+    double radius;
+    string color = "Green";
+public:
+    Ball(double radius) : radius(radius) {
+
+    }
+
+    double findVolume() override {
+        return (1.33) * 3.14 * (radius * radius * radius);
+    }
+
+    double findGroundSquare() override {
+        return 4 * 3.14 * (radius * radius);
+    }
+
+    string getColor() override {
+        return color;
+    }
+};
+
+class Konus : public VolumeFigure { //Конус
+private:
+    double radius;
+    double height;
+    double formingSideLength;
+    string color = "blue";
+public:
+    Konus(double radius, double height, double fSL)
+    : radius(radius), height(height), formingSideLength(fSL) {
+
+    }
+
+    double findGroundSquare() override {
+        return radius * radius * 3.14;
+    }
+
+    double findVolume() override {
+        return (0.33) * findGroundSquare() * height;
+    }
+
+    double findBackGroundSquare()  {
+        return 3.14 * radius * formingSideLength;
+    }
+
+    double findFullGroundSquare() {
+        return 3.14 * radius * (formingSideLength + radius);
+    }
+
+    string getColor() override {
+        return color;
+    }
+
+
+};
+
+class FlatFigure { //Абстрактный класс плоская фигура
+    virtual int findSquare() = 0;
+    virtual int findPerimeter() = 0; //площадь основания
+    virtual string getColor() = 0;
+};
+
+class Parallelogram : public FlatFigure { //Параллелограмм
+private:
+    int side1;
+    int side2;
+    int height;
+    string color = "blue";
+
+public:
+
+    int findSquare() override {
+        return side1 * height;
+    }
+
+    int findPerimeter() override {
+        return side1 * 2 + side2 * 2;
+    }
+
+    string getColor() override {
+        return color;
+    }
+
+    Parallelogram() {
+
+    }
+
+    Parallelogram(int s1, int s2, int h) : side1(s1), side2(s2), height(h) {
+
+    }
+};
+
+
+class Rectangle : public Parallelogram { //Прямоугольник
+private:
+    int width;
+    int length;
+    string color = "black";
+
+public:
+    int findSquare() override {
+        return width * length;
+    }
+
+    int findPerimeter() override {
+        return width * 2 + length * 2;
+    }
+
+    string getColor() override {
+        return color;
+    }
+
+    Rectangle() {
+
+    }
+
+    Rectangle(int w, int l) : width(w), length(l) {
+
+    }
+
+};
+
+
+
+class Rhombus: public Parallelogram { //Ромб
+private:
+    int side;
+    int height;
+    int diag;
+    string color = "grey";
+public:
+    Rhombus(int side, int height, int diag) : side(side), height(height), diag(diag) {
+
+    }
+
+    int findSquare() override {
+        return (diag * diag) / 2;
+    }
+
+    int findPerimeter() override {
+        return side * 4;
+    }
+
+    string getColor() override {
+        return color;
+    }
+
+};
+
+class Square : public Rectangle { //Квадрат
+private:
+    int side;
+    string color = "Yellow";
+
+public:
+
+    Square(int side) : side(side) {
+
+    }
+
+    int findPerimeter() override {
+        return side * 4;
+    }
+
+    int findSquare() override {
+        return side * side;
+    }
+
+    string getColor() override {
+        return color;
+    }
+};
+
+int main() {
+    system("chcp 65001");
+
+    Square sq(2);
+    Rectangle rec(4, 5);
+    Parallelogram parl(2, 3, 4);
+    Rhombus rh(3, 4, 5);
+    Konus kn(3, 5, 6);
+    Ball ball(4);
+
+    //Нахождение площади
+    cout << "Площадь квадрата со стороной 2: " <<  sq.findSquare() << endl;
+    cout << "Площадь прямоугольника со сторонами 4 и 5: " <<  rec.findSquare() << endl;
+    cout << "Площадь параллелограмма со сторонами 2 и 3 и высотой 4: " <<  parl.findSquare() << endl;
+    cout << "Площадь ромба со стороной 3, высотой 4 и диагональю 5: " <<  rh.findSquare() << endl;
+
+    cout << "\n";
+
+    cout << "Площадь поверхности конуса с радиусом 3, высотой 5 и образующей 6: " << kn.findGroundSquare() << endl;
+    cout << "Площадь боковой поверхности конуса с радиусом 3, высотой 5 и образующей 6: " << kn.findBackGroundSquare() << endl;
+    cout << "Площадь полной поверхности конуса с радиусом 3, высотой 5 и образующей 6: " << kn.findFullGroundSquare() << endl;
+
+    cout << "\n";
+
+    //Нахождение объёма
+    cout << "Объём конуса: " <<  kn.findVolume() << endl;
+    cout << "Объём шара: " <<  ball.findVolume() << endl;
+
+    cout << "\n";
+
+    //Нахождение периметра
+    cout << "Периметр квадрата со стороной 2: " <<  sq.findPerimeter() << endl;
+    cout << "Периметр прямоугольника со сторонами 4 и 5: " <<  rec.findPerimeter() << endl;
+    cout << "Периметр параллелограмма со сторонами 2 и 3 и высотой 4: " <<  parl.findPerimeter() << endl;
+    cout << "Периметр ромба со стороной 3, высотой 4 и диагональю 5: " <<  rh.findPerimeter() << endl;
+
+    cout << "\n";
+
+    //Вывод цвета
+    cout << "Цвет квадрата: " <<  sq.getColor() << endl;
+    cout << "Цвет прямоугольника: " <<  rec.getColor() << endl;
+    cout << "Цвет параллелограмма: " <<  parl.getColor() << endl;
+    cout << "Цвет ромба: " <<  rh.getColor() << endl;
+    cout << "Цвет конуса: " <<  kn.getColor() << endl;
+    cout << "Цвет шара: " <<  ball.getColor() << endl;
+    return 0;#include <iostream>
+#include <vector>
+#include <iterator>
+
+using namespace std;
+
+class Set {
+private:
+    vector <int> my_list;
+public:
+
+    Set() = default;
+
+    ~Set() = default;
+
+    void add(int a) {
+        (my_list).push_back(a);
+    }
+
+    void removeElem(int index) {
+        my_list.erase(my_list.begin() + index);
+    }
+
+    void print() {
+	for (int i = 0; i < my_list.size(); i++) {
+            cout << my_list.at(i) << " ";
+        }
+    }
+
+    friend Set operator+(Set &s1, Set &s2);
+};
+
+Set operator+(Set &s1, Set &s2) {
+    Set temp;
+    Set temp_new;
+    copy(s1.my_list.begin(), s1.my_list.end(), back_inserter(temp_new.my_list));
+    copy(s2.my_list.begin(), s2.my_list.end(), back_inserter(temp_new.my_list));
+    copy(temp_new.my_list.begin(), temp_new.my_list.end(), back_inserter(temp.my_list));
+    return temp;
+}
+
+int main() {
+    system("chcp 65001");
+
+    Set a;
+    a.add(9);
+    a.add(8);
+    a.add(19);
+
+    Set b;
+    b.add(5);
+    b.add(4);
+    b.add(11);
+
+
+    cout << "Множество A: ";
+    a.print();
+    cout << "\n";
+
+    cout << "Множество B: ";
+    b.print();
+    cout << "\n";
+
+    Set c = a + b;
+    cout << "Множество C: ";
+    c.print();
+
+}#include <iostream>
+#include <vector>
+#include <iterator>
+
+using namespace std;
+
+
+/*
+Задача на основе 6 задачи 6 варианта. В качестве иного типа данных использовались string и char
+ */
+template <class T>
+class Set {
+private:
+    vector <T> my_list;
+public:
+
+    Set() = default;
+
+    ~Set() = default;
+
+    void add(T a) {
+        (my_list).push_back(a);
+    }
+
+    void removeElem(int index) {
+        my_list.erase(my_list.begin() + index);
+    }
+
+    void print() {
+        for (int i = 0; i < my_list.size(); i++) {
+            cout << my_list.at(i) << " ";
+        }
+    }
+
+    friend Set<T> operator+(Set<T> &s1, Set<T> &s2);
+};
+
+Set<string> operator+(Set<string> &s1, Set<string> &s2) {
+    Set<string> temp;
+    Set<string> temp_new;
+    copy(s1.my_list.begin(), s1.my_list.end(), back_inserter(temp_new.my_list));
+    copy(s2.my_list.begin(), s2.my_list.end(), back_inserter(temp_new.my_list));
+    copy(temp_new.my_list.begin(), temp_new.my_list.end(), back_inserter(temp.my_list));
+    return temp;
+}
+
+Set<char> operator+(Set<char> &s1, Set<char> &s2) {
+    Set<char> temp1;
+    Set<char> temp_new;
+    copy(s1.my_list.begin(), s1.my_list.end(), back_inserter(temp_new.my_list));
+    copy(s2.my_list.begin(), s2.my_list.end(), back_inserter(temp_new.my_list));
+    copy(temp_new.my_list.begin(), temp_new.my_list.end(), back_inserter(temp1.my_list));
+    return temp1;
+}
+
+int main() {
+    system("chcp 65001");
+
+    Set<string> a;
+    a.add("Лиса");
+    a.add("Собака");
+    a.add("Волк");
+
+    Set<string> b;
+    b.add("Пчела");
+    b.add("Оса");
+    b.add("Шмель");
+
+
+    cout << "Множество животных: ";
+    a.print();
+    cout << "\n";
+
+    cout << "Множество насекомых: ";
+    b.print();
+    cout << "\n";
+
+    Set<string> c = a + b;
+    cout << "Множество животных и насекомых: ";
+    c.print();
+
+    cout << "\n\n";
+
+    Set<char> d;
+    d.add('a');
+    d.add('e');
+    d.add('o');
+
+    Set<char> f;
+    f.add('b');
+    f.add('c');
+    f.add('d');
+
+    Set<char> h;
+    h = d + f;
+
+    cout << "Множество гласных букв: ";
+    d.print();
+    cout << "\n";
+
+    cout << "Множество согласных букв: ";
+    f.print();
+    cout << "\n";
+
+    cout << "Множество согласных и гласных букв: ";
+    h.print();
+    cout << "\n";
+
+
+
+}
+=====ТЕЛО ПИСЬМА==========='NoneType' object has no attribute 'decode'#include <fstream>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+	system("chcp 1251");
+
+	string str;
+	ifstream f1("f1.txt");
+
+	while (!f1.eof()) {
+		getline(f1, str);
+		for (int i = 0; i < str.size() - 1; i += 3) {
+			swap(str[i], str[i + 1]);
+		}
+		cout << str;
+	}
+
+	ofstream f2("f2.txt");
+
+	if (!f2.is_open()) {
+		cout << "f2.txt" << endl;
+	}
+	else {
+		f2 << str << endl;
+	}
+
+	return 0;
+
+	
+}#include <iostream>
+#include <string>
+#include <utility>
+#include <fstream>
+#include <sstream>
+#include <vector>
+using namespace std;
+
+struct Song {
+    string musician;
+    string musName;
+    unsigned int yearSong;
+    string nameOfPerf;
+};
+
+struct MusicShop {
+    vector<Song> song;
+};
+
+vector<Song> song;
+void addSong(string musician_temp, string musName_temp, string perform, unsigned int year) {
+    song[year].musician = move(musician_temp);
+    song[year].musName = move(musName_temp);
+    song[year].nameOfPerf = move(perform);
+    song[year].yearSong = year;
+}
+
+void getSong(int year) {
+        if (song[year].yearSong == year) {
+            cout << "Музыкант\\группа: " << song[year].musician + " " << "; песня - " << song[year].musName + " "
+                 << "; вид исполнения - " << song[year].nameOfPerf << " " << "; дата релиза - " << song[year].yearSong;
+        }
+}
+
+int main() {
+    ifstream f1;
+    f1.open("f1.txt");
+    if (!f1.is_open()) {
+        cout << "Файл не смог открыться" << endl;
+    } else {
+        cout << "Файл был открыт" << endl;
+        string str;
+        while (getline(f1, str)) {
+            getline(f1, str);
+            string musicin, nameMuz, perform;
+            unsigned int year;
+            istringstream isstr(str);
+            isstr >> musicin >> nameMuz >> perform >> year;
+            addSong(musicin, nameMuz, perform, year);
+        }
+    }
+
+    f1.close();
+
+
+    ofstream f2;
+    f2.open("f2.txt");
+    if (!f2.is_open()) {
+        cout << "Файл не смог открыться" << endl;
+    } else {
+        cout << "Файл был открыт" << endl;
+        cout << "Введите данные:" << endl;
+        string data;
+        cin >> data;
+        f2 << data;
+    }
+    f2.close();
+
+
+    cout << endl << "Введите дату релиза:" << endl;
+    int year;
+    cin >> year;
+    getSong(year);
+
+}#include <iostream>
+
+
+using namespace std;
+
+class VolumeFigure { //Абстрактный класс объёмная фигура
+    virtual double findVolume() = 0;
+    virtual double findGroundSquare() = 0;
+    virtual string getColor() = 0;
+};
+
+
+class Ball : public VolumeFigure { //Шар
+private:
+    double radius;
+    string color = "Green";
+public:
+    Ball(double radius) : radius(radius) {
+
+    }
+
+    double findVolume() override {
+        return (1.33) * 3.14 * (radius * radius * radius);
+    }
+
+    double findGroundSquare() override {
+        return 4 * 3.14 * (radius * radius);
+    }
+
+    string getColor() override {
+        return color;
+    }
+};
+
+class Konus : public VolumeFigure { //Конус
+private:
+    double radius;
+    double height;
+    double formingSideLength;
+    string color = "blue";
+public:
+    Konus(double radius, double height, double fSL)
+    : radius(radius), height(height), formingSideLength(fSL) {
+
+    }
+
+    double findGroundSquare() override {
+        return radius * radius * 3.14;
+    }
+
+    double findVolume() override {
+        return (0.33) * findGroundSquare() * height;
+    }
+
+    double findBackGroundSquare()  {
+        return 3.14 * radius * formingSideLength;
+    }
+
+    double findFullGroundSquare() {
+        return 3.14 * radius * (formingSideLength + radius);
+    }
+
+    string getColor() override {
+        return color;
+    }
+
+
+};
+
+class FlatFigure { //Абстрактный класс плоская фигура
+    virtual int findSquare() = 0;
+    virtual int findPerimeter() = 0; //площадь основания
+    virtual string getColor() = 0;
+};
+
+class Parallelogram : public FlatFigure { //Параллелограмм
+private:
+    int side1;
+    int side2;
+    int height;
+    string color = "blue";
+
+public:
+
+    int findSquare() override {
+        return side1 * height;
+    }
+
+    int findPerimeter() override {
+        return side1 * 2 + side2 * 2;
+    }
+
+    string getColor() override {
+        return color;
+    }
+
+    Parallelogram() {
+
+    }
+
+    Parallelogram(int s1, int s2, int h) : side1(s1), side2(s2), height(h) {
+
+    }
+};
+
+
+class Rectangle : public Parallelogram { //Прямоугольник
+private:
+    int width;
+    int length;
+    string color = "black";
+
+public:
+    int findSquare() override {
+        return width * length;
+    }
+
+    int findPerimeter() override {
+        return width * 2 + length * 2;
+    }
+
+    string getColor() override {
+        return color;
+    }
+
+    Rectangle() {
+
+    }
+
+    Rectangle(int w, int l) : width(w), length(l) {
+
+    }
+
+};
+
+
+
+class Rhombus: public Parallelogram { //Ромб
+private:
+    int side;
+    int height;
+    int diag;
+    string color = "grey";
+public:
+    Rhombus(int side, int height, int diag) : side(side), height(height), diag(diag) {
+
+    }
+
+    int findSquare() override {
+        return (diag * diag) / 2;
+    }
+
+    int findPerimeter() override {
+        return side * 4;
+    }
+
+    string getColor() override {
+        return color;
+    }
+
+};
+
+class Square : public Rectangle { //Квадрат
+private:
+    int side;
+    string color = "Yellow";
+
+public:
+
+    Square(int side) : side(side) {
+
+    }
+
+    int findPerimeter() override {
+        return side * 4;
+    }
+
+    int findSquare() override {
+        return side * side;
+    }
+
+    string getColor() override {
+        return color;
+    }
+};
+
+int main() {
+    system("chcp 65001");
+
+    Square sq(2);
+    Rectangle rec(4, 5);
+    Parallelogram parl(2, 3, 4);
+    Rhombus rh(3, 4, 5);
+    Konus kn(3, 5, 6);
+    Ball ball(4);
+
+    //Нахождение площади
+    cout << "Площадь квадрата со стороной 2: " <<  sq.findSquare() << endl;
+    cout << "Площадь прямоугольника со сторонами 4 и 5: " <<  rec.findSquare() << endl;
+    cout << "Площадь параллелограмма со сторонами 2 и 3 и высотой 4: " <<  parl.findSquare() << endl;
+    cout << "Площадь ромба со стороной 3, высотой 4 и диагональю 5: " <<  rh.findSquare() << endl;
+
+    cout << "\n";
+
+    cout << "Площадь поверхности конуса с радиусом 3, высотой 5 и образующей 6: " << kn.findGroundSquare() << endl;
+    cout << "Площадь боковой поверхности конуса с радиусом 3, высотой 5 и образующей 6: " << kn.findBackGroundSquare() << endl;
+    cout << "Площадь полной поверхности конуса с радиусом 3, высотой 5 и образующей 6: " << kn.findFullGroundSquare() << endl;
+
+    cout << "\n";
+
+    //Нахождение объёма
+    cout << "Объём конуса: " <<  kn.findVolume() << endl;
+    cout << "Объём шара: " <<  ball.findVolume() << endl;
+
+    cout << "\n";
+
+    //Нахождение периметра
+    cout << "Периметр квадрата со стороной 2: " <<  sq.findPerimeter() << endl;
+    cout << "Периметр прямоугольника со сторонами 4 и 5: " <<  rec.findPerimeter() << endl;
+    cout << "Периметр параллелограмма со сторонами 2 и 3 и высотой 4: " <<  parl.findPerimeter() << endl;
+    cout << "Периметр ромба со стороной 3, высотой 4 и диагональю 5: " <<  rh.findPerimeter() << endl;
+
+    cout << "\n";
+
+    //Вывод цвета
+    cout << "Цвет квадрата: " <<  sq.getColor() << endl;
+    cout << "Цвет прямоугольника: " <<  rec.getColor() << endl;
+    cout << "Цвет параллелограмма: " <<  parl.getColor() << endl;
+    cout << "Цвет ромба: " <<  rh.getColor() << endl;
+    cout << "Цвет конуса: " <<  kn.getColor() << endl;
+    cout << "Цвет шара: " <<  ball.getColor() << endl;
+    return 0;#include <iostream>
+#include <vector>
+#include <iterator>
+
+using namespace std;
+
+class Set {
+private:
+    vector <int> my_list;
+public:
+
+    Set() = default;
+
+    ~Set() = default;
+
+    void add(int a) {
+        (my_list).push_back(a);
+    }
+
+    void removeElem(int index) {
+        my_list.erase(my_list.begin() + index);
+    }
+
+    void print() {
+	for (int i = 0; i < my_list.size(); i++) {
+            cout << my_list.at(i) << " ";
+        }
+    }
+
+    friend Set operator+(Set &s1, Set &s2);
+};
+
+Set operator+(Set &s1, Set &s2) {
+    Set temp;
+    Set temp_new;
+    copy(s1.my_list.begin(), s1.my_list.end(), back_inserter(temp_new.my_list));
+    copy(s2.my_list.begin(), s2.my_list.end(), back_inserter(temp_new.my_list));
+    copy(temp_new.my_list.begin(), temp_new.my_list.end(), back_inserter(temp.my_list));
+    return temp;
+}
+
+int main() {
+    system("chcp 65001");
+
+    Set a;
+    a.add(9);
+    a.add(8);
+    a.add(19);
+
+    Set b;
+    b.add(5);
+    b.add(4);
+    b.add(11);
+
+
+    cout << "Множество A: ";
+    a.print();
+    cout << "\n";
+
+    cout << "Множество B: ";
+    b.print();
+    cout << "\n";
+
+    Set c = a + b;
+    cout << "Множество C: ";
+    c.print();
+
+}#include <iostream>
+#include <vector>
+#include <iterator>
+
+using namespace std;
+
+
+/*
+Задача на основе 6 задачи 6 варианта. В качестве иного типа данных использовались string и char
+ */
+template <class T>
+class Set {
+private:
+    vector <T> my_list;
+public:
+
+    Set() = default;
+
+    ~Set() = default;
+
+    void add(T a) {
+        (my_list).push_back(a);
+    }
+
+    void removeElem(int index) {
+        my_list.erase(my_list.begin() + index);
+    }
+
+    void print() {
+        for (int i = 0; i < my_list.size(); i++) {
+            cout << my_list.at(i) << " ";
+        }
+    }
+
+    friend Set<T> operator+(Set<T> &s1, Set<T> &s2);
+};
+
+Set<string> operator+(Set<string> &s1, Set<string> &s2) {
+    Set<string> temp;
+    Set<string> temp_new;
+    copy(s1.my_list.begin(), s1.my_list.end(), back_inserter(temp_new.my_list));
+    copy(s2.my_list.begin(), s2.my_list.end(), back_inserter(temp_new.my_list));
+    copy(temp_new.my_list.begin(), temp_new.my_list.end(), back_inserter(temp.my_list));
+    return temp;
+}
+
+Set<char> operator+(Set<char> &s1, Set<char> &s2) {
+    Set<char> temp1;
+    Set<char> temp_new;
+    copy(s1.my_list.begin(), s1.my_list.end(), back_inserter(temp_new.my_list));
+    copy(s2.my_list.begin(), s2.my_list.end(), back_inserter(temp_new.my_list));
+    copy(temp_new.my_list.begin(), temp_new.my_list.end(), back_inserter(temp1.my_list));
+    return temp1;
+}
+
+int main() {
+    system("chcp 65001");
+
+    Set<string> a;
+    a.add("Лиса");
+    a.add("Собака");
+    a.add("Волк");
+
+    Set<string> b;
+    b.add("Пчела");
+    b.add("Оса");
+    b.add("Шмель");
+
+
+    cout << "Множество животных: ";
+    a.print();
+    cout << "\n";
+
+    cout << "Множество насекомых: ";
+    b.print();
+    cout << "\n";
+
+    Set<string> c = a + b;
+    cout << "Множество животных и насекомых: ";
+    c.print();
+
+    cout << "\n\n";
+
+    Set<char> d;
+    d.add('a');
+    d.add('e');
+    d.add('o');
+
+    Set<char> f;
+    f.add('b');
+    f.add('c');
+    f.add('d');
+
+    Set<char> h;
+    h = d + f;
+
+    cout << "Множество гласных букв: ";
+    d.print();
+    cout << "\n";
+
+    cout << "Множество согласных букв: ";
+    f.print();
+    cout << "\n";
+
+    cout << "Множество согласных и гласных букв: ";
+    h.print();
+    cout << "\n";
+
+
+
+}#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    vector<int> list = {1, 3, 4, 3, 8, 22, 8, 11, 10, 1, 10};
+    int count = 0;
+    for (int i = 0, j = 2; i < list.size() - 1 && j < list.size(); i++, j++) {
+        if (list.at(i) == list.at(j)) {
+            count++;
+        }
+    }
+    cout << "Result: " << count;
+}

@@ -1,0 +1,10 @@
+=========гюцнкнбйх охяэлю==========
+FROM: ('=?UTF-8?B?0L3QuNC60LjRgtCwINC60L7Qu9C/0LDQutC+0LI=?=', 'nik.kolpakov@inbox.ru')
+TO: m_dryuchenko@mail.ru
+DATE: Mon, 23 Mar 2020 20:20:00 +0300
+SUBJECT: =?UTF-8?B?SU1HXzIwMjAwMzIzXzIwMTEzNS5qcGc=?=
+MESSAGE_ID: <1584984000.495334749@f506.i.mail.ru>
+
+
+=====рекн охяэлю==========='NoneType' object has no attribute 'decode'
+=====рекн охяэлю==========='NoneType' object has no attribute 'decode''utf-8' codec can't decode byte 0xff in position 0: invalid start byte

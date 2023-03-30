@@ -1,0 +1,1 @@
+Actions (deleted) with conf file ( d:/test folder\doc3.txt  ) were detected at:  2023-03-21 22:00:30.194204  by  LAPTOP-KLK2MD3E 

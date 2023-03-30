@@ -2,13 +2,45 @@ import datetime
 import hashlib
 import os
 import socket
+
+from docx.opc.exceptions import PackageNotFoundError
+
 import reg_exp_conf
+from docx import Document
+from PyPDF2 import PdfReader
 
 
 def update_db():
     open('./fileDatabase', 'w').close()
     get_file_hashes()
 
+
+def read_pdf_file(pdf_path):
+    pdf_file = PdfReader(pdf_path)
+    number_of_pages = len(pdf_file.pages)
+
+    text = ""
+    for i in range(0, number_of_pages - 1):
+        page = pdf_file.pages[i]
+        page_text = page.extract_text()
+        text += page_text
+
+    return text
+
+
+def read_docx_file(docx_path):
+    doc = Document(docx_path)
+
+    text = []
+    for paragraph in doc.paragraphs:
+        text.append(paragraph.text)
+
+    return '\n'.join(text)
+
+
+def get_file_type(file_path):
+    file_extension = os.path.splitext(file_path)[1]
+    return file_extension
 
 def write_file_to_db(elem):
     text_conf = is_file_or_text_confidential(False, elem)
@@ -80,21 +112,36 @@ def is_file_or_text_confidential(is_text, path_to_file):
 
         try:
 
-            file = open(path_to_file, "r")
+            file_type = get_file_type(path_to_file)
 
-            while True:
-                line = file.readline()
+            if file_type == ".pdf":
+                text = read_pdf_file(path_to_file)
 
-                if not line:
-                    break
+            elif file_type == ".doc" or file_type == ".docx":
+                text = read_docx_file(path_to_file)
 
-                text += line.strip() + " "
+            else:
 
+                file = open(path_to_file, "r")
+
+                while True:
+                    line = file.readline()
+
+                    if not line:
+                        break
+
+                    text += line.strip() + " "
+
+                file.close()
+
+        except PackageNotFoundError:
+            print("Couldn't find *.doc or *.docx file. Maybe, it was deleted!")
+            return True
         except FileNotFoundError:
             print("Couldn't find file. Maybe, it was deleted!")
             return True
 
-        file.close()
+
     else:
         text = path_to_file
 
@@ -126,6 +173,11 @@ def is_file_or_text_confidential(is_text, path_to_file):
         return False
 
 
+
+def is_pdf_file_confidential():
+    pass
+
+
 def conf_info_detected(data, action):
     detection_date = datetime.datetime.now()
     detection_date_right_format = str(datetime.datetime.date(datetime.datetime.now()))
@@ -142,6 +194,10 @@ def conf_info_detected(data, action):
 
 
 if __name__ == "__main__":
-    is_file_or_text_confidential(True, "Hello! My new neighbor is pretty nice guy. Maybe i should to talk to him soon.")
-    is_file_or_text_confidential(True,
-                                 "Hi! I just found out that her number is +79525481672! Take your chance and call her now!!!")
+    try:
+        f = read_docx_file("D:\TEST FOLDER\Лабораторная_11.docx")
+        print(f)
+    except PackageNotFoundError:
+        print("Sosi docx")
+    except FileNotFoundError:
+        print("Sosi file")

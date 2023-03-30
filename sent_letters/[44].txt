@@ -1,0 +1,21 @@
+=========ЗАГОЛОВКИ ПИСЬМА==========
+FROM: ('=?UTF-8?B?0L3QuNC60LjRgtCwINC60L7Qu9C/0LDQutC+0LI=?=', 'nik.kolpakov@inbox.ru')
+TO: =?UTF-8?B?Y3NhZG1pbnM=?= <csadmins@sc.vsu.ru>
+DATE: Wed, 13 May 2020 13:12:08 +0300
+SUBJECT: =?UTF-8?B?0JTQvtC80LXQvdC90LDRjyDQv9C+0YfRgtCw?=
+MESSAGE_ID: <1589364728.794609555@f334.i.mail.ru>
+
+
+=====ТЕЛО ПИСЬМА===========
+Логин в системе - kolpakov_n_s
+ 
+Номер студенческого билета - 16190087
+ 
+ 
+=====ТЕЛО ПИСЬМА===========
+Логин в системе - kolpakov_n_s
+ 
+Номер студенческого билета - 16190087
+ 
+ 
+<HTML><BODY><div>Логин в системе -&nbsp;kolpakov_n_s</div><div>&nbsp;</div><div>Номер студенческого билета -&nbsp;16190087</div><div>&nbsp;</div><div>&nbsp;</div></BODY></HTML>

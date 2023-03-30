@@ -1,0 +1,11 @@
+=========«¿√ŒÀŒ¬ » œ»—‹Ã¿==========
+FROM: ('=?UTF-8?B?0JrQvtC70L/QsNC60L7QsiDQnS7QoS4=?=', 'nik.kolpakov@inbox.ru')
+TO: =?UTF-8?B?enNhX3p1ZXY=?= <zsa_zuev@mail.ru>
+DATE: Tue, 25 May 2021 22:24:13 +0300
+SUBJECT: =?UTF-8?B?0JvQsNCx0L7RgNCw0YLQvtGA0L3QsNGPINGA0LDQsdC+0YLQsCDihJY2LmRv?=
+ =?UTF-8?B?Y3g=?=
+MESSAGE_ID: <1621970653.87711883@f454.i.mail.ru>
+
+
+=====“≈ÀŒ œ»—‹Ã¿==========='NoneType' object has no attribute 'decode'
+=====“≈ÀŒ œ»—‹Ã¿==========='NoneType' object has no attribute 'decode''utf-8' codec can't decode byte 0xa3 in position 14: invalid start byte
