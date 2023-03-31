@@ -1,6 +1,6 @@
 import datetime
 import socket
-from file_utils import get_file_type, read_docx_file, read_pdf_file
+from file_utils import get_file_type, read_docx_file, read_pdf_file, read_txt_file
 from docx.opc.exceptions import PackageNotFoundError
 import reg_exp_utils
 
@@ -39,18 +39,7 @@ def is_file_or_text_confidential(is_text, path_to_file):
                 text = read_docx_file(path_to_file)
 
             else:
-
-                file = open(path_to_file, "r")
-
-                while True:
-                    line = file.readline()
-
-                    if not line:
-                        break
-
-                    text += line.strip() + " "
-
-                file.close()
+                text = read_txt_file(path_to_file)
 
         except PackageNotFoundError:
             print("Couldn't find *.doc or *.docx file. Maybe, it was deleted!")

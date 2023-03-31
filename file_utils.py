@@ -26,6 +26,22 @@ def read_docx_file(docx_path):
     return '\n'.join(text)
 
 
+def read_txt_file(txt_path):
+    text = ""
+    file = open(txt_path, "r")
+
+    while True:
+        line = file.readline()
+
+        if not line:
+            break
+
+        text += line.strip() + " "
+    file.close()
+
+    return text
+
+
 def get_file_type(file_path):
     file_extension = os.path.splitext(file_path)[1]
     return file_extension
