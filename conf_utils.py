@@ -1,5 +1,7 @@
 import datetime
 import socket
+
+import conf_detect
 from file_utils import get_file_type, read_docx_file, read_pdf_file, read_txt_file
 from docx.opc.exceptions import PackageNotFoundError
 import reg_exp_utils
@@ -26,6 +28,7 @@ def get_conf_hashes():
 def is_file_or_text_confidential(is_text, path_to_file):
     text = ""
 
+    # Если файл представляет собой путь к файлу
     if not is_text:
 
         try:
@@ -35,7 +38,7 @@ def is_file_or_text_confidential(is_text, path_to_file):
             if file_type == ".pdf":
                 text = read_pdf_file(path_to_file)
 
-            elif file_type == ".doc" or file_type == ".docx":
+            elif file_type == ".docx":
                 text = read_docx_file(path_to_file)
 
             else:
@@ -51,6 +54,7 @@ def is_file_or_text_confidential(is_text, path_to_file):
     else:
         text = path_to_file
 
+    # Проверка текста на регулярки
     cond1 = reg_exp_utils.mail_match(text)
     cond2 = reg_exp_utils.phone_number_match(text)
     cond3 = reg_exp_utils.passport_data_match(text)
@@ -60,9 +64,16 @@ def is_file_or_text_confidential(is_text, path_to_file):
     cond7 = reg_exp_utils.ipv6_match(text)
     cond8 = reg_exp_utils.mac_address_match(text)
 
+    # Проверка текста на ключевые слова
+    precetnage_conf = conf_detect.check_conf_info(text)
+
     if cond1 or cond2 or cond3 or cond4 or cond5 or cond6 or cond7 or cond8:
         return True
     else:
+
+        if precetnage_conf > 10:
+            return True
+
         return False
 
 

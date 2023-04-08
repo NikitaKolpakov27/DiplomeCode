@@ -71,5 +71,5 @@ def password_match(msg):
 
 
 if __name__ == "__main__":
-    res = ipv6_match("4405:4380:")
+    res = password_match("ok/PycharmProjects/DiplomCode/ma")
     print(res)

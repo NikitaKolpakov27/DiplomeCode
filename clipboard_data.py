@@ -1,11 +1,13 @@
 import tkinter as tk
 import conf_utils
+import file_utils
+
 
 def get_data_from_clipboard():
     data = ""
     last_data = None
 
-    conf_hashes = tools.get_conf_hashes()
+    conf_hashes = conf_utils.get_conf_hashes()
 
     while True:
 
@@ -19,7 +21,7 @@ def get_data_from_clipboard():
                 print("Clipboard is empty")
                 break
 
-        data_type = tools.is_string_path(data)
+        data_type = file_utils.is_string_path(data)
 
         if data != last_data and len(data) != 0:
 
@@ -28,12 +30,12 @@ def get_data_from_clipboard():
 
                 print("Буфер -> ", data)
 
-                if tools.hash_file(data) in conf_hashes:
+                if file_utils.hash_file(data) in conf_hashes:
                     print("WARNING!")
-                    tools.conf_info_detected(data, "Copy")
+                    conf_utils.conf_info_detected(data, "Copy")
             else:
 
-                conf_res = tools.is_file_or_text_confidential(True, data)
+                conf_res = conf_utils.is_file_or_text_confidential(True, data)
 
                 if conf_res:
                     print("Буфер -> ", data, "[This text has confidential data!!!]")
