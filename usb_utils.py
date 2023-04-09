@@ -3,6 +3,16 @@ import psutil as psutil
 import conf_utils
 import file_utils
 
+# Проверка подключенных флеш-накопителей
+def check_all_drives():
+    flash_dirs = get_flash_directories()
+    if len(flash_dirs) > 0:
+        print("Флеш-накопитель(-и) был(-и) подключен(-ы)")
+        check_flash_drives(flash_dirs)
+    else:
+        print("Нет флеш-накопителей")
+
+
 # Получить директории для флеш-накопителей
 def get_flash_directories():
     drives = psutil.disk_partitions()

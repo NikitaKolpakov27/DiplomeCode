@@ -28,7 +28,7 @@ def get_data_from_clipboard():
             # Проверка, является ли текст в буфере путем к файлу или нет
             if data_type:
 
-                print("Буфер -> ", data)
+                print("Буфер -> ", data, "(FILE)")
 
                 if file_utils.hash_file(data) in conf_hashes:
                     print("WARNING!")
@@ -38,9 +38,9 @@ def get_data_from_clipboard():
                 conf_res = conf_utils.is_file_or_text_confidential(True, data)
 
                 if conf_res:
-                    print("Буфер -> ", data, "[This text has confidential data!!!]")
+                    print("Буфер -> ", data, "[This text may contain confidential data!!!]")
                 else:
-                    print("Буфер -> ", data)
+                    print("Буфер -> ", data, "TEXT")
 
         last_data = data
 

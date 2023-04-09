@@ -1,0 +1,1 @@
+Actions (deleted) with conf file ( d:/test folder\bithc.txt  ) were detected at:  2023-04-09 16:57:47.499397  by  LAPTOP-KLK2MD3E 

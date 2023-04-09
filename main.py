@@ -2,6 +2,7 @@ from watchdog.observers import Observer
 import clipboard_data
 import db_utils
 import my_handler
+import usb_utils
 from usb_utils import get_flash_directories, check_flash_drives
 import browserhistory as bh
 
@@ -19,11 +20,7 @@ if __name__ == "__main__":
     print("==================================")
 
     while True:
-        flash_dirs = get_flash_directories()
-
-        if len(flash_dirs) > 0:
-            check_flash_drives(flash_dirs)
-
+        usb_utils.check_all_drives()
         try:
             clipboard_data.get_data_from_clipboard()
         except KeyboardInterrupt:
