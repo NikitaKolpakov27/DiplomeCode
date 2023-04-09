@@ -1,11 +1,9 @@
 import os
-import string
-from ctypes import windll
-
 import psutil as psutil
 import conf_utils
 import file_utils
 
+# Получить директории для флеш-накопителей
 def get_flash_directories():
     drives = psutil.disk_partitions()
     flash_dirs = []
@@ -18,6 +16,7 @@ def get_flash_directories():
     return flash_dirs
 
 
+# Проверка всех подключённых флеш-накопителей на конф. файлы
 def check_flash_drives(flash_dirs):
 
     for flash_dir in flash_dirs:

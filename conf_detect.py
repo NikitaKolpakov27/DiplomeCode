@@ -20,6 +20,7 @@ conf_words = ""
 for word in conf_words_array:
     conf_words += word + " "
 
+# Показывает облако ключевых слов для конф. информации
 def show_conf_wordcloud():
     conf_wordcloud = WordCloud(width=500, height=300).generate(conf_words)
 
@@ -82,19 +83,16 @@ def find_phrases(array):
                 if array[j] == phrase_2:
                     phrases.append(array[i] + " " + array[j])
 
-    print("Phrases: ", phrases)  # Потом удалить
     return len(phrases)
 
 
 def check_conf_info(text):
     final_text = preprocessing(text)
-    print(final_text)
     count = 0
 
     # Поиск по ключевым словам
     for i in final_text:
         if i in conf_words_array:
-            print("Совпадение -> ", i)
             count += 1
 
     # Поиск по ключевым фразам
@@ -103,8 +101,6 @@ def check_conf_info(text):
 
     # Вычисления процента конфиденциальной информации в тексте
     percentage = (count / len(final_text)) * 100
-    print("This text has " + str(round(percentage, 2)) + "% of conf info")
-
     return percentage
 
 

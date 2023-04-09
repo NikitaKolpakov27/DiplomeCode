@@ -2,7 +2,7 @@ from watchdog.observers import Observer
 import clipboard_data
 import db_utils
 import my_handler
-import test
+from usb_utils import get_flash_directories, check_flash_drives
 import browserhistory as bh
 
 if __name__ == "__main__":
@@ -19,10 +19,10 @@ if __name__ == "__main__":
     print("==================================")
 
     while True:
-        flash_dirs = test.get_flash_directories()
+        flash_dirs = get_flash_directories()
 
         if len(flash_dirs) > 0:
-            test.check_flash_drives(flash_dirs)
+            check_flash_drives(flash_dirs)
 
         try:
             clipboard_data.get_data_from_clipboard()

@@ -7,6 +7,7 @@ from docx.opc.exceptions import PackageNotFoundError
 import reg_exp_utils
 
 
+# Получает хэши конфиденциальных файлов
 def get_conf_hashes():
     raw_array = []
     conf_hashes_array = []
@@ -77,6 +78,7 @@ def is_file_or_text_confidential(is_text, path_to_file):
         return False
 
 
+# Отправка отчёта после операций с конфиденциальными файлами
 def conf_info_detected(data, action):
     detection_date = datetime.datetime.now()
     detection_date_right_format = str(datetime.datetime.date(datetime.datetime.now()))
@@ -99,6 +101,6 @@ if __name__ == "__main__":
         f = read_docx_file("D:\\TEST FOLDER\\Лабораторная_11.docx")
         print(f)
     except PackageNotFoundError:
-        print("Sosi docx")
+        print("S docx")
     except FileNotFoundError:
-        print("Sosi file")
+        print("S file")
