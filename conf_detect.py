@@ -20,9 +20,14 @@ conf_words = ""
 for word in conf_words_array:
     conf_words += word + " "
 
-# Показывает облако ключевых слов для конф. информации
-def show_conf_wordcloud():
-    conf_wordcloud = WordCloud(width=500, height=300).generate(conf_words)
+# Показывает облако наиболее встречаемых слов для анализируемого текста
+def show_conf_wordcloud(text_array):
+    # Преобразование массива слов в одну строку
+    text_array_str = ""
+    for i in text_array:
+        text_array_str += i + " "
+
+    conf_wordcloud = WordCloud(width=500, height=300).generate(text_array_str)
 
     plt.figure(figsize=(10, 8), facecolor='w')
     plt.imshow(conf_wordcloud)

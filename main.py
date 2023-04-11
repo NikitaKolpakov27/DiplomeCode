@@ -1,9 +1,9 @@
 from watchdog.observers import Observer
 import clipboard_data
+import conf_detect
 import db_utils
 import my_handler
 import usb_utils
-from usb_utils import get_flash_directories, check_flash_drives
 import browserhistory as bh
 
 if __name__ == "__main__":

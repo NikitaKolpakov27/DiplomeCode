@@ -65,12 +65,12 @@ def is_file_or_text_confidential(is_text, path_to_file):
     cond7 = reg_exp_utils.ipv6_match(text)
     cond8 = reg_exp_utils.mac_address_match(text)
 
-    # Проверка текста на ключевые слова
-    precetnage_conf = conf_detect.check_conf_info(text)
-
     if cond1 or cond2 or cond3 or cond4 or cond5 or cond6 or cond7 or cond8:
         return True
     else:
+
+        # Проверка текста на ключевые слова
+        precetnage_conf = conf_detect.check_conf_info(text)
 
         if precetnage_conf > 10:
             return True

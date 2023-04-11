@@ -71,5 +71,4 @@ def password_match(msg):
 
 
 if __name__ == "__main__":
-    res = password_match("ok/PycharmProjects/DiplomCode/ma")
-    print(res)
+    pass

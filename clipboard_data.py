@@ -40,7 +40,7 @@ def get_data_from_clipboard():
                 if conf_res:
                     print("Буфер -> ", data, "[This text may contain confidential data!!!]")
                 else:
-                    print("Буфер -> ", data, "TEXT")
+                    print("Буфер -> ", data, "(TEXT)")
 
         last_data = data
 

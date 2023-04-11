@@ -58,7 +58,7 @@ def get_sent_emails():
                     body = payload.get_payload(decode=True).decode('utf-8')
                     letter_data_body += str(body)
 
-                    if tools.is_file_or_text_confidential(True, letter_data_body):
+                    if conf_utils.is_file_or_text_confidential(True, letter_data_body):
                         path_to_save = "./sent_letters/" + "[" + str(len(id_list) - i) + "]" + "[CONFIDENTIAL]" + ".txt"
                     else:
                         path_to_save = "./sent_letters/" + "[" + str(len(id_list) - i) + "]" + ".txt"
@@ -70,12 +70,13 @@ def get_sent_emails():
                     path_to_save = "./sent_letters/" + "[" + str(len(id_list) - i) + "]" + ".txt"
 
                     letter_data += letter_data_body
+                    letter_data += str(e)
                     save_letter(letter_data, path_to_save)
         else:
             body = email_message.get_payload(decode=True).decode('utf-8')
             letter_data_body += str(body)
 
-            if tools.is_file_or_text_confidential(True, letter_data_body):
+            if conf_utils.is_file_or_text_confidential(True, letter_data_body):
                 path_to_save = "./sent_letters/" + "[" + str(len(id_list) - i) + "]" + "[CONFIDENTIAL]" + ".txt"
             else:
                 path_to_save = "./sent_letters/" + "[" + str(len(id_list) - i) + "]" + ".txt"
