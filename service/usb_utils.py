@@ -1,7 +1,7 @@
 import os
 import psutil as psutil
-import conf_utils
-import file_utils
+import service.conf_utils as conf_utils
+import service.file_utils as file_utils
 
 # Проверка подключенных флеш-накопителей
 def check_all_drives():

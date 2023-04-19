@@ -1,10 +1,9 @@
 import datetime
 import socket
-
-import conf_detect
-from file_utils import get_file_type, read_docx_file, read_pdf_file, read_txt_file
+import service.conf_detect as conf_detect
+from service.file_utils import get_file_type, read_docx_file, read_pdf_file, read_txt_file
 from docx.opc.exceptions import PackageNotFoundError
-import reg_exp_utils
+import service.reg_exp_utils as reg_exp_utils
 
 
 # Получает хэши конфиденциальных файлов

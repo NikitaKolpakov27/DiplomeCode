@@ -1,6 +1,6 @@
 import os
-from conf_utils import is_file_or_text_confidential
-from file_utils import hash_file
+from service.conf_utils import is_file_or_text_confidential
+from service.file_utils import hash_file
 
 
 def update_db():

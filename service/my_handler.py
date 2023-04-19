@@ -1,8 +1,7 @@
 from watchdog.events import FileSystemEventHandler
-import conf_utils
-import db_utils
-import usb_utils
-
+import service.conf_utils as conf_utils
+import service.db_utils as db_utils
+import service.usb_utils as usb_utils
 
 class MyHandler(FileSystemEventHandler):
     def on_any_event(self, event):
