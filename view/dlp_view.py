@@ -1,93 +1,78 @@
+import os.path
+import tkinter.messagebox
 from tkinter import *
-from tkinter import messagebox
 from watchdog.observers import Observer
 import service.my_handler
 import service.db_utils
 import service.usb_utils
 import service.clipboard_utils
 import browserhistory as bh
-
-import main
-from service import clipboard_utils
 from view import view_utils
 
+event_handler = service.my_handler.MyHandler()
+observer = Observer()
 
 def main_process():
-    window.withdraw()
-    new_window = Toplevel(window)
-    new_window.protocol("WM_DELETE_WINDOW", lambda: window.destroy())
-
-    new_window.title("DLP. Main Process")
-    new_window.geometry("600x400")
-
+    # Проверка введенного пути
     selected_path = dir_name.get()
-    info_path = "ТЕКУЩАЯ ДИРЕКТОРИЯ: " + str(selected_path) + "\n" + "==============" + "\n"
+    check_path = os.path.isdir(selected_path)
 
-    main_log = Text(new_window, width=600, height=200, bg='black',
-                    font=("Courier New", 12), foreground="white", wrap=WORD)
-    main_log.pack()
-    main_log.insert(1.0, info_path)
+    if not check_path:
+        tkinter.messagebox.showwarning(title="Неверный путь", message="Системе не удается найти указанный путь!")
+        window.destroy()
 
-    ##########test-success!
-    #view_utils.usb_check(main_log)
-    ##########test
+    else:
 
-    event_handler = service.my_handler.MyHandler()
-    observer = Observer()
+        # Удаление старого окна
+        window.withdraw()
+        new_window = Toplevel(window)
+        new_window.protocol("WM_DELETE_WINDOW", lambda: window.destroy())
 
-    observer.schedule(event_handler, path=selected_path, recursive=True)
-    observer.start()
-    service.db_utils.update_db()
+        # Создание нового окна
+        new_window.title("DLP. Main Process")
+        new_window.geometry("600x400")
+        info_path = "ТЕКУЩАЯ ДИРЕКТОРИЯ: " + str(selected_path) + "\n" + "=====================" + "\n"
 
-    # while True:
-    #service.usb_utils.check_all_drives()
-    view_utils.usb_check(main_log)
+        main_log = Text(new_window, width=600, height=200, bg='black',
+                        font=("Courier New", 12), foreground="white", wrap=WORD)
+        main_log.pack()
+        main_log.insert(1.0, info_path)
 
+        # Получение информации об окне для обсервера
+        event_handler.get_info(main_log, new_window)
 
+        # Старт обсервера
+        observer.schedule(event_handler, path=selected_path, recursive=True)
+        observer.start()
+        service.db_utils.update_db()
 
-    view_utils.clipboard_info_view2(main_log, new_window)
-    # new_window.after(0, clipboard_utils.get_data_from_clipboard2, new_window)
-    new_window.mainloop()
-    # try:
-    #     # service.clipboard_utils.get_data_from_clipboard()
-    #     view_utils.clipboard_info_view(main_log, new_window)
-    #
-    #     # new_window.after(1000, view_utils.clipboard_info_view)
-    #     new_window.update()
-    #     new_window.mainloop()
-    # except KeyboardInterrupt:
-    #     bh.write_browserhistory_csv()
-    #     observer.stop()
-
-
-
+        # Главный процесс
+        try:
+            view_utils.usb_check(main_log)
+            view_utils.clipboard_info_view2(main_log, new_window)
+            new_window.mainloop()
+        except KeyboardInterrupt:
+            bh.write_browserhistory_csv()
+            observer.stop()
 
 
 window = Tk()
 window.title('DLP')
-window.geometry('400x300')
+window.geometry('600x200')
 
-frame = Frame(
-    window,
-    padx=10,
-    pady=10
-)
+frame = Frame(window, padx=10, pady=10)
 frame.pack(expand=True)
 
-dir_text = Label(
-    frame,
-    text="Введите директорию: "
-)
-dir_text.grid(row=3, column=1)
+logo_text = Label(frame, text="DLP-система", font=("Helvetica", 18), foreground="blue")
+logo_text.grid(row=0, column=2)
 
-dir_name = Entry(frame,)
-dir_name.grid(row=3, column=2, pady=5)
+dir_text = Label(frame, text="Введите директорию: ", font=("Helvetica", 14))
+dir_text.grid(row=1, column=1)
 
-cal_btn = Button(
-    frame,
-    text='Начать процесс',
-    command=main_process
-)
+dir_name = Entry(frame, width=30, font=("Helvetica", 14))
+dir_name.grid(row=1, column=2, pady=5)
+
+cal_btn = Button(frame, text='Начать процесс', command=main_process, font=("Helvetica", 14))
 cal_btn.grid(row=5, column=2)
 
 window.mainloop()

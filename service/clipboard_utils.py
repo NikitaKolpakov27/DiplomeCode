@@ -77,13 +77,16 @@ def get_data_from_clipboard2(window, last_data):
 
             # print("Буфер -> ", data, "(FILE)")
 
-            # message = "Буфер -> " + str(data) + "(FILE)"
-            yield data, 'file', 'normal'
-
             if file_utils.hash_file(data) in conf_hashes:
                 print("WARNING!")
-                yield None, 'file', 'warning'
-                conf_utils.conf_info_detected(data, "Copy")
+                message = conf_utils.conf_info_detected(data, "Copy")
+                last_data = data
+                yield message, 'file', 'warning', last_data
+
+            else:
+                last_data = data
+                yield data, 'file', 'normal', last_data
+
         else:
 
             conf_res = conf_utils.is_file_or_text_confidential(True, data)
@@ -102,7 +105,6 @@ def get_data_from_clipboard2(window, last_data):
     elif data == last_data:
         yield None, 'same data', None, last_data
 
-    # last_data = data
     window.after(1000, get_data_from_clipboard2, window, last_data)
 
 

@@ -1,0 +1,1 @@
+Actions (Copy) with conf file ( D:/TEST FOLDER/doc1.txt  ) were detected at:  2023-04-20 19:29:03.121555  by  LAPTOP-KLK2MD3E 

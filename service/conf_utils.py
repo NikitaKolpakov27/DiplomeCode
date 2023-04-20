@@ -1,4 +1,5 @@
 import datetime
+import os
 import socket
 import service.conf_detect as conf_detect
 from service.file_utils import get_file_type, read_docx_file, read_pdf_file, read_txt_file
@@ -90,10 +91,15 @@ def conf_info_detected(data, action):
     file_name = detection_date_right_format + "_" + str(detection_date.hour) + "_" \
                 + str(detection_date.minute) + "_" + str(detection_date.second) + "_" \
                 + socket.gethostname()
-    path = "./Reports/" + file_name + ".txt"
 
-    with open(path, "a") as file:
+    cur_path = os.path.dirname(__file__)
+    correct_path = os.path.relpath('..\\Reports', cur_path)
+    correct_path = correct_path + "/" + file_name + ".txt"
+
+    with open(correct_path, "a") as file:
         file.write(str(message))
+
+    return message
 
 
 if __name__ == "__main__":
