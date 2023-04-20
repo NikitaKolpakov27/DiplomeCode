@@ -4,7 +4,7 @@ import service.my_handler
 import service.db_utils
 import service.usb_utils
 import service.clipboard_utils
-from service import clipboard_utils, conf_utils
+from service import clipboard_utils
 
 last_data = None
 
@@ -60,8 +60,13 @@ def clipboard_info_view(main_log, window):
 def clipboard_info_view2(main_log, window):
     global last_data
 
-    clipboard_result = clipboard_utils.get_data_from_clipboard2(window, last_data)
-    cl_data, cl_type, cl_event, last_data = next(clipboard_result)
+    try:
+        clipboard_result = clipboard_utils.get_data_from_clipboard2(window, last_data)
+        cl_data, cl_type, cl_event, last_data = next(clipboard_result)
+    except StopIteration:
+        cl_data = None
+        cl_type = 'same data'
+        cl_event = 'other'
 
     if cl_event == 'normal':
 
@@ -119,10 +124,6 @@ def handler_info_view(main_log, event, ev_type, status, path):
         main_log.tag_config("monitor", foreground="blue")
 
 
-
-
-
-
 if __name__ == "__main__":
-    clipboard_info_view(1)
+    pass
 
