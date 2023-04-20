@@ -78,6 +78,7 @@ def is_file_or_text_confidential(is_text, path_to_file):
 
 
 # Отправка отчёта после операций с конфиденциальными файлами
+# ЗАПИСАТЬ СООБЩЕНИЕ В МЕССЕДЖ БОКС!!!
 def conf_info_detected(data, action):
     detection_date = datetime.datetime.now()
     detection_date_right_format = str(datetime.datetime.date(datetime.datetime.now()))

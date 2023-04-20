@@ -8,9 +8,10 @@ def check_all_drives():
     flash_dirs = get_flash_directories()
     if len(flash_dirs) > 0:
         print("Флеш-накопитель(-и) был(-и) подключен(-ы)")
-        check_flash_drives(flash_dirs)
+        return check_flash_drives(flash_dirs)
     else:
         print("Нет флеш-накопителей")
+        return False, 0, None
 
 
 # Получить директории для флеш-накопителей
@@ -46,8 +47,10 @@ def check_flash_drives(flash_dirs):
 
         if conf_files_count > 0:
             print("On flash drive (" + flash_dir + ") was detected " + str(conf_files_count) + " confidential files.")
+            return True, conf_files_count, flash_dir
         else:
             print("On flash drive (" + flash_dir + ")" + " was haven't been detected any confidential files.")
+            return True, 0, flash_dir
 
 
 if __name__ == "__main__":

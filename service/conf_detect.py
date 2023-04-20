@@ -105,7 +105,8 @@ def check_conf_info(text):
     count += also_count
 
     # Вычисления процента конфиденциальной информации в тексте
-    percentage = (count / len(final_text)) * 100
+    length_text = len(final_text) + 1
+    percentage = (count / length_text) * 100
     return percentage
 
 

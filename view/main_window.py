@@ -4,7 +4,7 @@ import browserhistory as bh
 import service.my_handler
 import service.db_utils
 import service.usb_utils
-import service.clipboard_data
+import service.clipboard_utils
 
 event_handler = service.my_handler.MyHandler()
 observer = Observer()

