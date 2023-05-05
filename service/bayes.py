@@ -1,23 +1,11 @@
 # Обучаюшая выборка со спам письмами:
+import math
 import os.path
 from os import listdir
 from os.path import isfile
 
 import service.conf_detect
 from service import file_utils
-
-conf_array = (
-    'Кстати, мне нужно чтоб ты зашел на сайт через меня. Щас скину свой логин и пароль....',
-    'Перечисли мне 5000 рублей на карту. Номер карты скину позже',
-    'Это сообщение содержит сведения конфиденциального характера'
-)
-
-# Обучающая выборка с "нормальными" письмами:
-normal_array = (
-    'Завтра состоится собрание',
-    'Купи килограмм яблок и шоколадку',
-    ''
-)
 
 # Письмо требующее проверки
 test_letter = "В магазине гора яблок. Купи семь килограмм и шоколадку"
@@ -26,19 +14,36 @@ test_letter = "В магазине гора яблок. Купи семь кил
 spam_count = 0
 not_spam_count = 0
 
-def prepare_normal_data():
-    norm_array = []
+# Удаление чисел из массива строк
+def remove_digits(array=None):
+    new_arr = []
 
+    for i in array:
+        try:
+            int(i)
+            continue
+        except ValueError:
+            new_arr.append(i)
+
+    return new_arr
+
+# Получение данных по выборкам (нормальные и конф. данные)
+def prepare_data(mode):
+    data_array = []
     cur_path = os.path.dirname(__file__)
-    new_path = os.path.relpath("..\\dataset\\normal", cur_path)
+
+    if mode == 'normal':
+        new_path = os.path.relpath("..\\dataset\\normal", cur_path)
+    else:
+        new_path = os.path.relpath("..\\dataset\\conf", cur_path)
 
     for root, dirs, files in os.walk(new_path):
         for filename in files:
             pdf_file_path = root + "\\" + str(filename)
 
-            norm_array.append(file_utils.read_pdf_file(pdf_file_path))
+            data_array.append(file_utils.read_pdf_file(pdf_file_path))
 
-    return norm_array
+    return data_array
 
 
 def bayes_text_classify(test_letter):
@@ -47,6 +52,14 @@ def bayes_text_classify(test_letter):
     conf_words = []
     normal_words = []
     total_words = []
+
+    # Получение слов из выборки (конфиденциальной и нормальной)
+    conf_array = prepare_data('conf')
+    normal_array = prepare_data('normal')
+
+    # Удаление цифр из выборки
+    conf_array = remove_digits(conf_array)
+    normal_array = remove_digits(normal_array)
 
     # Формирование массива спам-слов
     for i in conf_array:
@@ -71,8 +84,8 @@ def bayes_text_classify(test_letter):
 
     # Цикл по тест. письму
     normalized_test_letter = service.conf_detect.preprocessing(test_letter)
-    total_probability_CONF = len(conf_array) / (len(conf_array) + len(normal_array))
-    total_probability_NORMAL = len(normal_array) / (len(conf_array) + len(normal_array))
+    total_probability_CONF = math.log(len(conf_array) / (len(conf_array) + len(normal_array)))
+    total_probability_NORMAL = math.log(len(normal_array) / (len(conf_array) + len(normal_array)))
 
     conf_multiplier = total_probability_CONF
     normal_multiplier = total_probability_NORMAL
@@ -80,21 +93,21 @@ def bayes_text_classify(test_letter):
     for i in normalized_test_letter:
 
         if i in total_words:
-            conf_counter = total_words.count(i)
-            normal_counter = total_words.count(i)
+            conf_counter = conf_words.count(i)
+            normal_counter = normal_words.count(i)
 
-            conf_result = (conf_counter + normal_counter) / (len(total_words) + len(conf_words))
-            normal_result = (conf_counter + normal_counter) / (len(total_words) + len(normal_words))
+            conf_result = math.log((conf_counter + normal_counter) / (len(total_words) + len(conf_words)))
+            normal_result = math.log((conf_counter + normal_counter) / (len(total_words) + len(normal_words)))
 
-            conf_multiplier *= conf_result
-            normal_multiplier *= normal_result
+            conf_multiplier += conf_result
+            normal_multiplier += normal_result
 
         else:
-            conf_result = 1 / (len(total_words) + len(conf_words))
-            normal_result = 1 / (len(total_words) + len(normal_words))
+            conf_result = math.log(1 / (len(total_words) + len(conf_words)))
+            normal_result = math.log(1 / (len(total_words) + len(normal_words)))
 
-            conf_multiplier *= conf_result
-            normal_multiplier *= normal_result
+            conf_multiplier += conf_result
+            normal_multiplier += normal_result
 
     print("CONF probability: ", conf_multiplier)
     print("NORMAL probability: ", normal_multiplier)
@@ -103,7 +116,8 @@ def bayes_text_classify(test_letter):
 
 
 if __name__ == "__main__":
-    # r = bayes_text_classify(test_letter=test_letter)
-    # print(r)
-    n_arr = prepare_normal_data()
-    print(n_arr)
+    r = bayes_text_classify(test_letter="Привет, как дела? Что делаешь? Слугай, как насчет всместе сходить в кино на"
+                                        "следующей неделе? Что думаешь?")
+    print(r)
+    # n_arr = prepare_data(mode='normal')
+    # print(n_arr)
