@@ -20,7 +20,7 @@ def credit_card_match(msg):
     return False
 
 def mail_match(msg):
-    matches = re.findall("[a-zA-Z0-9._]+@[a-z]+\.[a-z]{2,4}", msg)
+    matches = re.findall("[a-zA-Z0-9._]+@[a-zA-Z]+\.[a-zA-Z]{2,4}", msg)
     # print("Matches: ", matches)
 
     if len(matches) > 0:
@@ -29,7 +29,7 @@ def mail_match(msg):
     return False
 
 def passport_data_match(msg):
-    matches = re.findall("\d{2}[^0-9]*\d{2}[ -,_/]+\d{6}", msg)
+    matches = re.findall("\d{2}[ -,_/]*\d{2}[ -,_/]+\d{6}", msg)
     # print("Matches: ", matches)
 
     if len(matches) > 0:
@@ -71,4 +71,5 @@ def password_match(msg):
 
 
 if __name__ == "__main__":
-    pass
+    r = mail_match("00nik.kolpakov@inbox.ru")
+    print(r)

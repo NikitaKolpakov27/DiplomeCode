@@ -7,8 +7,11 @@ import service.clipboard_utils
 from service import clipboard_utils
 
 last_data = None
+usb_message = None
 
 def usb_check(main_log):
+    global usb_message
+
     usb_checking_result = service.usb_utils.check_all_drives()
 
     has_a_flash_drive = usb_checking_result[0]
@@ -102,26 +105,27 @@ def clipboard_info_view2(main_log, window):
     window.after(1000, clipboard_info_view2, main_log, window)
 
 
-def handler_info_view(main_log, event, ev_type, status, path):
+def handler_info_view(main_log, event, ev_type, status, path, message):
     if ev_type == 'file':
 
         if status == 'normal':
             main_log.insert(END, "\n" + event + " file -- " + path)
 
-            main_log.tag_add("monitor", 'end-2c linestart', 'end-2c')
-            main_log.tag_config("monitor", foreground="violet")
+            main_log.tag_add("monitor_norm", 'end-2c linestart', 'end-2c')
+            main_log.tag_config("monitor_norm", foreground="violet")
 
         if status == 'conf':
             main_log.insert(END, "\n" + event + " file (CONFIDENTIAL) -- " + path)
+            tkinter.messagebox.showerror(title="Опасность", message=message)
 
-            main_log.tag_add("monitor", 'end-2c linestart', 'end-2c')
-            main_log.tag_config("monitor", foreground="red")
+            main_log.tag_add("monitor_conf", 'end-2c linestart', 'end-2c')
+            main_log.tag_config("monitor_conf", foreground="red")
 
     else:
         main_log.insert(END, "\n" + event + " directory -- " + path)
 
-        main_log.tag_add("monitor", 'end-2c linestart', 'end-2c')
-        main_log.tag_config("monitor", foreground="blue")
+        main_log.tag_add("monitor_dir", 'end-2c linestart', 'end-2c')
+        main_log.tag_config("monitor_dir", foreground="blue")
 
 
 if __name__ == "__main__":

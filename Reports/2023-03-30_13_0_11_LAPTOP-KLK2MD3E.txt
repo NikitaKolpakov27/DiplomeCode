@@ -1,1 +1,0 @@
-Actions (moved) with conf file ( d:/test folder\Лабораторная_1.pdf  ) were detected at:  2023-03-30 13:00:11.926408  by  LAPTOP-KLK2MD3E 

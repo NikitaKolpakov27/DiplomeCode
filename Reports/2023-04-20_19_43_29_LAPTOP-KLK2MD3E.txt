@@ -1,1 +1,0 @@
-Actions (moved) with conf file ( d:/test folder\bith.txt  ) were detected at:  2023-04-20 19:43:29.716928  by  LAPTOP-KLK2MD3E 

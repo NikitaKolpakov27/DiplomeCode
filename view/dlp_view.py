@@ -2,6 +2,7 @@ import os.path
 import tkinter.messagebox
 from tkinter import *
 from tkinter import filedialog, ttk
+import tkinter.tix
 
 from watchdog.observers import Observer
 import service.my_handler
@@ -10,19 +11,12 @@ import service.usb_utils
 import service.clipboard_utils
 import browserhistory as bh
 
-from service import conf_detect
+from service import conf_detect, bayes
 from service.file_utils import get_file_type, read_docx_file, read_pdf_file, read_txt_file
-from view import view_utils
+from view import view_utils, passwd_view
 
 event_handler = service.my_handler.MyHandler()
 observer = Observer()
-
-def new_window_conf(path_to_file):
-    pass
-
-
-
-
 
 def check_file_for_conf():
     window.withdraw()
@@ -61,25 +55,44 @@ def check_file_for_conf():
         tkinter.messagebox.showerror(title="Ошибка", message="Файлы такого типа пока что не поддерживаются :(")
         window.destroy()
 
-    percentage_conf = conf_detect.check_conf_info(text)
-    progress_var.stop()
-    msg = "Данный файл содержит признаков информации ограниченного доступа на " + str(percentage_conf) + "%"
-    tkinter.messagebox.showinfo(title="Результат проверки", message=msg)
+    # percentage_conf = conf_detect.check_conf_info(text)
+    # progress_var.stop()
+    # msg = "Данный файл содержит признаков информации ограниченного доступа на " + str(percentage_conf) + "%"
+    # tkinter.messagebox.showinfo(title="Результат проверки", message=msg)
+    conf_result = bayes.bayes_text_classify(test_letter=text)
+
+    if conf_result:
+        msg = "Данный файл содержит признаков информации ограниченного доступа"
+        tkinter.messagebox.showinfo(title="Результат проверки", message=msg)
+    else:
+        msg = "Данный файл НЕ содержит признаков информации ограниченного доступа"
+        tkinter.messagebox.showinfo(title="Результат проверки", message=msg)
 
     conf_window.mainloop()
 
 
-
 def main_process():
-    # Проверка введенного пути
+    # Проверка валидности введенного пути
     selected_path = dir_name.get()
     check_path = os.path.isdir(selected_path)
 
     if not check_path:
-        tkinter.messagebox.showwarning(title="Неверный путь", message="Системе не удается найти указанный путь!")
-        window.destroy()
+
+        if os.path.isfile(selected_path):
+            tkinter.messagebox.showwarning(title="Неверный путь",
+                        message="Ввод: " + str(selected_path) + "\nВведен путь к файлу, а не к директории!")
+        else:
+            tkinter.messagebox.showwarning(title="Неверный путь",
+                        message="Ввод: " + str(selected_path) + "\nСистеме не удается найти указанный путь!")
 
     else:
+
+        def window_passwd():
+            new_window.withdraw()
+            passwd_window = Toplevel(window)
+            passwd_window.protocol("WM_DELETE_WINDOW", lambda: new_window.destroy())
+
+            passwd_view.main_process(passwd_window)
 
         # Удаление старого окна
         window.withdraw()
@@ -97,8 +110,10 @@ def main_process():
         main_log.insert(1.0, info_path)
 
         # Добавление скроллбара
-        scrollbar = Scrollbar(orient="vertical", command=main_log.yview)
+        scrollbar = Scrollbar(new_window, orient="vertical", command=main_log.yview)
         scrollbar.pack(side=RIGHT, fill=Y)
+        # scrollbar = tkinter.tix.ScrolledWindow(new_window, 600, 400)
+        # scrollbar.pack()
 
         # Получение информации об окне для обсервера
         event_handler.get_info(main_log, new_window)
@@ -112,11 +127,11 @@ def main_process():
         try:
             view_utils.usb_check(main_log)
             view_utils.clipboard_info_view2(main_log, new_window)
+            new_window.protocol("WM_DELETE_WINDOW", window_passwd)
             new_window.mainloop()
         except KeyboardInterrupt:
             bh.write_browserhistory_csv()
             observer.stop()
-
 
 window = Tk()
 window.title('DLP')

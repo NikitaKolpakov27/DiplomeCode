@@ -26,6 +26,25 @@ def get_conf_hashes():
     return conf_hashes_array
 
 
+# Получает имена конфиденциальных файлов
+def get_conf_files():
+    raw_array = []
+    conf_files_array = []
+
+    with open("./fileDatabase", "r") as file:
+        lines = file.readlines()
+
+        for line in lines:
+            raw_array.append(line.split("-----"))
+
+    for i in range(0, len(raw_array)):
+
+        if raw_array[i][2] == "True\n":
+            conf_files_array.append(raw_array[i][0])
+
+    return conf_files_array
+
+
 def is_file_or_text_confidential(is_text, path_to_file):
     text = ""
 
@@ -47,10 +66,10 @@ def is_file_or_text_confidential(is_text, path_to_file):
 
         except PackageNotFoundError:
             print("Couldn't find *.doc or *.docx file. Maybe, it was deleted!")
-            return True
+            return False
         except FileNotFoundError:
             print("Couldn't find file. Maybe, it was deleted!")
-            return True
+            return False
 
     else:
         text = path_to_file

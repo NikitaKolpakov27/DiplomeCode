@@ -1,0 +1,1 @@
+Actions (deleted) with conf file ( d:/test folder\newfold\doc4.txt  ) were detected at:  2023-05-03 16:05:01.686770  by  LAPTOP-KLK2MD3E 

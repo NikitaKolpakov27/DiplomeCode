@@ -56,6 +56,7 @@ def get_data_from_clipboard2(window, last_data):
     # last_data = None
 
     conf_hashes = conf_utils.get_conf_hashes()
+    conf_files = conf_utils.get_conf_files()
 
     # root = tk.Tk()
     # root.withdraw()
