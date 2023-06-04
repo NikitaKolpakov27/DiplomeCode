@@ -6,5 +6,5 @@ SUBJECT: None
 MESSAGE_ID: <1628106519.92512729@f411.i.mail.ru>
 
 
-=====рекн охяэлю==========='NoneType' object has no attribute 'decode'
-=====рекн охяэлю==========='NoneType' object has no attribute 'decode''utf-8' codec can't decode byte 0xc1 in position 8: invalid start byte
+=====рекн охяэлю==========='NoneType' object has no attribute 'decode''NoneType' object has no attribute 'decode'
+=====рекн охяэлю==========='NoneType' object has no attribute 'decode''utf-8' codec can't decode byte 0xc1 in position 8: invalid start byte'utf-8' codec can't decode byte 0xc1 in position 8: invalid start byte

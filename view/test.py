@@ -34,36 +34,43 @@
 #
 # win.mainloop()
 import os
+import random
 import tkinter.messagebox
 
 from service import conf_detect
 from service.file_utils import get_file_type, read_pdf_file, read_docx_file, read_txt_file
 
 if __name__ == "__main__":
-    from tkinter import *
-    from tkinter import ttk
+    # from tkinter import *
+    # from tkinter import ttk
+    #
+    # gui = Tk()
+    # gui.title('Delftstack')
+    # gui.geometry('600x400')
+    #
+    #
+    # def StartProgress():
+    #     # start progress
+    #     progress_var.start(10)
+    #
+    #
+    # def StopProgress():
+    #     # stop progress
+    #     progress_var.stop()
+    #
+    #
+    # # create an object of progress bar
+    # progress_var = ttk.Progressbar(gui, orient=HORIZONTAL, length=400, mode='indeterminate')
+    # progress_var.pack(pady=30)
+    # btn = Button(gui, text='progress', command=StartProgress)
+    # btn.pack(pady=30)
+    #
+    # btn2 = Button(gui, text='stop', command=StopProgress)
+    # btn2.pack(pady=30)
+    # gui.mainloop()
 
-    gui = Tk()
-    gui.title('Delftstack')
-    gui.geometry('600x400')
-
-
-    def StartProgress():
-        # start progress
-        progress_var.start(10)
-
-
-    def StopProgress():
-        # stop progress
-        progress_var.stop()
-
-
-    # create an object of progress bar
-    progress_var = ttk.Progressbar(gui, orient=HORIZONTAL, length=400, mode='indeterminate')
-    progress_var.pack(pady=30)
-    btn = Button(gui, text='progress', command=StartProgress)
-    btn.pack(pady=30)
-
-    btn2 = Button(gui, text='stop', command=StopProgress)
-    btn2.pack(pady=30)
-    gui.mainloop()
+    chars = 'abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
+    password = ''
+    for i in range(10):
+        password += random.choice(chars)
+    print(password)

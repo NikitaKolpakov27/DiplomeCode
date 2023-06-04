@@ -1,14 +1,15 @@
-import os.path
 import tkinter.messagebox
 import sys
 from tkinter import *
-from tkinter import filedialog, ttk
 from service import passwd_utils
 
 def main_process(passwd_window):
 
     def on_closing():
         check_passwd()
+
+    def return_to_base():
+        passwd_window.destroy()
 
     def check_passwd():
         if passwd_utils.check_passwd(passwd_name.get()):
@@ -34,7 +35,10 @@ def main_process(passwd_window):
     passwd_name.grid(row=3, column=2, pady=5)
 
     passwd_btn = Button(frame, text='ОК', command=check_passwd, font=("Helvetica", 14))
-    passwd_btn.grid(row=5, column=2)
+    passwd_btn.grid(row=4, column=2)
+
+    return_btn = Button(frame, text='Вернуться', command=return_to_base, font=("Helvetica", 14))
+    return_btn.grid(row=5, column=2)
 
     passwd_window.protocol("WM_DELETE_WINDOW", on_closing)
     passwd_window.mainloop()

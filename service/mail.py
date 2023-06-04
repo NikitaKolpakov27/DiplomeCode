@@ -1,17 +1,19 @@
 import imaplib
 import email
-import conf_utils
+import os
+
+import service.conf_utils
 
 
 def save_letter(data, path):
     with open(path, "w") as file:
         file.write(data)
 
-def get_sent_emails():
+def get_sent_emails(mail_login, mail_passwd):
     mail = imaplib.IMAP4_SSL('imap.mail.ru')
 
-    mail_login = input("Введите адрес ящика: ")
-    mail_passwd = input("Введите пароль от внешнего ящика: ")
+    # mail_login = input("Введите адрес ящика: ")
+    # mail_passwd = input("Введите пароль от внешнего ящика: ")
 
     mail.login(mail_login, mail_passwd)
 
@@ -58,32 +60,48 @@ def get_sent_emails():
                     body = payload.get_payload(decode=True).decode('utf-8')
                     letter_data_body += str(body)
 
-                    if conf_utils.is_file_or_text_confidential(True, letter_data_body):
+                    if service.conf_utils.is_file_or_text_confidential(True, letter_data_body):
                         path_to_save = "./sent_letters/" + "[" + str(len(id_list) - i) + "]" + "[CONFIDENTIAL]" + ".txt"
+                        new_path_to_save = "[" + str(len(id_list) - i) + "]" + "[CONFIDENTIAL]" + ".txt"
                     else:
                         path_to_save = "./sent_letters/" + "[" + str(len(id_list) - i) + "]" + ".txt"
+                        new_path_to_save = "[" + str(len(id_list) - i) + "]" + ".txt"
 
                     letter_data += letter_data_body
-                    save_letter(letter_data, path_to_save)
+                    cur_path = os.path.dirname(__file__)
+                    folder_path = "..\\sent_letters\\" + new_path_to_save
+                    mail_path = os.path.relpath(folder_path, cur_path)
+
+                    save_letter(letter_data, mail_path)
                 except Exception as e:
                     letter_data_body += str(e)
                     path_to_save = "./sent_letters/" + "[" + str(len(id_list) - i) + "]" + ".txt"
+                    new_path_to_save = "[" + str(len(id_list) - i) + "]" + ".txt"
 
                     letter_data += letter_data_body
                     letter_data += str(e)
-                    save_letter(letter_data, path_to_save)
+
+                    cur_path = os.path.dirname(__file__)
+                    folder_path = "..\\sent_letters\\" + new_path_to_save
+                    mail_path = os.path.relpath(folder_path, cur_path)
+                    save_letter(letter_data, mail_path)
         else:
             body = email_message.get_payload(decode=True).decode('utf-8')
             letter_data_body += str(body)
 
-            if conf_utils.is_file_or_text_confidential(True, letter_data_body):
+            if service.conf_utils.is_file_or_text_confidential(True, letter_data_body):
                 path_to_save = "./sent_letters/" + "[" + str(len(id_list) - i) + "]" + "[CONFIDENTIAL]" + ".txt"
+                new_path_to_save = "[" + str(len(id_list) - i) + "]" + "[CONFIDENTIAL]" + ".txt"
             else:
                 path_to_save = "./sent_letters/" + "[" + str(len(id_list) - i) + "]" + ".txt"
+                new_path_to_save = "[" + str(len(id_list) - i) + "]" + ".txt"
 
             letter_data += letter_data_body
-            save_letter(letter_data, path_to_save)
+            cur_path = os.path.dirname(__file__)
+            folder_path = "..\\sent_letters\\" + new_path_to_save
+            mail_path = os.path.relpath(folder_path, cur_path)
 
+            save_letter(letter_data, mail_path)
 
 if __name__ == "__main__":
     get_sent_emails()

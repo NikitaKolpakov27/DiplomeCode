@@ -6,7 +6,7 @@ SUBJECT: =?UTF-8?B?0JDQu9Cz0L7RgNC40YLQvCDRhdGN0YjQuNGA0L7QstCw0L3QuNGP?=
 MESSAGE_ID: <1640188063.744576036@f513.i.mail.ru>
 
 
-=====“≈ÀŒ œ»—‹Ã¿==========='NoneType' object has no attribute 'decode'
+=====“≈ÀŒ œ»—‹Ã¿==========='NoneType' object has no attribute 'decode''NoneType' object has no attribute 'decode'
 =====“≈ÀŒ œ»—‹Ã¿==========='NoneType' object has no attribute 'decode'unsigned long long hashAlg(const unsigned char* msgData, int msgSize, unsigned long long hash0, unsigned int N)
 {
     int indBlock = 0;
@@ -92,7 +92,7 @@ MESSAGE_ID: <1640188063.744576036@f513.i.mail.ru>
         delete[]roundKeys;
     }
     return hashVal;
-}'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
+}'utf-8' codec can't decode byte 0xff in position 0: invalid start byte'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
 =====“≈ÀŒ œ»—‹Ã¿==========='NoneType' object has no attribute 'decode'unsigned long long hashAlg(const unsigned char* msgData, int msgSize, unsigned long long hash0, unsigned int N)
 {
     int indBlock = 0;
@@ -135,4 +135,4 @@ MESSAGE_ID: <1640188063.744576036@f513.i.mail.ru>
         delete[]roundKeys;
     }
     return hashVal;
-}'utf-8' codec can't decode byte 0xff in position 0: invalid start byte'utf-8' codec can't decode byte 0xff in position 0: invalid start byte
+}'utf-8' codec can't decode byte 0xff in position 0: invalid start byte'utf-8' codec can't decode byte 0xff in position 0: invalid start byte'utf-8' codec can't decode byte 0xff in position 0: invalid start byte

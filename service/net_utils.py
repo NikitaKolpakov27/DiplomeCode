@@ -1,37 +1,36 @@
 import os
-import time
-from datetime import datetime as dt
 
 redirect = "127.0.0.1"
-website_list = ["www.google.com", "www.twitch.tv"]
+# website_list = ["www.google.com", "www.twitch.tv"]
+website_list = []
+host_path = "C:\\Windows\\System32\\drivers\\etc\\hosts"
 
-cur_path = os.path.dirname(__file__)
-host_path = os.path.relpath("..\\hosts", cur_path)
+def disable_websites():
 
-while True:
+    # Добавление "запрещенных" сайтов в массив
+    cur_path = os.path.dirname(__file__)
+    ws_path = os.path.relpath("..\\view\\website_list", cur_path)
 
-    website_list.append("www.ya.ru")
-    print(website_list)
+    f = open(ws_path, "r")
+    web_sites = f.readlines()
 
-    if dt(dt.now().year, dt.now().month, dt.now().day, 8) < dt.now() \
-            < dt(dt.now().year, dt.now().month, dt.now().day, 23):
-        print("Rihanna")
+    for i in web_sites:
+        website_list.append(i.strip())
+    f.close()
 
-        file = open(host_path, "r+")
-        content = file.read()
-        for website in website_list:
-            if website in content:
-                pass
-            else:
-                file.write(redirect + " " + website + "\n")
-    else:
-        print("Drake")
+    file = open(host_path, "r+")
+    content = file.read()
+    for website in website_list:
+        if website in content:
+            pass
+        else:
+            file.write(redirect + " " + website + "\n")
 
-        file = open(host_path, 'r+')
-        content = file.readlines()
-        file.seek(0)
-        for line in content:
-            if not any(website in line for website in website_list):
-                file.write(line)
-            file.truncate()
-    time.sleep(5)
+def enable_websites():
+    file = open(host_path, 'r+')
+    content = file.readlines()
+    file.seek(0)
+    for line in content:
+        if not any(website in line for website in website_list):
+            file.write(line)
+        file.truncate()

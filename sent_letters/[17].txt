@@ -131,4 +131,4 @@ MESSAGE_ID: <1638195030.836656109@f397.i.mail.ru>
 >-- 
 >С уважением,
 >Дрюченко Михаил
- 'NoneType' object has no attribute 'decode'
+ 'NoneType' object has no attribute 'decode''NoneType' object has no attribute 'decode'

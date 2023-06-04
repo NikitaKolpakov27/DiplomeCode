@@ -6,5 +6,5 @@ SUBJECT: =?UTF-8?B?U2VsZjogSGVyZSBhcmUgc29tZSBmaWxlcy4=?=
 MESSAGE_ID: <1594707017.337594381@f56.i.mail.ru>
 
 
-=====рекн охяэлю==========='NoneType' object has no attribute 'decode'
-=====рекн охяэлю==========='NoneType' object has no attribute 'decode''utf-8' codec can't decode byte 0xd3 in position 10: invalid continuation byte
+=====рекн охяэлю==========='NoneType' object has no attribute 'decode''NoneType' object has no attribute 'decode'
+=====рекн охяэлю==========='NoneType' object has no attribute 'decode''utf-8' codec can't decode byte 0xd3 in position 10: invalid continuation byte'utf-8' codec can't decode byte 0xd3 in position 10: invalid continuation byte

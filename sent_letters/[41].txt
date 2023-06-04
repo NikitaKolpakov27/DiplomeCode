@@ -6,7 +6,7 @@ SUBJECT: =?UTF-8?B?TGFiIDQgdmFyIDQudHh0LCBMYWIgNiB2YXIgNi50eHQsIExhYiA3LnR4dA==?
 MESSAGE_ID: <1591603668.805832827@f483.i.mail.ru>
 
 
-=====рекн охяэлю==========='NoneType' object has no attribute 'decode'
+=====рекн охяэлю==========='NoneType' object has no attribute 'decode''NoneType' object has no attribute 'decode'
 =====рекн охяэлю==========='NoneType' object has no attribute 'decode'#include <iostream>
 #include <string>
 #include <utility>

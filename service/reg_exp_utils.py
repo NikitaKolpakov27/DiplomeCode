@@ -61,14 +61,6 @@ def mac_address_match(msg):
 
     return False
 
-def password_match(msg):
-    matches = re.findall("(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$", msg)
-
-    if len(matches) > 0:
-        return True
-
-    return False
-
 
 if __name__ == "__main__":
     r = mail_match("00nik.kolpakov@inbox.ru")

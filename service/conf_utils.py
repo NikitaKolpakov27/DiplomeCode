@@ -6,13 +6,15 @@ from service.file_utils import get_file_type, read_docx_file, read_pdf_file, rea
 from docx.opc.exceptions import PackageNotFoundError
 import service.reg_exp_utils as reg_exp_utils
 
-
 # Получает хэши конфиденциальных файлов
 def get_conf_hashes():
     raw_array = []
     conf_hashes_array = []
 
-    with open("./fileDatabase", "r") as file:
+    cur_path = os.path.dirname(__file__)
+    db_path = os.path.relpath("..\\view\\fileDatabase", cur_path)
+
+    with open(db_path, "r") as file:
         lines = file.readlines()
 
         for line in lines:
@@ -26,12 +28,15 @@ def get_conf_hashes():
     return conf_hashes_array
 
 
-# Получает имена конфиденциальных файлов
+# Получает имена конфиденциальных файлов (из основной БД)
 def get_conf_files():
     raw_array = []
     conf_files_array = []
 
-    with open("./fileDatabase", "r") as file:
+    cur_path = os.path.dirname(__file__)
+    db_path = os.path.relpath("..\\view\\fileDatabase", cur_path)
+
+    with open(db_path, "r") as file:
         lines = file.readlines()
 
         for line in lines:
@@ -45,11 +50,32 @@ def get_conf_files():
     return conf_files_array
 
 
+def is_file_was_in_db(suspect_file):
+    suspect_file = suspect_file.replace("/", "\\")
+    suspect_file = suspect_file + "\n"
+
+    cur_path = os.path.dirname(__file__)
+    db_path = os.path.relpath("..\\view\\conf_fileDatabase", cur_path)
+
+    with open(db_path, "r") as file:
+        lines = file.readlines()
+
+        for line in lines:
+            if suspect_file == line.lower():
+                return True
+
+        return False
+
+
 def is_file_or_text_confidential(is_text, path_to_file):
     text = ""
 
     # Если файл представляет собой путь к файлу
     if not is_text:
+
+        # Проверяет, есть ли файл в базе конф. файлов. Есть - значит, определенно содержит признаки
+        if is_file_was_in_db(path_to_file):
+            return True
 
         try:
 
@@ -80,11 +106,10 @@ def is_file_or_text_confidential(is_text, path_to_file):
     cond3 = reg_exp_utils.passport_data_match(text)
     cond4 = reg_exp_utils.credit_card_match(text)
     cond5 = reg_exp_utils.ipv4_match(text)
-    cond6 = reg_exp_utils.password_match(text)
-    cond7 = reg_exp_utils.ipv6_match(text)
-    cond8 = reg_exp_utils.mac_address_match(text)
+    cond6 = reg_exp_utils.ipv6_match(text)
+    cond7 = reg_exp_utils.mac_address_match(text)
 
-    if cond1 or cond2 or cond3 or cond4 or cond5 or cond6 or cond7 or cond8:
+    if cond1 or cond2 or cond3 or cond4 or cond5 or cond6 or cond7:
         return True
     else:
 
@@ -122,10 +147,8 @@ def conf_info_detected(data, action):
 
 
 if __name__ == "__main__":
-    try:
-        f = read_docx_file("D:\\TEST FOLDER\\Лабораторная_11.docx")
-        print(f)
-    except PackageNotFoundError:
-        print("S docx")
-    except FileNotFoundError:
-        print("S file")
+    st = "d:/test folder\\"
+    st_2 = "D:\\TEST FOLDER\\"
+    st = st.replace("/", "\\")
+    print(st, "==", st_2.lower())
+

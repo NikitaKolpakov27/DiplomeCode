@@ -1,4 +1,5 @@
 import os.path
+import subprocess
 import tkinter.messagebox
 from tkinter import *
 from tkinter import filedialog, ttk
@@ -11,9 +12,10 @@ import service.usb_utils
 import service.clipboard_utils
 import browserhistory as bh
 
-from service import conf_detect, bayes
+from service import conf_detect, bayes, net_utils, mail
 from service.file_utils import get_file_type, read_docx_file, read_pdf_file, read_txt_file
 from view import view_utils, passwd_view
+
 
 event_handler = service.my_handler.MyHandler()
 observer = Observer()
@@ -71,6 +73,49 @@ def check_file_for_conf():
     conf_window.mainloop()
 
 
+def check_mail():
+    window.withdraw()
+    mail_window = Toplevel(window)
+    mail_window.protocol("WM_DELETE_WINDOW", lambda: window.destroy())
+
+    def receiving():
+        mail_login.grid_remove()
+        mail_passwd.grid_remove()
+        mail_password.grid_remove()
+        mail_name.grid_remove()
+        mail_process.grid_remove()
+
+        process_bar = Label(mail_window, text="Идет процесс получения.", font=("Helvetica", 14))
+        process_bar.grid(row=1, column=1, pady=20)
+
+        progress_var = ttk.Progressbar(mail_window, orient=HORIZONTAL, length=400, mode='indeterminate')
+        progress_var.grid(row=2, column=1, pady=30)
+        progress_var.start(10)
+
+        mail.get_sent_emails(mail_login=mail_login.get(), mail_passwd=mail_passwd.get())
+        tkinter.messagebox.showinfo(title="E-mail messages receiving", message="Отправленные письма были получены!")
+
+    mail_window.title("DLP. Checking e-mail letters")
+    mail_window.geometry("600x200")
+
+    mail_name = Label(mail_window, text="Введите название ящика: ", font=("Helvetica", 14))
+    mail_name.grid(row=1, column=1)
+
+    mail_login = Entry(mail_window, width=30, font=("Helvetica", 14))
+    mail_login.grid(row=1, column=2, pady=5)
+
+    mail_password = Label(mail_window, text="Введите пароль от внешнего ящика", font=("Helvetica", 14))
+    mail_password.grid(row=2, column=1)
+
+    mail_passwd = Entry(mail_window, width=30, font=("Helvetica", 14))
+    mail_passwd.grid(row=2, column=2, pady=5)
+
+    mail_process = Button(mail_window, text='Проверить почту', command=receiving, font=("Helvetica", 14))
+    mail_process.grid(row=3, column=1)
+
+    mail_window.mainloop()
+
+
 def main_process():
     # Проверка валидности введенного пути
     selected_path = dir_name.get()
@@ -88,9 +133,9 @@ def main_process():
     else:
 
         def window_passwd():
-            new_window.withdraw()
-            passwd_window = Toplevel(window)
-            passwd_window.protocol("WM_DELETE_WINDOW", lambda: new_window.destroy())
+            # new_window.withdraw()
+            passwd_window = Toplevel(new_window)
+            # passwd_window.protocol("WM_DELETE_WINDOW", lambda: new_window.destroy())
 
             passwd_view.main_process(passwd_window)
 
@@ -121,21 +166,26 @@ def main_process():
         # Старт обсервера
         observer.schedule(event_handler, path=selected_path, recursive=True)
         observer.start()
+
+        # Обновление БД
         service.db_utils.update_db()
+        service.db_utils.make_conf_file_db()
 
         # Главный процесс
         try:
             view_utils.usb_check(main_log)
+            # net_utils.disable_websites()
             view_utils.clipboard_info_view2(main_log, new_window)
             new_window.protocol("WM_DELETE_WINDOW", window_passwd)
             new_window.mainloop()
         except KeyboardInterrupt:
+            # net_utils.enable_websites()
             bh.write_browserhistory_csv()
             observer.stop()
 
 window = Tk()
 window.title('DLP')
-window.geometry('600x200')
+window.geometry('705x200')
 
 frame = Frame(window, padx=10, pady=10)
 frame.pack(expand=True)
@@ -150,9 +200,12 @@ dir_name = Entry(frame, width=30, font=("Helvetica", 14))
 dir_name.grid(row=1, column=2, pady=5)
 
 dlp_btn = Button(frame, text='Начать процесс', command=main_process, font=("Helvetica", 14))
-dlp_btn.grid(row=5, column=2)
+dlp_btn.grid(row=1, column=3)
 
 check_conf_btn = Button(frame, text='Проверить файл', command=check_file_for_conf, font=("Helvetica", 14))
 check_conf_btn.grid(row=5, column=1)
+
+check_mail_btn = Button(frame, text='Проверить почту', command=check_mail, font=("Helvetica", 14))
+check_mail_btn.grid(row=5, column=2)
 
 window.mainloop()
