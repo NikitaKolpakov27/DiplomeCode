@@ -1,5 +1,3 @@
-import subprocess
-
 from watchdog.observers import Observer
 import service.my_handler
 import service.db_utils
