@@ -1,3 +1,5 @@
+from typing import List, Any
+
 import matplotlib.pyplot as plt
 import string
 import nltk
@@ -20,8 +22,15 @@ conf_words = ""
 for word in conf_words_array:
     conf_words += word + " "
 
-# Показывает облако наиболее встречаемых слов для анализируемого текста
+
 def show_conf_wordcloud(text_array):
+    """
+        Показывает облако наиболее встречаемых слов для анализируемого текста
+
+        :param text_array: Массив слов
+        :return: None
+    """
+
     # Преобразование массива слов в одну строку
     text_array_str = ""
     for i in text_array:
@@ -35,8 +44,19 @@ def show_conf_wordcloud(text_array):
     plt.tight_layout(pad=0)
     plt.show()
 
-# Подготовка текста к классификации
-def preprocessing(text):
+
+def preprocessing(text) -> list[Any]:
+    """
+        Подготовка текста к классификации
+
+        :param text: Проверяемый текст
+        :return: массив слов без всякого лишнего (спецсимволы, предлоги и пр.)
+    """
+
+    # Добавил из-за ошибок при компиляции
+    nltk.download("punkt_tab")
+    nltk.download("stopwords")
+
     # Удаление спец символов из текста
     text = text.lower()
     spec_chars = string.punctuation + '\xa0«»\t—…'
@@ -74,8 +94,13 @@ def preprocessing(text):
     return final_array
 
 
-# Поиск конфиденциальных фраз в тексте
-def find_phrases(array):
+def find_phrases(array) -> int:
+    """
+        Поиск конфиденциальных фраз в тексте
+
+        :param array: Массив текста
+        :return: int len(phrases): количество обнаруженных конфиденциальных фраз в тексте
+    """
     phrases = []
 
     for i in range(0, len(array)):
@@ -91,7 +116,14 @@ def find_phrases(array):
     return len(phrases)
 
 
-def check_conf_info(text):
+def check_conf_info(text) -> float:
+    """
+        Проверяем текст на наличие в нем конфиденциальной информации
+
+        :param text: Проверяемый текст
+        :return: float percentage: процент конфиденциальной информации в тексте
+                (согласно совпадениям по ключевым словам)
+    """
     final_text = preprocessing(text)
     count = 0
 
@@ -107,6 +139,7 @@ def check_conf_info(text):
     # Вычисления процента конфиденциальной информации в тексте
     length_text = len(final_text) + 1
     percentage = (count / length_text) * 100
+
     return percentage
 
 

@@ -1,0 +1,1 @@
+Actions (created) with conf file ( D:\TEST FOLDER\Новый текстовый документ.txt  ) were detected at:  2024-12-03 23:39:14.202080  by  LAPTOP-KLK2MD3E 
