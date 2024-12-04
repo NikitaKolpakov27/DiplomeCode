@@ -2,7 +2,6 @@ import tkinter as tk
 import service.conf_utils as conf_utils
 import service.file_utils as file_utils
 
-
 def get_data_from_clipboard():
     data = ""
     last_data = None

@@ -8,10 +8,14 @@ def update_db():
     db_path = os.path.relpath("..\\view\\fileDatabase", cur_path)
 
     open(db_path, 'w').close()
-    get_file_hashes()
+    _get_file_hashes()
 
 
-def write_file_to_db(elem):
+def _write_file_to_db(elem):
+    """
+        edit: Сделал private методом
+    """
+
     cur_path = os.path.dirname(__file__)
     db_path = os.path.relpath("..\\view\\fileDatabase", cur_path)
 
@@ -24,14 +28,18 @@ def write_file_to_db(elem):
     file.close()
 
 
-def get_file_hashes(directory='D:\\TEST FOLDER'):
+def _get_file_hashes(directory='D:\\TEST FOLDER'):
+    """
+        edit: Сделал private методом
+    """
+
     file_list = list()
 
     for (dir_path, dir_names, file_names) in os.walk(directory):
         file_list += [os.path.join(dir_path, file) for file in file_names]
 
     for elem in file_list:
-        write_file_to_db(elem)
+        _write_file_to_db(elem)
 
 
 def make_conf_file_db():

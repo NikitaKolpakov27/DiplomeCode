@@ -3,9 +3,17 @@ import psutil as psutil
 import service.conf_utils as conf_utils
 import service.file_utils as file_utils
 
-# Проверка подключенных флеш-накопителей
+
 def check_all_drives():
+    """
+        Проверка подключенных флеш-накопителей
+
+        :return:
+            * Если подключены -> проверка их на наличие конфиденциальных файлов
+            * Если нет, то ничего
+    """
     flash_dirs = get_flash_directories()
+
     if len(flash_dirs) > 0:
         print("Флеш-накопитель(-и) был(-и) подключен(-ы)")
         return check_flash_drives(flash_dirs)
@@ -14,8 +22,12 @@ def check_all_drives():
         return False, 0, None
 
 
-# Получить директории для флеш-накопителей
 def get_flash_directories():
+    """
+        Получение директории для флеш-накопителей
+
+        :return: list flash_dirs: список доступных директорий флеш-накопителей
+    """
     drives = psutil.disk_partitions()
     flash_dirs = []
 
@@ -27,22 +39,38 @@ def get_flash_directories():
     return flash_dirs
 
 
-# Проверка всех подключённых флеш-накопителей на конф. файлы
 def check_flash_drives(flash_dirs):
+    """
+        Проверка всех подключённых флеш-накопителей на конф. файлы
 
+        :param list flash_dirs: список доступных директорий флеш-накопителей
+        :return: кортеж, состоящий из информации о файлах; нужно для GUI
+    """
+
+    # Цикл для каждой директории
     for flash_dir in flash_dirs:
+
+        # Счетчик конфиденциальных файлов
         conf_files_count = 0
 
+        # Проходимся по всем файлам в текущей директории
         for root, dirs, files in os.walk(os.path.abspath(flash_dir)):
             for filename in files:
 
+                # Получаем тип (разрешение) файла
                 file_type = file_utils.get_file_type(filename)
 
+                # Рассматриваем только доступные типы (docx, pdf и txt)
                 if file_type == ".docx" or file_type == ".pdf" or file_type == ".txt":
+
+                    # Получаем полный путь файла
                     real_path = os.path.join(root, filename)
+
+                    # Проверяем, есть ли в тексте файла признаки конфиденциального характера
                     conf_res = conf_utils.is_file_or_text_confidential(False, real_path)
 
-                    if conf_res == True:
+                    # Если есть -> увеличиваем счетчик
+                    if conf_res:
                         conf_files_count += 1
 
         if conf_files_count > 0:

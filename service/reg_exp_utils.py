@@ -1,6 +1,5 @@
 import re
 
-
 def phone_number_match(msg):
     matches = re.findall("[+]?[7-8][0-9]{10}", msg)
     # print("Matches: ", matches)
@@ -60,6 +59,28 @@ def mac_address_match(msg):
         return True
 
     return False
+
+
+def inn_match(msg):
+    matches = re.findall(r'^\d{12}$', msg)
+    return _is_match(matches)
+
+
+def snils_match(msg):
+    matches = re.findall(r'^\d{3}-\d{3}-\d{3} \d{2}', msg)
+    return _is_match(matches)
+
+
+def _is_match(matches):
+    """
+       Вспомогательная функция (для упрощения кода)
+    """
+
+    if len(matches) > 0:
+        return True
+
+    return False
+
 
 
 if __name__ == "__main__":

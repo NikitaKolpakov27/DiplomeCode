@@ -33,17 +33,32 @@ class MyHandler(FileSystemEventHandler):
                                               str(event.event_type), 'dir', 'normal', str(event.src_path), "")
 
     def on_created(self, event):
+        """
+            Действия программы, совершаемые при создании файла/каталога
+        """
+
+        # Обновление БД
         db_utils.update_db()
 
     def on_deleted(self, event):
+        """
+            Действия программы, совершаемые при удалении файла/каталога
+        """
+
         db_utils.update_db()
-        # pass
 
     def on_modified(self, event):
+        """
+            Действия программы, совершаемые при модификации (изменении) файла/каталога
+        """
+
         db_utils.update_db()
-        # pass
 
     def on_moved(self, event):
+        """
+            Действия программы, совершаемые при перемещении файла/каталога
+        """
+
         db_utils.update_db()
 
     def on_closed(self, event):

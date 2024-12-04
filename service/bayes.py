@@ -3,6 +3,7 @@ import math
 import os.path
 from os import listdir
 from os.path import isfile
+from typing import Any
 
 import service.conf_detect
 from service import file_utils
@@ -14,8 +15,14 @@ test_letter = "В магазине гора яблок. Купи семь кил
 spam_count = 0
 not_spam_count = 0
 
-# Удаление чисел из массива строк
-def remove_digits(array=None):
+
+def remove_digits(array=None) -> list[Any]:
+    """
+        Удаление цифр из массива строк
+
+        :param array: массив, в котором могут быть цифры
+        :return: list new_arr: массив без цифр
+    """
     new_arr = []
 
     for i in array:
@@ -27,26 +34,44 @@ def remove_digits(array=None):
 
     return new_arr
 
-# Получение данных по выборкам (нормальные и конф. данные)
+
 def prepare_data(mode):
+    """
+        Получение данных по выборкам (нормальные и конфиденциальные данные)
+
+        :param str mode: режим данных (определение, из какого набора брать данные: из конфиденциального или нормального)
+        :return: list data_array: список, состоящий из слов из файлов в выбранном каталоге
+    """
+
     data_array = []
     cur_path = os.path.dirname(__file__)
 
+    # Опеределение пути к датасету
     if mode == 'normal':
         new_path = os.path.relpath("..\\dataset\\normal", cur_path)
     else:
         new_path = os.path.relpath("..\\dataset\\conf", cur_path)
 
+    # Получаем все файлы из выбранного каталога
     for root, dirs, files in os.walk(new_path):
         for filename in files:
             pdf_file_path = root + "\\" + str(filename)
 
+            # Добавляем в список прочитанные слова из каждого файла
             data_array.append(file_utils.read_pdf_file(pdf_file_path))
 
     return data_array
 
 
-def bayes_text_classify(test_letter):
+def bayes_text_classify(test_text) -> bool:
+    """
+        Классификация текста на нормальный и конфиденциальный с помощью наивного Байеса
+
+        :param str test_text: текст для классификации
+        :return: bool: результат классификации
+            * True - конфиденциальный
+            * False - нормальный
+    """
 
     # Массивы со спам-словами, со словами без спама и общие
     conf_words = []
@@ -83,7 +108,7 @@ def bayes_text_classify(test_letter):
             total_words.remove(i)
 
     # Цикл по тест. письму
-    normalized_test_letter = service.conf_detect.preprocessing(test_letter)
+    normalized_test_letter = service.conf_detect.preprocessing(test_text)
     total_probability_CONF = math.log(len(conf_array) / (len(conf_array) + len(normal_array)))
     total_probability_NORMAL = math.log(len(normal_array) / (len(conf_array) + len(normal_array)))
 
@@ -116,8 +141,8 @@ def bayes_text_classify(test_letter):
 
 
 if __name__ == "__main__":
-    r = bayes_text_classify(test_letter="Привет, как дела? Что делаешь? Слугай, как насчет всместе сходить в кино на"
-                                        "следующей неделе? Что думаешь?")
+    r = bayes_text_classify(test_text="Привет, как дела? Что делаешь? Слугай, как насчет всместе сходить в кино на"
+                                      "следующей неделе? Что думаешь?")
     print(r)
     # n_arr = prepare_data(mode='normal')
     # print(n_arr)
