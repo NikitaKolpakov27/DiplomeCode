@@ -18,6 +18,10 @@ conf_phrases = ["персональные данные", "ограниченны
                 "служебная тайна", "врачебная тайна", "тайна судопроизводства", "семейная тайна",
                 "коммерческая тайна"]
 
+# Добавил из-за ошибок при компиляции
+nltk.download("punkt_tab")
+nltk.download("stopwords")
+
 conf_words = ""
 for word in conf_words_array:
     conf_words += word + " "
@@ -52,10 +56,6 @@ def preprocessing(text) -> list[Any]:
         :param text: Проверяемый текст
         :return: массив слов без всякого лишнего (спецсимволы, предлоги и пр.)
     """
-
-    # Добавил из-за ошибок при компиляции
-    nltk.download("punkt_tab")
-    nltk.download("stopwords")
 
     # Удаление спец символов из текста
     text = text.lower()

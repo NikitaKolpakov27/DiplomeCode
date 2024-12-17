@@ -132,11 +132,19 @@ def write_log(message):
         :return: None
     """
 
-    # Создаем переменную со временем события
-    detection_date_right_format = str(datetime.datetime.date(datetime.datetime.now()))
+    # Создаем переменную со временем события (для названия файла)
+    detection_datetime = datetime.datetime.now()
+    detection_date = datetime.datetime.date(detection_datetime)
+    detection_date_right_format = str(detection_date)
+
+    # Время для лога
+    detection_date_log = (str(detection_date.day) + "." +
+                          str(detection_date.month) + "." + str(detection_date.year) +
+                          "--" + str(detection_datetime.hour) + ":" + str(detection_datetime.minute)
+                          + ":" + str(detection_datetime.second))
 
     # Имя файла (включает в себя дату события и имя устройства)
-    file_name = "Log" + detection_date_right_format + "_" + socket.gethostname()
+    file_name = "Log_" + detection_date_right_format + "_" + socket.gethostname()
 
     # Получение пути и запись в файл
     cur_path = os.path.dirname(__file__)
@@ -144,4 +152,4 @@ def write_log(message):
     correct_path = correct_path + "/" + file_name + ".txt"
 
     with open(correct_path, "a") as file:
-        file.write(str(message))
+        file.write(str(message) + "  " + detection_date_log)

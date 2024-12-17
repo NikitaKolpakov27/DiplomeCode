@@ -98,6 +98,10 @@ def is_file_or_text_confidential(is_text, path_to_file) -> bool:
                 print("Сейчас проверяется: " + path_to_file)
                 text = read_txt_file(path_to_file)
 
+            # Случай с неподдерживаемыми типами для рассмотрения
+            else:
+                text = file_type
+
         except PackageNotFoundError:
             print("Couldn't find *.doc or *.docx file. Maybe, it was deleted!")
             return False

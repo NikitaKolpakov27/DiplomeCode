@@ -1,7 +1,7 @@
 import tkinter.messagebox
 import sys
 from tkinter import *
-from service import passwd_utils
+from service import passwd_utils, file_utils
 
 def main_process(passwd_window):
 
@@ -14,9 +14,11 @@ def main_process(passwd_window):
     def check_passwd():
         if passwd_utils.check_passwd(passwd_name.get()):
             passwd_window.destroy()
+            file_utils.write_log("\nСистема     " + "Программа была выключена ")
             sys.exit("It's not the exception, program just finished")
         else:
             tkinter.messagebox.showerror("Bad Password", "Incorrect password!")
+            file_utils.write_log("\nСистема     " + "Неправильный пароль для выхода из программы ")
 
     # passwd_window = Tk()
     passwd_window.title('Password')
