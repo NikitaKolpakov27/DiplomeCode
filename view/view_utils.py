@@ -1,3 +1,6 @@
+import datetime
+import os
+import socket
 import tkinter.messagebox
 from tkinter import *
 import service.my_handler
@@ -111,7 +114,9 @@ def clipboard_info_view2(main_log, window):
             main_log.tag_config("clip_conf", foreground="red")
 
             err_message = cl_data
-            tkinter.messagebox.showwarning(title="Опасность", message=err_message)
+
+            # Пока уберем, чтоб не мешало
+            # tkinter.messagebox.showwarning(title="Опасность", message=err_message)
 
         if cl_type == 'same data':
             main_log.insert(END, ".")
@@ -145,7 +150,9 @@ def handler_info_view(main_log, event, ev_type, status, path, message):
         # Если файл - конфиденциальный
         if status == 'conf':
             main_log.insert(END, "\n" + event + " file (CONFIDENTIAL) -- " + path)
-            tkinter.messagebox.showerror(title="Опасность", message=message)
+
+            # Пока уберем
+            # tkinter.messagebox.showerror(title="Опасность", message=message)
 
             main_log.tag_add("monitor_conf", 'end-2c linestart', 'end-2c')
             main_log.tag_config("monitor_conf", foreground="red")

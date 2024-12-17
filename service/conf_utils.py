@@ -1,8 +1,7 @@
 import datetime
 import os
-import socket
 import service.conf_detect as conf_detect
-from service.file_utils import get_file_type, read_docx_file, read_pdf_file, read_txt_file
+from service.file_utils import get_file_type, read_docx_file, read_pdf_file, read_txt_file, write_log
 from docx.opc.exceptions import PackageNotFoundError
 import service.reg_exp_utils as reg_exp_utils
 
@@ -67,7 +66,15 @@ def is_file_was_in_db(suspect_file):
         return False
 
 
-def is_file_or_text_confidential(is_text, path_to_file):
+def is_file_or_text_confidential(is_text, path_to_file) -> bool:
+    """
+        Проверка текста на наличие в нем признаков конфиденциальной информации
+
+        :param bool is_text: Является ли переданный файл файлом (или просто текстом)?
+        :param str path_to_file: Путь к файлу
+
+        :return: bool: есть ли признаки конфиденциальной информации в файле или нет?
+    """
     text = ""
 
     # Если файл представляет собой путь к файлу
@@ -87,7 +94,8 @@ def is_file_or_text_confidential(is_text, path_to_file):
             elif file_type == ".docx":
                 text = read_docx_file(path_to_file)
 
-            else:
+            elif file_type == ".txt":
+                print("Сейчас проверяется: " + path_to_file)
                 text = read_txt_file(path_to_file)
 
         except PackageNotFoundError:
@@ -108,8 +116,10 @@ def is_file_or_text_confidential(is_text, path_to_file):
     cond5 = reg_exp_utils.ipv4_match(text)
     cond6 = reg_exp_utils.ipv6_match(text)
     cond7 = reg_exp_utils.mac_address_match(text)
+    cond8 = reg_exp_utils.inn_match(text)
+    cond9 = reg_exp_utils.snils_match(text)
 
-    if cond1 or cond2 or cond3 or cond4 or cond5 or cond6 or cond7:
+    if cond1 or cond2 or cond3 or cond4 or cond5 or cond6 or cond7 or cond8 or cond9:
         return True
     else:
 
@@ -122,26 +132,26 @@ def is_file_or_text_confidential(is_text, path_to_file):
         return False
 
 
-# Отправка отчёта после операций с конфиденциальными файлами
-# ЗАПИСАТЬ СООБЩЕНИЕ В МЕССЕДЖ БОКС!!!
-def conf_info_detected(data, action):
+def conf_info_detected(data, action) -> str:
+    """
+        Отправка отчёта после операций с конфиденциальными файлами
+
+        :param data: данные, в которых был зафиксирован инцидент (имя файла)
+        :param action: действие, при котором был зафиксирован инцидент (удаление, перемещение и т.д.)
+
+        :return: str message: само сообщение в строковом виде
+    """
+
+    # Дата события
     detection_date = datetime.datetime.now()
-    detection_date_right_format = str(datetime.datetime.date(datetime.datetime.now()))
+
+    # Формирование сообщения
     message = " ".join(
-        ["Actions (" + action + ") with conf file (", data, " ) were detected at: ", str(detection_date), " by ",
-         socket.gethostname(), "\n"])
+        ["Actions (" + action + ") with conf file (", data, " ) were detected at: ", str(detection_date), "\n"])
     print(message)
 
-    file_name = detection_date_right_format + "_" + str(detection_date.hour) + "_" \
-                + str(detection_date.minute) + "_" + str(detection_date.second) + "_" \
-                + socket.gethostname()
-
-    cur_path = os.path.dirname(__file__)
-    correct_path = os.path.relpath('..\\Reports', cur_path)
-    correct_path = correct_path + "/" + file_name + ".txt"
-
-    with open(correct_path, "a") as file:
-        file.write(str(message))
+    # Запись отчета о проишествии в лог-файл
+    write_log(message)
 
     return message
 

@@ -1,5 +1,8 @@
+import datetime
 import os
 import hashlib
+import socket
+
 from docx import Document
 from PyPDF2 import PdfReader
 
@@ -55,7 +58,11 @@ def read_txt_file(txt_path) -> str:
     file = open(txt_path, "r")
 
     while True:
-        line = file.readline()
+
+        try:
+            line = file.readline()
+        except UnicodeDecodeError as e:
+            return str(e.reason)
 
         if not line:
             break
@@ -116,3 +123,25 @@ def is_string_path(path) -> bool:
         return True
     else:
         return False
+
+def write_log(message):
+    """
+        Запись сообщения в лог-файл
+
+        :param message: само событие, которое нужно записать в файл
+        :return: None
+    """
+
+    # Создаем переменную со временем события
+    detection_date_right_format = str(datetime.datetime.date(datetime.datetime.now()))
+
+    # Имя файла (включает в себя дату события и имя устройства)
+    file_name = "Log" + detection_date_right_format + "_" + socket.gethostname()
+
+    # Получение пути и запись в файл
+    cur_path = os.path.dirname(__file__)
+    correct_path = os.path.relpath('..\\Reports', cur_path)
+    correct_path = correct_path + "/" + file_name + ".txt"
+
+    with open(correct_path, "a") as file:
+        file.write(str(message))

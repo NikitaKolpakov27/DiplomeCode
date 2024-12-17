@@ -75,9 +75,15 @@ def get_data_from_clipboard2(window, last_data):
         # Проверка, является ли текст в буфере путем к файлу или нет
         if data_type:
 
-            # print("Буфер -> ", data, "(FILE)")
+            # Проверка на исключение (когда может податься на вход директория, что-то другое, а не файл)
+            hash_result = ""
+            try:
+                hash_result = file_utils.hash_file(data)
+            except Exception as e:
+                message = str(e)
+                yield message, 'file', 'warning', last_data
 
-            if file_utils.hash_file(data) in conf_hashes:
+            if hash_result in conf_hashes:
                 print("WARNING!")
                 message = conf_utils.conf_info_detected(data, "Copy")
                 last_data = data
