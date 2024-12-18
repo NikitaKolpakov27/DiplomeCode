@@ -62,24 +62,7 @@ def usb_check(main_log):
         main_log.tag_add("usb_no", 'end-2c linestart', 'end-2c')
         main_log.tag_config("usb_no", foreground="yellow")
 
-
 def clipboard_info_view(main_log, window):
-    clipboard_result = clipboard_utils.get_data_from_clipboard2(window)
-
-    for cl_data, cl_type, cl_event in clipboard_result:
-
-        if cl_event == 'normal':
-
-            if cl_type == 'file':
-                main_log.insert(END, "Буфер -> " + str(cl_data) + "(FILE)" + "\n")
-            else:
-                main_log.insert(END, "Буфер -> " + str(cl_data) + "(TEXT)" + "\n")
-
-        else:
-            if cl_type == 'text':
-                main_log.insert(END, "Буфер -> " + str(cl_data) + "[This text may contain confidential data!!!]" + "\n")
-
-def clipboard_info_view2(main_log, window):
     global last_data
 
     try:
@@ -102,7 +85,7 @@ def clipboard_info_view2(main_log, window):
         else:
             main_log.insert(END, "\n" + "Буфер -> " + str(cl_data) + " (TEXT)")
             # Запись в лог
-            write_log("\n" + "Буфер     " + str(cl_data) + " (TEXT)")
+            write_log("\n" + "Буфер     " + str(cl_data).replace("\n", "") + " (TEXT)")
 
             main_log.tag_add("clip_text", 'end-2c linestart', 'end-2c')
             main_log.tag_config("clip_text", foreground="#42aaff")
@@ -131,7 +114,7 @@ def clipboard_info_view2(main_log, window):
 
         if cl_type == 'same data':
             main_log.insert(END, ".")
-    window.after(1000, clipboard_info_view2, main_log, window)
+    window.after(1000, clipboard_info_view, main_log, window)
 
 
 def handler_info_view(main_log, event, ev_type, status, path, message):
@@ -155,16 +138,16 @@ def handler_info_view(main_log, event, ev_type, status, path, message):
         if status == 'normal':
             main_log.insert(END, "\n" + event + " file -- " + path)
             # Запись в лог
-            write_log("\n" + event + " file -- " + path)
+            write_log("\n" + str(event).upper() + " FILE     " + path)
 
             main_log.tag_add("monitor_norm", 'end-2c linestart', 'end-2c')
             main_log.tag_config("monitor_norm", foreground="violet")
 
         # Если файл - конфиденциальный
         if status == 'conf':
-            main_log.insert(END, "\n" + event + " file (CONFIDENTIAL) -- " + path)
+            main_log.insert(END, "\n" + event + " file (CONF) -- " + path)
             # Запись в лог
-            write_log("\n" + event + " file (CONFIDENTIAL) -- " + path)
+            write_log("\n" + str(event).upper() + " FILE (CONF)     " + path)
 
             # Пока уберем
             # tkinter.messagebox.showerror(title="Опасность", message=message)
@@ -179,7 +162,7 @@ def handler_info_view(main_log, event, ev_type, status, path, message):
     else:
         main_log.insert(END, "\n" + event + " directory -- " + path)
         # Запись в лог
-        write_log("\n" + event + " directory -- " + path)
+        write_log("\n" + str(event).upper() + " DIRECTORY     " + path)
 
         main_log.tag_add("monitor_dir", 'end-2c linestart', 'end-2c')
         main_log.tag_config("monitor_dir", foreground="blue")

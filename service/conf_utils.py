@@ -100,7 +100,7 @@ def is_file_or_text_confidential(is_text, path_to_file) -> bool:
 
             # Случай с неподдерживаемыми типами для рассмотрения
             else:
-                text = file_type
+                text = "default"
 
         except PackageNotFoundError:
             print("Couldn't find *.doc or *.docx file. Maybe, it was deleted!")
@@ -146,12 +146,8 @@ def conf_info_detected(data, action) -> str:
         :return: str message: само сообщение в строковом виде
     """
 
-    # Дата события
-    detection_date = datetime.datetime.now()
-
     # Формирование сообщения
-    message = " ".join(
-        ["Actions (" + action + ") with conf file (", data, " ) were detected at: ", str(detection_date), "\n"])
+    message = " ".join([action + " conf file     ", data])
     print(message)
 
     # Запись отчета о проишествии в лог-файл

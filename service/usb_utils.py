@@ -53,6 +53,9 @@ def check_flash_drives(flash_dirs):
         # Счетчик конфиденциальных файлов
         conf_files_count = 0
 
+        # Список конфиденциальных файлов (для записи в отдельный лог)
+        conf_files_list = []
+
         # Проходимся по всем файлам в текущей директории
         for root, dirs, files in os.walk(os.path.abspath(flash_dir)):
             for filename in files:
@@ -72,9 +75,11 @@ def check_flash_drives(flash_dirs):
                     # Если есть -> увеличиваем счетчик
                     if conf_res:
                         conf_files_count += 1
+                        conf_files_list.append(real_path)
 
         if conf_files_count > 0:
             print("On flash drive (" + flash_dir + ") was detected " + str(conf_files_count) + " confidential files.")
+            file_utils.write_log("USB     На накопителе (" + flash_dir + ") было замечено " + str(conf_files_count) + " конфиденциальных файлов:" + str(conf_files_list), '..\\Reports\\usb_reports')
             return True, conf_files_count, flash_dir
         else:
             print("On flash drive (" + flash_dir + ")" + " was haven't been detected any confidential files.")

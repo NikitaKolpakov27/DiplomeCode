@@ -61,7 +61,7 @@ def check_file_for_conf():
     # progress_var.stop()
     # msg = "Данный файл содержит признаков информации ограниченного доступа на " + str(percentage_conf) + "%"
     # tkinter.messagebox.showinfo(title="Результат проверки", message=msg)
-    conf_result = bayes.bayes_text_classify(test_letter=text)
+    conf_result = bayes.bayes_text_classify(test_text=text)
 
     if conf_result:
         msg = "Данный файл содержит признаков информации ограниченного доступа"
@@ -117,8 +117,11 @@ def check_mail():
 
 
 def main_process():
+
     # Проверка валидности введенного пути
     selected_path = dir_name.get()
+    # Временно
+    # selected_path = "d:\\test folder"
     check_path = os.path.isdir(selected_path)
 
     if not check_path:
@@ -175,7 +178,7 @@ def main_process():
         try:
             view_utils.usb_check(main_log)
             # net_utils.disable_websites()
-            view_utils.clipboard_info_view2(main_log, new_window)
+            view_utils.clipboard_info_view(main_log, new_window)
             new_window.protocol("WM_DELETE_WINDOW", window_passwd)
             new_window.mainloop()
         except KeyboardInterrupt:

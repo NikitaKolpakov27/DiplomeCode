@@ -124,10 +124,11 @@ def is_string_path(path) -> bool:
     else:
         return False
 
-def write_log(message):
+def write_log(message, path='..\\Reports'):
     """
         Запись сообщения в лог-файл
 
+        :param path: путь к логу
         :param message: само событие, которое нужно записать в файл
         :return: None
     """
@@ -148,8 +149,8 @@ def write_log(message):
 
     # Получение пути и запись в файл
     cur_path = os.path.dirname(__file__)
-    correct_path = os.path.relpath('..\\Reports', cur_path)
+    correct_path = os.path.relpath(path, cur_path)
     correct_path = correct_path + "/" + file_name + ".txt"
 
     with open(correct_path, "a") as file:
-        file.write(str(message) + "  " + detection_date_log)
+        file.write(str(message) + "     " + detection_date_log)
