@@ -1,7 +1,9 @@
 import csv
 import string
 
+import keras
 import numpy
+import numpy as np
 import pandas as pd
 import nltk
 from matplotlib import pyplot as plt
@@ -71,10 +73,228 @@ def prepare_text_for_model(text_data):
 
     return vectorizer, features
 
-
-def make_model(text_data=data['text']):
+def make_model_custom_classifier(text_data=data['text'], classifier='SVM'):
     """
         Создание модели и предсказание результатов
+
+        :param text_data: обработанные данные из датасета (после лематизации и пр.)
+        :param classifier: указанный пользователем классификатор
+        :return: None
+    """
+
+    custom_model = None
+    message = ""
+
+    if classifier == 'KNN':
+        from sklearn.neighbors import KNeighborsClassifier
+        custom_model = KNeighborsClassifier()
+        message = "Knn accuracy: "
+    elif classifier == 'Random Forest':
+        from sklearn.ensemble import RandomForestClassifier
+        custom_model = RandomForestClassifier()
+        message = "Random Forest accuracy: "
+    elif classifier == 'Decision Tree':
+        from sklearn.tree import DecisionTreeClassifier
+        custom_model = DecisionTreeClassifier()
+        message = "Decision Tree accuracy: "
+    elif classifier == 'lda':
+        from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+        custom_model = LinearDiscriminantAnalysis()
+        message = "Linear Discriminant accuracy: "
+    else:
+        from sklearn.svm import SVC
+        custom_model = SVC()
+        message = "SVM accuracy: "
+
+    vectorizer, features = prepare_text_for_model(text_data)
+
+    X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.2)
+
+    # Train the classifier
+    custom_model.fit(X_train, y_train)
+
+    # Predict the labels of the test set
+    y_pred = custom_model.predict(X_test)
+
+    accuracy = np.mean(y_pred == y_test)
+    print(message, accuracy)
+
+# Особенная, не полходит под другие простые
+def make_model_lstm(text_data=data['text']):
+    """
+        Создание модели на основе LSTM-сетей и предсказание результатов
+        P.S. Пока не работает, нужно больше мощностей!
+
+        :param text_data: обработанные данные из датасета (после лематизации и пр.)
+        :return: None
+    """
+    global X_train, X_test, y_train, y_test
+
+    vectorizer, features = prepare_text_for_model(text_data)
+
+    print(u'Собираем модель...')
+    print("Len special: ", len(vectorizer.get_feature_names_out()),)
+    lstm_model = tf.keras.models.Sequential()
+    lstm_model.add(tf.keras.layers.Embedding(input_dim=400, output_dim=128))
+    lstm_model.add(tf.keras.layers.LSTM(16, dropout=0.2, recurrent_dropout=0.2))
+    lstm_model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
+
+    lstm_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+    print(lstm_model.summary())
+
+    # Divide the dataset into test and training sets.
+    X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.2)
+
+    print('Размерность X_train:', X_train.shape)
+    print('Размерность X_test:', X_test.shape)
+
+    print(u'Преобразуем категории в матрицу двоичных чисел '
+          u'(для использования categorical_crossentropy)')
+
+    num_classes = 2
+
+    # y_train = keras.utils.to_categorical(y_train, num_classes)
+    # y_test = keras.utils.to_categorical(y_test, num_classes)
+    print('y_train shape:', y_train.shape)
+    print('y_test shape:', y_test.shape)
+
+    print(u'Тренируем модель...')
+    history = lstm_model.fit(X_train, y_train, batch_size=128, epochs=10, verbose=1)
+    score = lstm_model.evaluate(X_test, y_test)
+    print()
+    print(u'Оценка теста: {}'.format(score[0]))
+    print(u'Оценка точности модели: {}'.format(score[1]))
+
+def make_model_svm(text_data=data['text']):
+    """
+        Создание модели SVM и предсказание результатов
+
+        :param text_data: обработанные данные из датасета (после лематизации и пр.)
+        :return: None
+    """
+    from sklearn.svm import SVC
+
+    vectorizer, features = prepare_text_for_model(text_data)
+
+    X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.2)
+
+    # Create an SVM classifier
+    clf = SVC()
+
+    # Train the classifier
+    clf.fit(X_train, y_train)
+
+    # Predict the labels of the test set
+    y_pred = clf.predict(X_test)
+
+    accuracy = np.mean(y_pred == y_test)
+    print("Accuracy:", accuracy)
+
+def make_model_knn(text_data=data['text']):
+    """
+        Создание модели Knn и предсказание результатов
+
+        :param text_data: обработанные данные из датасета (после лематизации и пр.)
+        :return: None
+    """
+    from sklearn.neighbors import KNeighborsClassifier
+
+    vectorizer, features = prepare_text_for_model(text_data)
+
+    X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.3)
+
+    # Create an SVM classifier
+    knn = KNeighborsClassifier(n_neighbors=2)
+
+    # Train the classifier
+    knn.fit(X_train, y_train)
+
+    # Predict the labels of the test set
+    y_pred = knn.predict(X_test)
+
+    accuracy = np.mean(y_pred == y_test)
+    print("KNN Accuracy:", accuracy)
+
+def make_model_dtc(text_data=data['text']):
+    """
+        Создание модели дерева решений и предсказание результатов
+
+        :param text_data: обработанные данные из датасета (после лематизации и пр.)
+        :return: None
+    """
+    from sklearn.tree import DecisionTreeClassifier
+
+    vectorizer, features = prepare_text_for_model(text_data)
+
+    X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.3)
+
+    # Create an SVM classifier
+    tree_model = DecisionTreeClassifier()
+
+    # Train the classifier
+    tree_model.fit(X_train, y_train)
+
+    # Predict the labels of the test set
+    y_pred = tree_model.predict(X_test)
+
+    accuracy = np.mean(y_pred == y_test)
+    print("Decision Tree Accuracy:", accuracy)
+
+def make_model_forest(text_data=data['text']):
+    """
+        Создание модели случайного леса и предсказание результатов
+
+        :param text_data: обработанные данные из датасета (после лематизации и пр.)
+        :return: None
+    """
+    from sklearn.ensemble import RandomForestClassifier
+
+    vectorizer, features = prepare_text_for_model(text_data)
+
+    X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.3)
+
+    # Create an SVM classifier
+    tree_model = RandomForestClassifier()
+
+    # Train the classifier
+    tree_model.fit(X_train, y_train)
+
+    # Predict the labels of the test set
+    y_pred = tree_model.predict(X_test)
+
+    accuracy = np.mean(y_pred == y_test)
+    print("Random Forest Accuracy:", accuracy)
+
+
+def make_model_lda(text_data=data['text']):
+    """
+        Создание модели линейного дискриминантного анализа предсказание результатов
+
+        :param text_data: обработанные данные из датасета (после лематизации и пр.)
+        :return: None
+    """
+    from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+
+    vectorizer, features = prepare_text_for_model(text_data)
+
+    X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.3)
+
+    # Create an SVM classifier
+    tree_model = LinearDiscriminantAnalysis()
+
+    # Train the classifier
+    tree_model.fit(X_train, y_train)
+
+    # Predict the labels of the test set
+    y_pred = tree_model.predict(X_test)
+
+    accuracy = np.mean(y_pred == y_test)
+    print("Linear Discriminant Analysis Accuracy:", accuracy)
+
+def make_model_MINE(text_data=data['text']):
+    """
+        Создание модели на основе MLP (multilayer perceptron) и предсказание результатов
 
         :param text_data: обработанные данные из датасета (после лематизации и пр.)
         :return: None
@@ -85,7 +305,7 @@ def make_model(text_data=data['text']):
 
     vectorizer, features = prepare_text_for_model(text_data)
 
-    # Define the model architecture
+    # Определяем архитектуру нейросети
     model = tf.keras.models.Sequential()
     model.add(tf.keras.layers.Dense(128, activation='relu', input_shape=(len(vectorizer.get_feature_names_out()),)))
     model.add(tf.keras.layers.Dropout(0.5))
@@ -96,13 +316,23 @@ def make_model(text_data=data['text']):
     # Compile the model
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
+    print(model.summary())
+
     data['label'] = data['label'].astype(int)
 
-    # Train the model ###### Тут ломается :(
-    history = model.fit(features, data['label'], epochs=10, batch_size=64, verbose=1)
+    # # Train the model ###### Тут ломается :(
+    # history = model.fit(features, data['label'], epochs=10, batch_size=64, verbose=1)
 
     # Divide the dataset into test and training sets.
     X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.2)
+
+    print('Размерность X_train:', X_train.shape)
+    print('Размерность X_test:', X_test.shape)
+    print('y_train shape:', y_train.shape)
+    print('y_test shape:', y_test.shape)
+
+    # Train the model ###### Тут ломается :(
+    history = model.fit(features, data['label'], epochs=10, batch_size=64, verbose=1)
 
     # Evaluate the model on the test set
     loss, accuracy = model.evaluate(X_test, y_test)
@@ -169,52 +399,63 @@ def new_old_vectorizer_process(text_data):
 
     return features
 
+# Свое решение
+# if __name__ == "__main__":
+#
+#     # Сначала нужно обучить модель
+#     make_model()
+#
+#     # Работает!
+#     test_data = [
+#         "ты не видела куда он тогда пошел? мне очень интересно",
+#         "слышала о новой классной кофейне в центре города?",
+#         "мне кажется, нам нужно серьезно поговорить. когда ты сегодня освободишься?",
+#         "прикрепил пару файлов во вложении"
+#     ]
+#
+#     hard_test_data = [
+#         "Я слышал, что на высшем уровне обсуждают изменения в стратегии, но детали держат в секрете.",
+#         "Некоторые из нас получили запросы на дополнительную информацию, но неясно, для чего она нужна.",
+#         "Мне сказали, что скоро будут объявления о новых назначениях, но никто не знает, кто именно будет назначен.",
+#         "В офисе говорят, что есть проблемы с одним из проектов, но официальной информации пока нет.",
+#         "На последней встрече упоминали о возможных увольнениях, но никто не подтвердил эту информацию."
+#     ]
+#
+#     normal_data = [
+#         "С днем рождения, Ирина! Желаю счастья и успехов во всех начинаниях!",
+#         "Привет! Как дела? Давно не виделись!",
+#         "Кто-то хочет пойти в кино в выходные? Напишите, если интересно!",
+#         "Участвую в марафоне на следующей неделе! Кто со мной?",
+#         "Заметила, что у нас много общих друзей! Как ты знаешь?"
+#     ]
+#
+#     conf_data = [
+#         "Мне нужно обсудить с тобой некоторые личные и деловые вопросы, касающиеся работы.",
+#         "Это пока неофициально, так что прошу держать это в секрете.",
+#         "Привет! У меня есть информация о предстоящем проекте, которую нельзя разглашать",
+#         "Не хочу тебя пугать, но я слышал слухи о возможных увольнениях в компании.",
+#         "Я хотел бы обсудить свою зарплату и возможные изменения. Это важный вопрос."
+#     ]
+#
+#     # test_data = "ты не видела куда он тогда пошел? мне очень интересно"
+#     # processed_text = preprocess_text(test_data)
+#     td = pd.Series(hard_test_data)
+#
+#     # feature_test = prepare_text_for_model(td)[1]
+#     feature_test = new_old_vectorizer_process(td)
+#
+#     predict_model(feature_test)
 
 if __name__ == "__main__":
-
-    # Сначала нужно обучить модель
-    make_model()
-
-    # Работает!
-    test_data = [
-        "ты не видела куда он тогда пошел? мне очень интересно",
-        "слышала о новой классной кофейне в центре города?",
-        "мне кажется, нам нужно серьезно поговорить. когда ты сегодня освободишься?",
-        "прикрепил пару файлов во вложении"
-    ]
-
-    hard_test_data = [
-        "Я слышал, что на высшем уровне обсуждают изменения в стратегии, но детали держат в секрете.",
-        "Некоторые из нас получили запросы на дополнительную информацию, но неясно, для чего она нужна.",
-        "Мне сказали, что скоро будут объявления о новых назначениях, но никто не знает, кто именно будет назначен.",
-        "В офисе говорят, что есть проблемы с одним из проектов, но официальной информации пока нет.",
-        "На последней встрече упоминали о возможных увольнениях, но никто не подтвердил эту информацию."
-    ]
-
-    normal_data = [
-        "С днем рождения, Ирина! Желаю счастья и успехов во всех начинаниях!",
-        "Привет! Как дела? Давно не виделись!",
-        "Кто-то хочет пойти в кино в выходные? Напишите, если интересно!",
-        "Участвую в марафоне на следующей неделе! Кто со мной?",
-        "Заметила, что у нас много общих друзей! Как ты знаешь?"
-    ]
-
-    conf_data = [
-        "Мне нужно обсудить с тобой некоторые личные и деловые вопросы, касающиеся работы.",
-        "Это пока неофициально, так что прошу держать это в секрете.",
-        "Привет! У меня есть информация о предстоящем проекте, которую нельзя разглашать",
-        "Не хочу тебя пугать, но я слышал слухи о возможных увольнениях в компании.",
-        "Я хотел бы обсудить свою зарплату и возможные изменения. Это важный вопрос."
-    ]
-
-    # test_data = "ты не видела куда он тогда пошел? мне очень интересно"
-    # processed_text = preprocess_text(test_data)
-    td = pd.Series(conf_data)
-
-    # feature_test = prepare_text_for_model(td)[1]
-    feature_test = new_old_vectorizer_process(td)
-
-    predict_model(feature_test)
-
-
+    # make_model_svm()
+    # make_model_lstm()
+    # make_model_knn()
+    # make_model_dtc()
+    # make_model_forest()
+    # make_model_lda()
+    # make_model_MINE()
+    make_model_custom_classifier(classifier='Random Forest')
+    make_model_custom_classifier(classifier='SVM')
+    make_model_custom_classifier(classifier='lda')
+    make_model_custom_classifier(classifier='KNN')
 
