@@ -1,0 +1,24 @@
+********
+Model: Random Forest
+Creation time: 2025-04-15 22:10:26.706632
+Evaluation time: 0:02:15.602584
+Accuracy: 0.8047070605908864
+********
+********
+Model: lda
+Creation time: 2025-04-15 22:12:43.774010
+Evaluation time: 0:07:51.519103
+Accuracy: 0.6975463194792189
+********
+********
+Model: KNN
+Creation time: 2025-04-15 22:20:36.162097
+Evaluation time: 0:00:07.775733
+Accuracy: 0.5673510265398097
+********
+********
+Model: Decision Tree
+Creation time: 2025-04-15 22:53:28.201151
+Evaluation time: 0:01:23.871736
+Accuracy: 0.7616424636955433
+********
