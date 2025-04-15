@@ -1,4 +1,5 @@
 import csv
+import datetime
 import string
 
 import keras
@@ -106,6 +107,7 @@ def make_model_custom_classifier(text_data=data['text'], classifier='SVM'):
         custom_model = SVC()
         message = "SVM accuracy: "
 
+    create_model_time = datetime.datetime.now()
     vectorizer, features = prepare_text_for_model(text_data)
 
     X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.2)
@@ -113,11 +115,20 @@ def make_model_custom_classifier(text_data=data['text'], classifier='SVM'):
     # Train the classifier
     custom_model.fit(X_train, y_train)
 
+    evaluation_time = datetime.datetime.now() - create_model_time
+
     # Predict the labels of the test set
     y_pred = custom_model.predict(X_test)
 
     accuracy = np.mean(y_pred == y_test)
-    print(message, accuracy)
+
+    with open('./model_report.txt', 'a+') as file:
+        file.write('********\n')
+        file.write(''.join(['Model: ', classifier, '\n']))
+        file.write(''.join(['Creation time: ', str(create_model_time), '\n']))
+        file.write(''.join(['Evaluation time: ', str(evaluation_time), '\n']))
+        file.write(''.join(['Accuracy: ', str(accuracy), '\n']))
+        file.write('********\n')
 
 # Особенная, не полходит под другие простые
 def make_model_lstm(text_data=data['text']):
@@ -166,133 +177,7 @@ def make_model_lstm(text_data=data['text']):
     print(u'Оценка теста: {}'.format(score[0]))
     print(u'Оценка точности модели: {}'.format(score[1]))
 
-def make_model_svm(text_data=data['text']):
-    """
-        Создание модели SVM и предсказание результатов
-
-        :param text_data: обработанные данные из датасета (после лематизации и пр.)
-        :return: None
-    """
-    from sklearn.svm import SVC
-
-    vectorizer, features = prepare_text_for_model(text_data)
-
-    X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.2)
-
-    # Create an SVM classifier
-    clf = SVC()
-
-    # Train the classifier
-    clf.fit(X_train, y_train)
-
-    # Predict the labels of the test set
-    y_pred = clf.predict(X_test)
-
-    accuracy = np.mean(y_pred == y_test)
-    print("Accuracy:", accuracy)
-
-def make_model_knn(text_data=data['text']):
-    """
-        Создание модели Knn и предсказание результатов
-
-        :param text_data: обработанные данные из датасета (после лематизации и пр.)
-        :return: None
-    """
-    from sklearn.neighbors import KNeighborsClassifier
-
-    vectorizer, features = prepare_text_for_model(text_data)
-
-    X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.3)
-
-    # Create an SVM classifier
-    knn = KNeighborsClassifier(n_neighbors=2)
-
-    # Train the classifier
-    knn.fit(X_train, y_train)
-
-    # Predict the labels of the test set
-    y_pred = knn.predict(X_test)
-
-    accuracy = np.mean(y_pred == y_test)
-    print("KNN Accuracy:", accuracy)
-
-def make_model_dtc(text_data=data['text']):
-    """
-        Создание модели дерева решений и предсказание результатов
-
-        :param text_data: обработанные данные из датасета (после лематизации и пр.)
-        :return: None
-    """
-    from sklearn.tree import DecisionTreeClassifier
-
-    vectorizer, features = prepare_text_for_model(text_data)
-
-    X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.3)
-
-    # Create an SVM classifier
-    tree_model = DecisionTreeClassifier()
-
-    # Train the classifier
-    tree_model.fit(X_train, y_train)
-
-    # Predict the labels of the test set
-    y_pred = tree_model.predict(X_test)
-
-    accuracy = np.mean(y_pred == y_test)
-    print("Decision Tree Accuracy:", accuracy)
-
-def make_model_forest(text_data=data['text']):
-    """
-        Создание модели случайного леса и предсказание результатов
-
-        :param text_data: обработанные данные из датасета (после лематизации и пр.)
-        :return: None
-    """
-    from sklearn.ensemble import RandomForestClassifier
-
-    vectorizer, features = prepare_text_for_model(text_data)
-
-    X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.3)
-
-    # Create an SVM classifier
-    tree_model = RandomForestClassifier()
-
-    # Train the classifier
-    tree_model.fit(X_train, y_train)
-
-    # Predict the labels of the test set
-    y_pred = tree_model.predict(X_test)
-
-    accuracy = np.mean(y_pred == y_test)
-    print("Random Forest Accuracy:", accuracy)
-
-
-def make_model_lda(text_data=data['text']):
-    """
-        Создание модели линейного дискриминантного анализа предсказание результатов
-
-        :param text_data: обработанные данные из датасета (после лематизации и пр.)
-        :return: None
-    """
-    from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-
-    vectorizer, features = prepare_text_for_model(text_data)
-
-    X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.3)
-
-    # Create an SVM classifier
-    tree_model = LinearDiscriminantAnalysis()
-
-    # Train the classifier
-    tree_model.fit(X_train, y_train)
-
-    # Predict the labels of the test set
-    y_pred = tree_model.predict(X_test)
-
-    accuracy = np.mean(y_pred == y_test)
-    print("Linear Discriminant Analysis Accuracy:", accuracy)
-
-def make_model_MINE(text_data=data['text']):
+def make_model_mine(text_data=data['text']):
     """
         Создание модели на основе MLP (multilayer perceptron) и предсказание результатов
 
@@ -363,8 +248,13 @@ def make_model_MINE(text_data=data['text']):
     plt.tight_layout()
     plt.show()
 
-
 def predict_model(text_feature):
+    """
+        Оформляет результат классификации модели
+
+        :param text_feature: данные в векторном представлении
+        :return: str -> "CONF" - если сообщение конфиденциальное, "NORM" - если нормальное
+    """
     global model
 
     # Тестирование
@@ -447,15 +337,10 @@ def new_old_vectorizer_process(text_data):
 #     predict_model(feature_test)
 
 if __name__ == "__main__":
-    # make_model_svm()
-    # make_model_lstm()
-    # make_model_knn()
-    # make_model_dtc()
-    # make_model_forest()
-    # make_model_lda()
     # make_model_MINE()
-    make_model_custom_classifier(classifier='Random Forest')
-    make_model_custom_classifier(classifier='SVM')
-    make_model_custom_classifier(classifier='lda')
-    make_model_custom_classifier(classifier='KNN')
+    # make_model_custom_classifier(classifier='Random Forest')
+    # make_model_custom_classifier(classifier='SVM')
+    # make_model_custom_classifier(classifier='lda')
+    # make_model_custom_classifier(classifier='KNN')
+    make_model_custom_classifier(classifier='Decision Tree')
 
