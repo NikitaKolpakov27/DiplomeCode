@@ -7,3 +7,6 @@ pymorphy2~=0.9.1
 wordcloud~=1.9.4
 scikit-learn~=1.5.2
 pandas~=2.1.1
+numpy~=1.26.1
+tensorflow~=2.18.0
+psutil~=6.1.0

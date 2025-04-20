@@ -12,7 +12,7 @@ import service.usb_utils
 import service.clipboard_utils
 import browserhistory as bh
 
-from service import conf_detect, bayes, net_utils, mail
+from service import conf_detect, bayes, net_utils, mail, ai_conf
 from service.file_utils import get_file_type, read_docx_file, read_pdf_file, read_txt_file
 from view import view_utils, passwd_view
 
@@ -116,6 +116,32 @@ def check_mail():
     mail_window.mainloop()
 
 
+def check_text_ai():
+    def click_classify():
+        result_label.configure(text="Идет проверка...")
+        result_label.configure(text=ai_conf.classify_view_version(input_message.get("1.0", END)))
+
+    window.withdraw()
+    ai_window = Toplevel(window)
+    ai_window.protocol("WM_DELETE_WINDOW", lambda: window.destroy())
+
+    ai_window.title("DLP. Checking text by AI")
+    ai_window.geometry("600x300")
+
+    write_message = Label(ai_window, text="Введите ваше сообщение: ", font=("Helvetica", 14))
+    write_message.grid(column=0, row=0)
+
+    input_message = Text(ai_window, width=60, height=5)
+    input_message.grid(column=0, row=1)
+
+    classify_button = Button(ai_window, text="Получить результат", command=click_classify, font=("Helvetica", 14))
+    classify_button.grid(column=0, row=2)
+
+    result_label = Label(ai_window, font=("Helvetica", 14), foreground="blue")
+    result_label.grid(column=0, row=4)
+
+    ai_window.mainloop()
+
 def main_process():
 
     # Проверка валидности введенного пути
@@ -188,7 +214,7 @@ def main_process():
 
 window = Tk()
 window.title('DLP')
-window.geometry('705x200')
+window.geometry('715x200')
 
 frame = Frame(window, padx=10, pady=10)
 frame.pack(expand=True)
@@ -210,5 +236,9 @@ check_conf_btn.grid(row=5, column=1)
 
 check_mail_btn = Button(frame, text='Проверить почту', command=check_mail, font=("Helvetica", 14))
 check_mail_btn.grid(row=5, column=2)
+
+check_text_ai = Button(frame, text='Классификация AI', command=check_text_ai,
+                       font=("Helvetica", 14), foreground="purple")
+check_text_ai.grid(row=5, column=3)
 
 window.mainloop()

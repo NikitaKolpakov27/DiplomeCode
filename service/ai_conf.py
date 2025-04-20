@@ -1,15 +1,12 @@
-import csv
 import datetime
+import os
 import string
-
-import keras
-import numpy
 import numpy as np
 import pandas as pd
 import nltk
 from matplotlib import pyplot as plt
 from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
+from nltk.stem import WordNetLemmatizer, SnowballStemmer
 from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import CountVectorizer
 import tensorflow as tf
@@ -19,8 +16,45 @@ model = None
 X_train, X_test, y_train, y_test = None, None, None, None
 vectorizer = None
 
-# Load the dataset
-data = pd.read_csv('conf_num.csv', encoding='utf-8', on_bad_lines='warn')
+# Тестовые данные в массивах (если потребуются)
+test_data = [
+    "ты не видела куда он тогда пошел? мне очень интересно",
+    "слышала о новой классной кофейне в центре города?",
+    "мне кажется, нам нужно серьезно поговорить. когда ты сегодня освободишься?",
+    "прикрепил пару файлов во вложении"
+]
+
+hard_test_data = [
+    "Я слышал, что на высшем уровне обсуждают изменения в стратегии, но детали держат в секрете.",
+    "Некоторые из нас получили запросы на дополнительную информацию, но неясно, для чего она нужна.",
+    "Мне сказали, что скоро будут объявления о новых назначениях, но никто не знает, кто именно будет назначен.",
+    "В офисе говорят, что есть проблемы с одним из проектов, но официальной информации пока нет.",
+    "На последней встрече упоминали о возможных увольнениях, но никто не подтвердил эту информацию."
+]
+
+normal_data = [
+    "С днем рождения, Ирина! Желаю счастья и успехов во всех начинаниях!",
+    "Привет! Как дела? Давно не виделись!",
+    "Кто-то хочет пойти в кино в выходные? Напишите, если интересно!",
+    "Участвую в марафоне на следующей неделе! Кто со мной?",
+    "Заметила, что у нас много общих друзей! Как ты знаешь?"
+]
+
+conf_data = [
+    "Мне нужно обсудить с тобой некоторые личные и деловые вопросы, касающиеся работы.",
+    "Это пока неофициально, так что прошу держать это в секрете.",
+    "Привет! У меня есть информация о предстоящем проекте, которую нельзя разглашать",
+    "Не хочу тебя пугать, но я слышал слухи о возможных увольнениях в компании.",
+    "Я хотел бы обсудить свою зарплату и возможные изменения. Это важный вопрос."
+]
+# Получение пути датасета (т.к. находится все в другой, внешней папке)
+cur_path = os.path.dirname(__file__)
+correct_path = os.path.relpath("..\\dataset", cur_path)
+conf_dataset = correct_path + "/conf_num.csv"
+
+# Загружаем датасет
+data = pd.read_csv(conf_dataset, encoding='utf-8', on_bad_lines='warn')
+
 
 def print_dataset(dataset):
     print("Текст:")
@@ -29,15 +63,16 @@ def print_dataset(dataset):
     print("================================")
 
 
+# Печатаем датасет (для определения возможных ошибок, опционально)
 print_dataset(data['text'])
 
 nltk.download('stopwords')
 nltk.download('wordnet')
 nltk.download('punkt_tab')
 
-# Preprocess the text
-def preprocess_text(text):
 
+# Обрабатываем текст для модели
+def preprocess_text(text):
     # Удаление спец символов из текста
     text = text.lower()
     spec_chars = string.punctuation + '\xa0«»\t—…'
@@ -54,7 +89,12 @@ def preprocess_text(text):
     lemmatizer = WordNetLemmatizer()
     tokens = [lemmatizer.lemmatize(word) for word in tokens]
 
+    # Стемминг (спорно, но можно оставить)
+    # stemmer = SnowballStemmer(language='russian')
+    # tokens = [stemmer.stem(word) for word in tokens]
+
     return ' '.join(tokens)
+
 
 def prepare_text_for_model(text_data):
     global vectorizer
@@ -69,10 +109,11 @@ def prepare_text_for_model(text_data):
 
     features = vectorizer.fit_transform(text_data)
 
-    # Convert the features to a dense matrix
+    # Конвертируем признаки (features) в матрицу
     features = features.toarray()
 
     return vectorizer, features
+
 
 def make_model_custom_classifier(text_data=data['text'], classifier='SVM'):
     """
@@ -86,9 +127,10 @@ def make_model_custom_classifier(text_data=data['text'], classifier='SVM'):
     custom_model = None
     message = ""
 
+    # Выбираем классификатор на основе действий пользователя
     if classifier == 'KNN':
         from sklearn.neighbors import KNeighborsClassifier
-        custom_model = KNeighborsClassifier()
+        custom_model = KNeighborsClassifier(n_neighbors=1)
         message = "Knn accuracy: "
     elif classifier == 'Random Forest':
         from sklearn.ensemble import RandomForestClassifier
@@ -104,7 +146,7 @@ def make_model_custom_classifier(text_data=data['text'], classifier='SVM'):
         message = "Linear Discriminant accuracy: "
     else:
         from sklearn.svm import SVC
-        custom_model = SVC()
+        custom_model = SVC(kernel='linear')
         message = "SVM accuracy: "
 
     create_model_time = datetime.datetime.now()
@@ -112,16 +154,20 @@ def make_model_custom_classifier(text_data=data['text'], classifier='SVM'):
 
     X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.2)
 
-    # Train the classifier
+    # Обучаем модель
+    print("Модель", classifier, "обучается...")
     custom_model.fit(X_train, y_train)
 
+    # Вычисляем время обучения модели
     evaluation_time = datetime.datetime.now() - create_model_time
 
-    # Predict the labels of the test set
+    # Предсказываем результат
     y_pred = custom_model.predict(X_test)
 
+    # Вычисляем точность классификации модели
     accuracy = np.mean(y_pred == y_test)
 
+    # Результаты записываем в файл
     with open('./model_report.txt', 'a+') as file:
         file.write('********\n')
         file.write(''.join(['Model: ', classifier, '\n']))
@@ -130,7 +176,8 @@ def make_model_custom_classifier(text_data=data['text'], classifier='SVM'):
         file.write(''.join(['Accuracy: ', str(accuracy), '\n']))
         file.write('********\n')
 
-# Особенная, не полходит под другие простые
+
+# Особенная, не подходит под другие простые
 def make_model_lstm(text_data=data['text']):
     """
         Создание модели на основе LSTM-сетей и предсказание результатов
@@ -143,22 +190,28 @@ def make_model_lstm(text_data=data['text']):
 
     vectorizer, features = prepare_text_for_model(text_data)
 
+    # Divide the dataset into test and training sets.
+    X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.2)
+
+    # Reshape input data
+    X_train = X_train.reshape((X_train.shape[0], X_train.shape[1], 1))
+    X_test = X_test.reshape((X_test.shape[0], X_test.shape[1], 1))
+
+    print('Размерность X_train:', X_train.shape)
+    print('Размерность X_test:', X_test.shape)
+
     print(u'Собираем модель...')
-    print("Len special: ", len(vectorizer.get_feature_names_out()),)
+    print("Len special: ", len(vectorizer.get_feature_names_out()), )
     lstm_model = tf.keras.models.Sequential()
-    lstm_model.add(tf.keras.layers.Embedding(input_dim=400, output_dim=128))
-    lstm_model.add(tf.keras.layers.LSTM(16, dropout=0.2, recurrent_dropout=0.2))
+    # lstm_model.add(tf.keras.layers.Embedding(input_dim=500, output_dim=64))
+    lstm_model.add(
+        tf.keras.layers.LSTM(units=64, return_sequences=True, input_shape=(X_train.shape[1], X_train.shape[2])))
+    lstm_model.add(tf.keras.layers.LSTM(units=64, return_sequences=True))
     lstm_model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
 
     lstm_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
     print(lstm_model.summary())
-
-    # Divide the dataset into test and training sets.
-    X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.2)
-
-    print('Размерность X_train:', X_train.shape)
-    print('Размерность X_test:', X_test.shape)
 
     print(u'Преобразуем категории в матрицу двоичных чисел '
           u'(для использования categorical_crossentropy)')
@@ -176,6 +229,7 @@ def make_model_lstm(text_data=data['text']):
     print()
     print(u'Оценка теста: {}'.format(score[0]))
     print(u'Оценка точности модели: {}'.format(score[1]))
+
 
 def make_model_mine(text_data=data['text']):
     """
@@ -198,31 +252,22 @@ def make_model_mine(text_data=data['text']):
     model.add(tf.keras.layers.Dropout(0.5))
     model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
 
-    # Compile the model
+    # Компилируем модель
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
-    print(model.summary())
-
+    # Приводим столбцы в тип int (для правильной работы в model.fit)
     data['label'] = data['label'].astype(int)
 
-    # # Train the model ###### Тут ломается :(
-    # history = model.fit(features, data['label'], epochs=10, batch_size=64, verbose=1)
-
-    # Divide the dataset into test and training sets.
+    # Делим выборку на обучающую и тестовую
     X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.2)
 
-    print('Размерность X_train:', X_train.shape)
-    print('Размерность X_test:', X_test.shape)
-    print('y_train shape:', y_train.shape)
-    print('y_test shape:', y_test.shape)
-
-    # Train the model ###### Тут ломается :(
+    # Обучаем модель
     history = model.fit(features, data['label'], epochs=10, batch_size=64, verbose=1)
 
-    # Evaluate the model on the test set
+    # Вычисляем точность и функцию потерь модели
     loss, accuracy = model.evaluate(X_test, y_test)
-    print('Test Loss:', loss)
-    print('Test Accuracy:', accuracy)
+    print('Потери на тестах:', loss)
+    print('Тестовая точность:', accuracy)
 
     # Построение графиков
     plt.figure(figsize=(12, 5))
@@ -230,7 +275,6 @@ def make_model_mine(text_data=data['text']):
     # График точности
     plt.subplot(1, 2, 1)
     plt.plot(history.history['accuracy'], label='Точность на обучении')
-    # plt.plot(history.history['val_accuracy'], label='Точность на валидации')
     plt.title('График точности')
     plt.xlabel('Эпохи')
     plt.ylabel('Точность')
@@ -239,7 +283,6 @@ def make_model_mine(text_data=data['text']):
     # График потерь
     plt.subplot(1, 2, 2)
     plt.plot(history.history['loss'], label='Потери на обучении')
-    # plt.plot(history.history['val_loss'], label='Потери на валидации')
     plt.title('График потерь')
     plt.xlabel('Эпохи')
     plt.ylabel('Потери')
@@ -248,12 +291,28 @@ def make_model_mine(text_data=data['text']):
     plt.tight_layout()
     plt.show()
 
-def predict_model(text_feature):
-    """
-        Оформляет результат классификации модели
+    # Сохраняем графики в jpg
+    save_name = ("mine_model_" + ".jpg")
+    plt.savefig(save_name)
 
-        :param text_feature: данные в векторном представлении
-        :return: str -> "CONF" - если сообщение конфиденциальное, "NORM" - если нормальное
+    # Получение пути для модели и вектора (т.к. находится все в другой, внешней папке)
+    cur_path = os.path.dirname(__file__)
+    correct_path = os.path.relpath("..\\ai_model", cur_path)
+    model_path = correct_path + "/model.joblib"
+    vectorizer_path = correct_path + "/vectorizer.joblib"
+
+    # Сохраняем полученную модель и вектор в отдельный файл (для его повторного использования в других задачах)
+    from joblib import dump
+    dump(model, model_path, compress=9)
+    dump(vectorizer, vectorizer_path, compress=9)
+
+
+def predict_model(text_feature) -> str:
+    """
+        Предсказываем результат классификации
+
+        :param text_feature: текстовые признаки
+        :return: str: результат классификации (NORN, DOUBT, CONF)
     """
     global model
 
@@ -261,26 +320,38 @@ def predict_model(text_feature):
     pred = model.predict(text_feature)
 
     print("\n")
-    for i in pred:
+    str_pred = ""
+    result = ""
 
-        if float(i[0] >= 0.51):
+    for i in pred:
+        num_pred = float(i[0])
+
+        if num_pred >= 0.51:
             str_pred = "CONF"
+        elif 0.51 >= num_pred >= 0.24:
+            str_pred = "DOUBT"
         else:
             str_pred = "NORM"
 
-        print("Результат: ", i, " Тип: ", str_pred)
+        result = "".join(["Результат: ", str(i), " Тип: ", str_pred])
+        print(result)
+
+    return result
 
 
-##### АААААААА оно работает!!""!!!! капаеца фыа выва ываф  ф авыафк фыафафв 19.12.2024
 def new_old_vectorizer_process(text_data):
+    """
+        Получаем features от вектора, с помощью которых будет проходить обучение сети
+
+        :param text_data:
+        :return: features - признаки сообщений
+    """
     global vectorizer
 
+    # Получаем обработанный текст
     processed_text_data = []
     for i in range(0, len(text_data)):
         processed_text_data.append(preprocess_text(text_data[i]))
-
-    print("processed text data: ")
-    print(processed_text_data)
 
     features = vectorizer.transform(processed_text_data)
 
@@ -289,58 +360,68 @@ def new_old_vectorizer_process(text_data):
 
     return features
 
-# Свое решение
-# if __name__ == "__main__":
-#
-#     # Сначала нужно обучить модель
-#     make_model()
-#
-#     # Работает!
-#     test_data = [
-#         "ты не видела куда он тогда пошел? мне очень интересно",
-#         "слышала о новой классной кофейне в центре города?",
-#         "мне кажется, нам нужно серьезно поговорить. когда ты сегодня освободишься?",
-#         "прикрепил пару файлов во вложении"
-#     ]
-#
-#     hard_test_data = [
-#         "Я слышал, что на высшем уровне обсуждают изменения в стратегии, но детали держат в секрете.",
-#         "Некоторые из нас получили запросы на дополнительную информацию, но неясно, для чего она нужна.",
-#         "Мне сказали, что скоро будут объявления о новых назначениях, но никто не знает, кто именно будет назначен.",
-#         "В офисе говорят, что есть проблемы с одним из проектов, но официальной информации пока нет.",
-#         "На последней встрече упоминали о возможных увольнениях, но никто не подтвердил эту информацию."
-#     ]
-#
-#     normal_data = [
-#         "С днем рождения, Ирина! Желаю счастья и успехов во всех начинаниях!",
-#         "Привет! Как дела? Давно не виделись!",
-#         "Кто-то хочет пойти в кино в выходные? Напишите, если интересно!",
-#         "Участвую в марафоне на следующей неделе! Кто со мной?",
-#         "Заметила, что у нас много общих друзей! Как ты знаешь?"
-#     ]
-#
-#     conf_data = [
-#         "Мне нужно обсудить с тобой некоторые личные и деловые вопросы, касающиеся работы.",
-#         "Это пока неофициально, так что прошу держать это в секрете.",
-#         "Привет! У меня есть информация о предстоящем проекте, которую нельзя разглашать",
-#         "Не хочу тебя пугать, но я слышал слухи о возможных увольнениях в компании.",
-#         "Я хотел бы обсудить свою зарплату и возможные изменения. Это важный вопрос."
-#     ]
-#
-#     # test_data = "ты не видела куда он тогда пошел? мне очень интересно"
-#     # processed_text = preprocess_text(test_data)
-#     td = pd.Series(hard_test_data)
-#
-#     # feature_test = prepare_text_for_model(td)[1]
-#     feature_test = new_old_vectorizer_process(td)
-#
-#     predict_model(feature_test)
 
+def classify_view_version(my_data) -> str:
+    """
+        Версия классификации для view
+
+        :param my_data: данные, которые нужно классифицировать
+        :return: str: результат классификации
+    """
+    global model
+    global vectorizer
+
+    # Получение пути для модели и вектора (т.к. находится все в другой, внешней папке)
+    cur_path = os.path.dirname(__file__)
+    correct_path = os.path.relpath("..\\ai_model", cur_path)
+    model_path = correct_path + "/model.joblib"
+    vectorizer_path = correct_path + "/vectorizer.joblib"
+
+    # Загружаем сохраненные модель и вектор
+    from joblib import load
+    model = load(model_path)
+    vectorizer = load(vectorizer_path)
+
+    # Получаем features
+    td = pd.Series(my_data)
+    feature_test = new_old_vectorizer_process(td)
+
+    # Предсказываем результат и возвращаем его
+    return predict_model(feature_test)
+
+
+def classify():
+    """
+        Используется для теста классификации модели (в консоли)
+
+        :return: None
+    """
+
+    # Загружаем модель и вектор признаков
+    from joblib import load
+    model = load('model.joblib')
+    vectorizer = load('vectorizer.joblib')
+
+    # Берем кастомные данные (с ввода с консоли пользователем)
+    my_data = input("Введите ваше сообщение: ")
+
+    # test_data = "ты не видела куда он тогда пошел? мне очень интересно"
+    # processed_text = preprocess_text(test_data)
+    td = pd.Series(my_data)
+
+    feature_test = new_old_vectorizer_process(td)
+
+    # Предсказываем результат
+    predict_model(feature_test)
+
+
+# Запускаем, когда нужно пересохранить модель и вектор
 if __name__ == "__main__":
-    # make_model_MINE()
+    make_model_mine()
+
     # make_model_custom_classifier(classifier='Random Forest')
     # make_model_custom_classifier(classifier='SVM')
     # make_model_custom_classifier(classifier='lda')
     # make_model_custom_classifier(classifier='KNN')
-    make_model_custom_classifier(classifier='Decision Tree')
-
+    # make_model_custom_classifier(classifier='Decision Tree')
+    # make_model_lstm()
