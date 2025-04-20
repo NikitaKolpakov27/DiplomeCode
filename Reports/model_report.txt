@@ -1,24 +1,36 @@
 ********
 Model: Random Forest
-Creation time: 2025-04-15 22:10:26.706632
-Evaluation time: 0:02:15.602584
-Accuracy: 0.8047070605908864
+Creation time: 2025-04-20 22:07:30.990414
+Evaluation time: 0:01:41.710012
+Accuracy: 0.8017664376840039
+********
+********
+Model: SVM
+Creation time: 2025-04-20 22:09:13.730570
+Evaluation time: 0:10:22.276018
+Accuracy: 0.8277723258096172
 ********
 ********
 Model: lda
-Creation time: 2025-04-15 22:12:43.774010
-Evaluation time: 0:07:51.519103
-Accuracy: 0.6975463194792189
+Creation time: 2025-04-20 22:22:18.571579
+Evaluation time: 0:06:47.227860
+Accuracy: 0.7173699705593719
 ********
 ********
 Model: KNN
-Creation time: 2025-04-15 22:20:36.162097
-Evaluation time: 0:00:07.775733
-Accuracy: 0.5673510265398097
+Creation time: 2025-04-20 22:29:06.272384
+Evaluation time: 0:00:08.094879
+Accuracy: 0.7556427870461236
 ********
 ********
 Model: Decision Tree
-Creation time: 2025-04-15 22:53:28.201151
-Evaluation time: 0:01:23.871736
-Accuracy: 0.7616424636955433
+Creation time: 2025-04-20 22:29:21.800005
+Evaluation time: 0:01:25.435912
+Accuracy: 0.7404317958783121
+********
+********
+Model: KNN
+Creation time: 2025-04-20 22:44:57.921854
+Evaluation time: 0:00:10.692422
+Accuracy: 0.7836113837095191
 ********

@@ -8,9 +8,10 @@ from matplotlib import pyplot as plt
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer, SnowballStemmer
 from nltk.tokenize import word_tokenize
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer, HashingVectorizer
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
+# import keras.backend as K
 
 model = None
 X_train, X_test, y_train, y_test = None, None, None, None
@@ -90,8 +91,8 @@ def preprocess_text(text):
     tokens = [lemmatizer.lemmatize(word) for word in tokens]
 
     # Стемминг (спорно, но можно оставить)
-    # stemmer = SnowballStemmer(language='russian')
-    # tokens = [stemmer.stem(word) for word in tokens]
+    stemmer = SnowballStemmer(language='russian')
+    tokens = [stemmer.stem(word) for word in tokens]
 
     return ' '.join(tokens)
 
@@ -102,7 +103,7 @@ def prepare_text_for_model(text_data):
     # Получаем отредактированный текст (после токенезации и лемматизации)
     data['processed_text'] = text_data.apply(preprocess_text)
 
-    vectorizer = CountVectorizer()
+    vectorizer = TfidfVectorizer()
 
     # Extract features from the processed text
     # features = vectorizer.fit_transform(data['processed_text'])
@@ -125,29 +126,27 @@ def make_model_custom_classifier(text_data=data['text'], classifier='SVM'):
     """
 
     custom_model = None
-    message = ""
 
     # Выбираем классификатор на основе действий пользователя
     if classifier == 'KNN':
         from sklearn.neighbors import KNeighborsClassifier
         custom_model = KNeighborsClassifier(n_neighbors=1)
-        message = "Knn accuracy: "
+
     elif classifier == 'Random Forest':
         from sklearn.ensemble import RandomForestClassifier
         custom_model = RandomForestClassifier()
-        message = "Random Forest accuracy: "
+
     elif classifier == 'Decision Tree':
         from sklearn.tree import DecisionTreeClassifier
         custom_model = DecisionTreeClassifier()
-        message = "Decision Tree accuracy: "
+
     elif classifier == 'lda':
         from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
         custom_model = LinearDiscriminantAnalysis()
-        message = "Linear Discriminant accuracy: "
+
     else:
         from sklearn.svm import SVC
         custom_model = SVC(kernel='linear')
-        message = "SVM accuracy: "
 
     create_model_time = datetime.datetime.now()
     vectorizer, features = prepare_text_for_model(text_data)
@@ -168,7 +167,12 @@ def make_model_custom_classifier(text_data=data['text'], classifier='SVM'):
     accuracy = np.mean(y_pred == y_test)
 
     # Результаты записываем в файл
-    with open('./model_report.txt', 'a+') as file:
+
+    cur_path = os.path.dirname(__file__)
+    correct_path = os.path.relpath("..\\Reports", cur_path)
+    report_path = correct_path + "/model_report.txt"
+
+    with open(report_path, 'a+') as file:
         file.write('********\n')
         file.write(''.join(['Model: ', classifier, '\n']))
         file.write(''.join(['Creation time: ', str(create_model_time), '\n']))
@@ -417,11 +421,11 @@ def classify():
 
 # Запускаем, когда нужно пересохранить модель и вектор
 if __name__ == "__main__":
-    make_model_mine()
+    # make_model_mine()
 
     # make_model_custom_classifier(classifier='Random Forest')
     # make_model_custom_classifier(classifier='SVM')
     # make_model_custom_classifier(classifier='lda')
-    # make_model_custom_classifier(classifier='KNN')
+    make_model_custom_classifier(classifier='KNN')
     # make_model_custom_classifier(classifier='Decision Tree')
     # make_model_lstm()
