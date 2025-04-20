@@ -246,6 +246,10 @@ def make_model_mine(text_data=data['text']):
     global X_train, X_test, y_train, y_test
     global vectorizer
 
+    # Время отсчета создания модели
+    create_model_time = datetime.datetime.now()
+
+    # Получаем признаки и вектор
     vectorizer, features = prepare_text_for_model(text_data)
 
     # Определяем архитектуру нейросети
@@ -268,10 +272,14 @@ def make_model_mine(text_data=data['text']):
     # Обучаем модель
     history = model.fit(features, data['label'], epochs=10, batch_size=64, verbose=1)
 
+    # Вычисляем время обучения модели
+    evaluation_time = datetime.datetime.now() - create_model_time
+
     # Вычисляем точность и функцию потерь модели
     loss, accuracy = model.evaluate(X_test, y_test)
     print('Потери на тестах:', loss)
     print('Тестовая точность:', accuracy)
+    print('Время обучения:', evaluation_time)
 
     # Построение графиков
     plt.figure(figsize=(12, 5))
@@ -421,11 +429,11 @@ def classify():
 
 # Запускаем, когда нужно пересохранить модель и вектор
 if __name__ == "__main__":
-    # make_model_mine()
+    make_model_mine()
 
     # make_model_custom_classifier(classifier='Random Forest')
     # make_model_custom_classifier(classifier='SVM')
     # make_model_custom_classifier(classifier='lda')
-    make_model_custom_classifier(classifier='KNN')
+    # make_model_custom_classifier(classifier='KNN')
     # make_model_custom_classifier(classifier='Decision Tree')
     # make_model_lstm()
