@@ -11,7 +11,6 @@ from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer, HashingVectorizer
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
-# import keras.backend as K
 
 model = None
 X_train, X_test, y_train, y_test = None, None, None, None
@@ -269,8 +268,14 @@ def make_model_mine(text_data=data['text']):
     # Делим выборку на обучающую и тестовую
     X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.2)
 
+    # Добавляем кросс-валидационную выборку
+    x_train, x_cv, y_train, y_cv = train_test_split(X_train, y_train, test_size=0.2)
+
     # Обучаем модель
-    history = model.fit(features, data['label'], epochs=10, batch_size=64, verbose=1)
+    history = model.fit(
+        features, data['label'], epochs=12, batch_size=64, verbose=1,
+        validation_data=(x_cv, y_cv)
+    )
 
     # Вычисляем время обучения модели
     evaluation_time = datetime.datetime.now() - create_model_time
@@ -287,6 +292,7 @@ def make_model_mine(text_data=data['text']):
     # График точности
     plt.subplot(1, 2, 1)
     plt.plot(history.history['accuracy'], label='Точность на обучении')
+    plt.plot(history.history['val_accuracy'], label='Точность при валидации')
     plt.title('График точности')
     plt.xlabel('Эпохи')
     plt.ylabel('Точность')
@@ -295,6 +301,7 @@ def make_model_mine(text_data=data['text']):
     # График потерь
     plt.subplot(1, 2, 2)
     plt.plot(history.history['loss'], label='Потери на обучении')
+    plt.plot(history.history['val_loss'], label='Потери на валидации')
     plt.title('График потерь')
     plt.xlabel('Эпохи')
     plt.ylabel('Потери')
