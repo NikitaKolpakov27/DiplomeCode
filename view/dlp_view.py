@@ -21,6 +21,50 @@ event_handler = service.my_handler.MyHandler()
 observer = Observer()
 
 def check_file_for_conf():
+
+    def start_checking_file():
+        path_to_file = filedialog.askopenfilename()
+
+        text = ""
+
+        conf_file_label = Label(conf_window, text=path_to_file)
+        conf_file_label.pack()
+
+        # Проверка типа файла
+        file_type = get_file_type(path_to_file)
+        if file_type == ".pdf":
+            text = read_pdf_file(path_to_file)
+
+        elif file_type == ".docx":
+            text = read_docx_file(path_to_file)
+
+        elif file_type == ".txt":
+            text = read_txt_file(path_to_file)
+
+        else:
+            tkinter.messagebox.showerror(title="Ошибка", message="Файлы такого типа пока что не поддерживаются :(")
+            conf_window.destroy()
+
+        # Старая реализация
+        # conf_result = bayes.bayes_text_classify(test_text=text)
+
+        # Получаем данные о классификации сообщения (число и тип)
+        conf_info = ai_conf.classify_view_version(text)
+        conf_numbers = float(conf_info[0])
+
+        conf_result = False
+        if conf_numbers > 0.51:
+            conf_result = True
+
+        if conf_result:
+            msg = "Данный файл содержит признаков информации ограниченного доступа" + " " + str(conf_numbers)
+            tkinter.messagebox.showinfo(title="Результат проверки", message=msg)
+        else:
+            msg = "Данный файл НЕ содержит признаков информации ограниченного доступа" + " " + str(conf_numbers)
+            tkinter.messagebox.showinfo(title="Результат проверки", message=msg)
+
+        conf_label.configure(text="Файл проверен!")
+
     window.withdraw()
     conf_window = Toplevel(window)
     conf_window.protocol("WM_DELETE_WINDOW", lambda: window.destroy())
@@ -31,44 +75,8 @@ def check_file_for_conf():
     conf_label = Label(conf_window, text="Проверяется файл: ")
     conf_label.pack()
 
-    text = ""
-    path_to_file = filedialog.askopenfilename()
-    # print('Selected:', path_to_file)
-
-    conf_file_label = Label(conf_window, text=path_to_file)
-    conf_file_label.pack()
-
-    progress_var = ttk.Progressbar(conf_window, orient=HORIZONTAL, length=400, mode='indeterminate')
-    progress_var.pack(pady=30)
-    progress_var.start(10)
-
-    # Проверка типа файла
-    file_type = get_file_type(path_to_file)
-    if file_type == ".pdf":
-        text = read_pdf_file(path_to_file)
-
-    elif file_type == ".docx":
-        text = read_docx_file(path_to_file)
-
-    elif file_type == ".txt":
-        text = read_txt_file(path_to_file)
-
-    else:
-        tkinter.messagebox.showerror(title="Ошибка", message="Файлы такого типа пока что не поддерживаются :(")
-        window.destroy()
-
-    # percentage_conf = conf_detect.check_conf_info(text)
-    # progress_var.stop()
-    # msg = "Данный файл содержит признаков информации ограниченного доступа на " + str(percentage_conf) + "%"
-    # tkinter.messagebox.showinfo(title="Результат проверки", message=msg)
-    conf_result = bayes.bayes_text_classify(test_text=text)
-
-    if conf_result:
-        msg = "Данный файл содержит признаков информации ограниченного доступа"
-        tkinter.messagebox.showinfo(title="Результат проверки", message=msg)
-    else:
-        msg = "Данный файл НЕ содержит признаков информации ограниченного доступа"
-        tkinter.messagebox.showinfo(title="Результат проверки", message=msg)
+    start_button = Button(conf_window, text="Выбрать файл для проверки", command=start_checking_file, width=30, height=30)
+    start_button.pack()
 
     conf_window.mainloop()
 
@@ -118,8 +126,18 @@ def check_mail():
 
 def check_text_ai():
     def click_classify():
-        result_label.configure(text="Идет проверка...")
-        result_label.configure(text=ai_conf.classify_view_version(input_message.get("1.0", END)))
+        temp_result_label.configure(text="Идет проверка...")
+
+        # Получаем данные о классификации сообщения (число и тип)
+        conf_info = ai_conf.classify_view_version(input_message.get("1.0", END))
+        conf_numbers = conf_info[0]
+        conf_type = conf_info[1]
+
+        # Формируем результат
+        conf_result = "Результат: " + conf_type + " " + str(conf_numbers)
+
+        temp_result_label.configure(text="")
+        result_label.configure(text=conf_result)
 
     window.withdraw()
     ai_window = Toplevel(window)
@@ -136,6 +154,9 @@ def check_text_ai():
 
     classify_button = Button(ai_window, text="Получить результат", command=click_classify, font=("Helvetica", 14))
     classify_button.grid(column=0, row=2)
+
+    temp_result_label = Label(ai_window, font=("Helvetica", 12), foreground="gray")
+    temp_result_label.grid(column=0, row=4)
 
     result_label = Label(ai_window, font=("Helvetica", 14), foreground="blue")
     result_label.grid(column=0, row=4)

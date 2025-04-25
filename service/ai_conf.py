@@ -352,7 +352,8 @@ def predict_model(text_feature) -> str:
         else:
             str_pred = "NORM"
 
-        result = "".join(["Результат: ", str(i), " Тип: ", str_pred])
+        # result = "".join(["Результат: ", str(i), " Тип: ", str_pred])
+        result = (i, str_pred)
         print(result)
 
     return result
@@ -376,6 +377,13 @@ def new_old_vectorizer_process(text_data):
 
     # Convert the features to a dense matrix
     features = features.toarray()
+
+    # Логирование (потом убрать)
+    print("Слова: ", processed_text_data)
+    print("Хар-ка слов: ", features)
+
+    print("Size of tokens: ", len(processed_text_data))
+    print("Size of features: ", len(features))
 
     return features
 
