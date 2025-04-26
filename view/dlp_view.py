@@ -1,5 +1,6 @@
 import os.path
 import subprocess
+import time
 import tkinter.messagebox
 from tkinter import *
 from tkinter import filedialog, ttk
@@ -23,12 +24,17 @@ observer = Observer()
 def check_file_for_conf():
 
     def start_checking_file():
+
+        conf_label.configure(text="Проверяется файл: ")
+        conf_file_label.configure(text="", foreground="black")
+
         path_to_file = filedialog.askopenfilename()
-
         text = ""
+        conf_file_label.configure(text=path_to_file)
 
-        conf_file_label = Label(conf_window, text=path_to_file)
-        conf_file_label.pack()
+        if path_to_file == "":
+            tkinter.messagebox.showinfo(title="Ошибка", message="Не выбран файл")
+            return
 
         # Проверка типа файла
         file_type = get_file_type(path_to_file)
@@ -56,26 +62,34 @@ def check_file_for_conf():
         if conf_numbers > 0.51:
             conf_result = True
 
+        conf_file_color = "green"
         if conf_result:
             msg = "Данный файл содержит признаков информации ограниченного доступа" + " " + str(conf_numbers)
             tkinter.messagebox.showinfo(title="Результат проверки", message=msg)
+            conf_file_color = "red"
         else:
             msg = "Данный файл НЕ содержит признаков информации ограниченного доступа" + " " + str(conf_numbers)
             tkinter.messagebox.showinfo(title="Результат проверки", message=msg)
 
         conf_label.configure(text="Файл проверен!")
+        conf_file_label.configure(foreground=conf_file_color)
 
     window.withdraw()
     conf_window = Toplevel(window)
     conf_window.protocol("WM_DELETE_WINDOW", lambda: window.destroy())
 
     conf_window.title("DLP. Checking file for confidential features")
-    conf_window.geometry("500x200")
+    conf_window.geometry("500x150")
 
-    conf_label = Label(conf_window, text="Проверяется файл: ")
+    # Проверяется файл
+    conf_label = Label(conf_window)
     conf_label.pack()
 
-    start_button = Button(conf_window, text="Выбрать файл для проверки", command=start_checking_file, width=30, height=30)
+    # Что за файл проверяется
+    conf_file_label = Label(conf_window)
+    conf_file_label.pack()
+
+    start_button = Button(conf_window, text="Выбрать файл для проверки", command=start_checking_file)
     start_button.pack()
 
     conf_window.mainloop()
