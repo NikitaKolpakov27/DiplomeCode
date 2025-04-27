@@ -1,9 +1,11 @@
+import csv
 import datetime
 import os
 import string
 import numpy as np
 import pandas as pd
 import nltk
+from datasets import Dataset
 from matplotlib import pyplot as plt
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer, SnowballStemmer
@@ -53,7 +55,7 @@ correct_path = os.path.relpath("..\\dataset", cur_path)
 conf_dataset = correct_path + "/conf_num.csv"
 
 # Загружаем датасет
-data = pd.read_csv(conf_dataset, encoding='utf-8', on_bad_lines='warn')
+data = pd.read_csv(conf_dataset, encoding='utf-8', on_bad_lines='error')
 
 
 def print_dataset(dataset):
@@ -61,6 +63,23 @@ def print_dataset(dataset):
     for i in range(0, len(dataset)):
         print(i + 1, " => ", dataset[i])
     print("================================")
+
+
+def from_pandas_to_dict(data):
+    """
+        Из массива типа DataFrame переводим в словарь (типа: "сообщение" - "ключ")
+
+        :param data: данные в виде DataFrame
+        :return: датасет в виде словаря
+    """
+    texts = data['text']
+    labels = data['label']
+
+    texts = texts.astype(str)
+    labels = labels.astype(str)
+
+    new_dict = dict(zip(texts, labels))
+    return new_dict
 
 
 # Печатаем датасет (для определения возможных ошибок, опционально)
@@ -113,7 +132,6 @@ def prepare_text_for_model(text_data):
     features = features.toarray()
 
     return vectorizer, features
-
 
 def make_model_custom_classifier(text_data=data['text'], classifier='SVM'):
     """
