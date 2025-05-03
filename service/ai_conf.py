@@ -5,7 +5,6 @@ import string
 import numpy as np
 import pandas as pd
 import nltk
-from datasets import Dataset
 from matplotlib import pyplot as plt
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer, SnowballStemmer
@@ -49,6 +48,7 @@ conf_data = [
     "Не хочу тебя пугать, но я слышал слухи о возможных увольнениях в компании.",
     "Я хотел бы обсудить свою зарплату и возможные изменения. Это важный вопрос."
 ]
+
 # Получение пути датасета (т.к. находится все в другой, внешней папке)
 cur_path = os.path.dirname(__file__)
 correct_path = os.path.relpath("..\\dataset", cur_path)
@@ -123,10 +123,8 @@ def prepare_text_for_model(text_data):
 
     vectorizer = TfidfVectorizer()
 
-    # Extract features from the processed text
-    # features = vectorizer.fit_transform(data['processed_text'])
-
-    features = vectorizer.fit_transform(text_data)
+    # features = vectorizer.fit_transform(text_data)
+    features = vectorizer.fit_transform(data['processed_text'])
 
     # Конвертируем признаки (features) в матрицу
     features = features.toarray()
@@ -160,6 +158,10 @@ def make_model_custom_classifier(text_data=data['text'], classifier='SVM'):
     elif classifier == 'lda':
         from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
         custom_model = LinearDiscriminantAnalysis()
+
+    elif classifier == 'Bayes':
+        from sklearn.naive_bayes import GaussianNB
+        custom_model = GaussianNB()
 
     else:
         from sklearn.svm import SVC
@@ -462,11 +464,12 @@ def classify():
 
 # Запускаем, когда нужно пересохранить модель и вектор
 if __name__ == "__main__":
-    make_model_mine()
+    # make_model_mine()
 
     # make_model_custom_classifier(classifier='Random Forest')
     # make_model_custom_classifier(classifier='SVM')
     # make_model_custom_classifier(classifier='lda')
     # make_model_custom_classifier(classifier='KNN')
     # make_model_custom_classifier(classifier='Decision Tree')
+    make_model_custom_classifier(classifier='Bayes')
     # make_model_lstm()

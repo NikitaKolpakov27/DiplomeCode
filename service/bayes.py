@@ -5,6 +5,8 @@ from os import listdir
 from os.path import isfile
 from typing import Any
 
+import pandas as pd
+
 import service.conf_detect
 from service import file_utils
 
@@ -35,8 +37,39 @@ def remove_digits(array=None) -> list[Any]:
     return new_arr
 
 
+def prepare_data_from_dataset(mode):
+    """
+        Новое получение данных
+
+        :param mode:
+        :return:
+    """
+
+    cur_path = os.path.dirname(__file__)
+    correct_path = os.path.relpath("..\\dataset", cur_path)
+    conf_dataset = correct_path + "/conf_num.csv"
+
+    # Загружаем датасет
+    data = pd.read_csv(conf_dataset, encoding='utf-8', on_bad_lines='warn')
+
+    data_dict = dict(zip(data['text'], data['label']))
+
+    arr = []
+    for k, v in data_dict.items():
+
+        if mode == 'normal':
+           if v == 0:
+               arr.append(k)
+
+        else:
+            if v == 1:
+                arr.append(k)
+
+    return arr
+
 def prepare_data(mode):
     """
+        СТАРОЕ
         Получение данных по выборкам (нормальные и конфиденциальные данные)
 
         :param str mode: режим данных (определение, из какого набора брать данные: из конфиденциального или нормального)
@@ -63,6 +96,75 @@ def prepare_data(mode):
     return data_array
 
 
+def _prepare_data_for_bayes():
+    # Массивы со спам-словами, со словами без спама и общие
+    conf_words = []
+    normal_words = []
+    total_words = []
+
+    # Получение слов из выборки (конфиденциальной и нормальной)
+    # conf_array = prepare_data('conf')
+    # normal_array = prepare_data('normal')
+
+    # Получение пути датасетов (т.к. находится все в другой, внешней папке)
+    cur_path = os.path.dirname(__file__)
+    correct_path = os.path.relpath("..\\dataset", cur_path)
+
+    # Новое
+    # Сохранение строк из датасета в файлы происходит отдельным скриптом (здесь не написано)
+    conf_array = prepare_data_from_dataset('conf')
+    normal_array = prepare_data_from_dataset('normal')
+
+    print("Загрузили и сохранили датасеты")
+
+    # Удаление цифр из выборки
+    conf_array = remove_digits(conf_array)
+    normal_array = remove_digits(normal_array)
+
+    # Формирование массива спам-слов
+    print("Начали с конф массивом")
+    for i in conf_array:
+        conf_letter = service.conf_detect.preprocessing(i)
+
+        for conf_word in conf_letter:
+            conf_words.append(conf_word)
+            total_words.append(conf_word)
+
+    print("Закончили")
+    print("Начали с норм массивом")
+    # Формирование массива нормальных слов
+    for i in normal_array:
+        normal_letter = service.conf_detect.preprocessing(i)
+
+        for normal_word in normal_letter:
+            normal_words.append(normal_word)
+            total_words.append(normal_word)
+
+    print("Закончили")
+    print("Удаляем дубликаты")
+    # Удаление дубликатов из обучающей выборки
+    for i in total_words:
+        if total_words.count(i) > 1:
+            total_words.remove(i)
+
+    normal_path = correct_path + "/normal_bayes.txt"
+    conf_path = correct_path + "/conf_bayes.txt"
+
+    # Записываем в файлы (чтобы быстрее доставать потом во время классификации)
+    print("Записываем в файлы")
+    with open(normal_path, "a+") as normal_file:
+        for norm in normal_array:
+            normal_file.write(norm)
+            normal_file.write("\n")
+    normal_file.close()
+
+    with open(conf_path, "a+") as conf_file:
+        for conf in conf_array:
+            conf_file.write(conf)
+            conf_file.write("\n")
+    conf_file.close()
+
+
 def bayes_text_classify(test_text) -> bool:
     """
         Классификация текста на нормальный и конфиденциальный с помощью наивного Байеса
@@ -73,20 +175,28 @@ def bayes_text_classify(test_text) -> bool:
             * False - нормальный
     """
 
+    cur_path = os.path.dirname(__file__)
+    correct_path = os.path.relpath("..\\dataset", cur_path)
+
+    normal_path = correct_path + "/normal_bayes.txt"
+    conf_path = correct_path + "/conf_bayes.txt"
+
     # Массивы со спам-словами, со словами без спама и общие
     conf_words = []
     normal_words = []
     total_words = []
 
-    # Получение слов из выборки (конфиденциальной и нормальной)
-    conf_array = prepare_data('conf')
-    normal_array = prepare_data('normal')
+    # Новое
+    conf_array = prepare_data_from_dataset('conf')
+    normal_array = prepare_data_from_dataset('normal')
+    print("Загрузили датасеты")
 
     # Удаление цифр из выборки
     conf_array = remove_digits(conf_array)
     normal_array = remove_digits(normal_array)
 
     # Формирование массива спам-слов
+    print("Начали с конф массивом")
     for i in conf_array:
         conf_letter = service.conf_detect.preprocessing(i)
 
@@ -94,6 +204,8 @@ def bayes_text_classify(test_text) -> bool:
             conf_words.append(conf_word)
             total_words.append(conf_word)
 
+    print("Закончили")
+    print("Начали с норм массивом")
     # Формирование массива нормальных слов
     for i in normal_array:
         normal_letter = service.conf_detect.preprocessing(i)
@@ -102,12 +214,14 @@ def bayes_text_classify(test_text) -> bool:
             normal_words.append(normal_word)
             total_words.append(normal_word)
 
+    print("Закончили")
     # Удаление дубликатов из обучающей выборки
     for i in total_words:
         if total_words.count(i) > 1:
             total_words.remove(i)
 
     # Цикл по тест. письму
+    print("Работаем с нужным текстом")
     normalized_test_letter = service.conf_detect.preprocessing(test_text)
     total_probability_CONF = math.log(len(conf_array) / (len(conf_array) + len(normal_array)))
     total_probability_NORMAL = math.log(len(normal_array) / (len(conf_array) + len(normal_array)))
@@ -141,8 +255,7 @@ def bayes_text_classify(test_text) -> bool:
 
 
 if __name__ == "__main__":
-    r = bayes_text_classify(test_text="Привет, как дела? Что делаешь? Слугай, как насчет всместе сходить в кино на"
-                                      "следующей неделе? Что думаешь?")
-    print(r)
-    # n_arr = prepare_data(mode='normal')
-    # print(n_arr)
+    # text = "Привет, как дела?"
+    # print(bayes_text_classify(text))
+
+    _prepare_data_for_bayes()

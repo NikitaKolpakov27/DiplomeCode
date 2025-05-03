@@ -34,3 +34,9 @@ Creation time: 2025-04-20 22:44:57.921854
 Evaluation time: 0:00:10.692422
 Accuracy: 0.7836113837095191
 ********
+********
+Model: Bayes
+Creation time: 2025-05-03 16:22:37.076789
+Evaluation time: 0:00:13.336974
+Accuracy: 0.7503526093088858
+********

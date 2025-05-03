@@ -3,7 +3,7 @@ from typing import List, Any
 import matplotlib.pyplot as plt
 import string
 import nltk
-import pymorphy2
+import pymorphy3
 from nltk import word_tokenize
 from wordcloud import WordCloud
 from nltk.corpus import stopwords
@@ -85,7 +85,7 @@ def preprocessing(text) -> list[Any]:
 
     # Лемматизация
     final_array = []
-    morph = pymorphy2.MorphAnalyzer()
+    morph = pymorphy3.MorphAnalyzer()
 
     for word in filtered_tokens:
         p = morph.parse(word)[0]
@@ -147,5 +147,7 @@ if __name__ == "__main__":
     # text = file_utils.read_pdf_file("C:/Users/MateBook/Downloads/MEGAShPORA.pdf")
     # check_conf_info(text)
 
-    txt = "Этот документ только для служебного пользования!"
-    find_phrases(preprocessing(txt))
+    # txt = "Этот документ только для служебного пользования!"
+    # find_phrases(preprocessing(txt))
+    arr = "Привет, Аня! Не спишь там в такую погоду?) Напоминаю, что у нас встреча в 10:00 в понедельник. Не забудь принести отчет!".split(" ")
+    show_conf_wordcloud(arr)
