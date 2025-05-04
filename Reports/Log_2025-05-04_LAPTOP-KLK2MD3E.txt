@@ -1,0 +1,172 @@
+
+USB     Нет флеш-накопителей     4.5.2025--17:44:49
+Буфер     # Проверка типа файла        file_type = get_file_type(path_to_file)        if file_type == ".pdf":            text = read_pdf_file(path_to_file)        elif file_type == ".docx":            text = read_docx_file(path_to_file)        elif file_type == ".txt":            text = read_txt_file(path_to_file) (TEXT)     4.5.2025--17:44:49
+USB     Нет флеш-накопителей     4.5.2025--17:44:49
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\view\fileDatabase     4.5.2025--17:44:50
+USB     Нет флеш-накопителей     4.5.2025--17:44:52
+MODIFIED DIRECTORY     D:\TEST FOLDER     4.5.2025--17:44:52
+USB     Нет флеш-накопителей     4.5.2025--17:44:54
+MODIFIED DIRECTORY     D:\TEST FOLDER\compressed_pics     4.5.2025--17:44:54
+USB     Нет флеш-накопителей     4.5.2025--17:44:56
+MODIFIED DIRECTORY     D:\TEST FOLDER\newfold     4.5.2025--17:44:56
+USB     Нет флеш-накопителей     4.5.2025--17:44:59
+MODIFIED DIRECTORY     D:\TEST FOLDER\pics     4.5.2025--17:44:59
+USB     Нет флеш-накопителей     4.5.2025--17:45:1
+MODIFIED DIRECTORY     D:\TEST FOLDER\Новая папка     4.5.2025--17:45:1
+USB     Нет флеш-накопителей     4.5.2025--17:45:3
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\view\conf_fileDatabase     4.5.2025--17:45:3
+USB     Нет флеш-накопителей     4.5.2025--17:45:5
+MODIFIED FILE     D:\TEST FOLDER\doc3.txt     4.5.2025--17:45:5
+USB     Нет флеш-накопителей     4.5.2025--17:45:8
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\charset_normalizer-3.4.2.dist-info\entry_points.txt     4.5.2025--17:45:8
+USB     Нет флеш-накопителей     4.5.2025--17:45:10
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\fonttools-4.57.0.dist-info\entry_points.txt     4.5.2025--17:45:10
+USB     Нет флеш-накопителей     4.5.2025--17:45:13
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\huggingface_hub-0.30.2.dist-info\entry_points.txt     4.5.2025--17:45:13
+USB     Нет флеш-накопителей     4.5.2025--17:45:15
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\jinja2-3.1.6.dist-info\entry_points.txt     4.5.2025--17:45:15
+Буфер     qknpW0ufyZ (TEXT)     4.5.2025--17:45:17
+USB     Нет флеш-накопителей     4.5.2025--17:45:18
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\markdown-3.8.dist-info\entry_points.txt     4.5.2025--17:45:18
+USB     Нет флеш-накопителей     4.5.2025--17:45:20
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\markdown_it_py-3.0.0.dist-info\entry_points.txt     4.5.2025--17:45:20
+Система     Неправильный пароль для выхода из программы      4.5.2025--17:45:22
+USB     Нет флеш-накопителей     4.5.2025--17:45:23
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\networkx-3.4.2.dist-info\entry_points.txt     4.5.2025--17:45:23
+USB     Нет флеш-накопителей     4.5.2025--17:45:25
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\nltk-3.9.1.dist-info\entry_points.txt     4.5.2025--17:45:25
+USB     Нет флеш-накопителей     4.5.2025--17:45:27
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\numpy-1.26.4.dist-info\entry_points.txt     4.5.2025--17:45:27
+USB     Нет флеш-накопителей     4.5.2025--17:45:30
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\pandas-2.1.4.dist-info\entry_points.txt     4.5.2025--17:45:30
+USB     Нет флеш-накопителей     4.5.2025--17:45:32
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\pip-23.2.1.dist-info\entry_points.txt     4.5.2025--17:45:32
+USB     Нет флеш-накопителей     4.5.2025--17:45:34
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\pydocx-0.9.10.dist-info\entry_points.txt     4.5.2025--17:45:34
+USB     Нет флеш-накопителей     4.5.2025--17:45:37
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\pygments-2.19.1.dist-info\entry_points.txt     4.5.2025--17:45:37
+USB     Нет флеш-накопителей     4.5.2025--17:45:39
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\pymorphy2-0.9.1.dist-info\entry_points.txt     4.5.2025--17:45:39
+USB     Нет флеш-накопителей     4.5.2025--17:45:41
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\pymorphy2_dicts_ru-2.4.417127.4579844.dist-info\entry_points.txt     4.5.2025--17:45:42
+USB     Нет флеш-накопителей     4.5.2025--17:45:44
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\pymorphy3-2.0.3.dist-info\entry_points.txt     4.5.2025--17:45:44
+USB     Нет флеш-накопителей     4.5.2025--17:45:46
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\pymorphy3_dicts_ru-2.4.417150.4580142.dist-info\entry_points.txt     4.5.2025--17:45:46
+USB     Нет флеш-накопителей     4.5.2025--17:45:48
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\setuptools-68.2.0.dist-info\entry_points.txt     4.5.2025--17:45:49
+Буфер     K9Y8L7YbJB (TEXT)     4.5.2025--17:45:49
+USB     Нет флеш-накопителей     4.5.2025--17:45:51
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\sympy-1.14.0.dist-info\entry_points.txt     4.5.2025--17:45:51
+Система     Неправильный пароль для выхода из программы      4.5.2025--17:45:53
+USB     Нет флеш-накопителей     4.5.2025--17:45:53
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\tensorboard-2.19.0.dist-info\entry_points.txt     4.5.2025--17:45:53
+Буфер     60VXPVPabv (TEXT)     4.5.2025--17:45:55
+USB     Нет флеш-накопителей     4.5.2025--17:45:56
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\tensorflow-2.19.0.dist-info\entry_points.txt     4.5.2025--17:45:56
+USB     Нет флеш-накопителей     4.5.2025--17:45:58
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\torch-2.7.0.dist-info\entry_points.txt     4.5.2025--17:45:58
+Система     Неправильный пароль для выхода из программы      4.5.2025--17:45:59
+USB     Нет флеш-накопителей     4.5.2025--17:46:0
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\tqdm-4.67.1.dist-info\entry_points.txt     4.5.2025--17:46:0
+Система     Неправильный пароль для выхода из программы      4.5.2025--17:46:1
+USB     Нет флеш-накопителей     4.5.2025--17:46:3
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\transformers-4.51.3.dist-info\entry_points.txt     4.5.2025--17:46:3
+USB     Нет флеш-накопителей     4.5.2025--17:46:5
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\watchdog-2.2.1.dist-info\entry_points.txt     4.5.2025--17:46:5
+Система     Неправильный пароль для выхода из программы      4.5.2025--17:46:6
+USB     Нет флеш-накопителей     4.5.2025--17:46:7
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\wheel-0.41.2.dist-info\entry_points.txt     4.5.2025--17:46:7
+Система     Неправильный пароль для выхода из программы      4.5.2025--17:46:9
+USB     Нет флеш-накопителей     4.5.2025--17:46:10
+MODIFIED FILE     D:\На новый ноут\PyCharm proj\diplome_code\.venv\Lib\site-packages\wordcloud-1.9.4.dist-info\entry_points.txt     4.5.2025--17:46:10
+USB     Нет флеш-накопителей     4.5.2025--20:35:29
+Буфер     cur_path = os.path.dirname(__file__)    correct_path = os.path.relpath("..\\ai_model", cur_path) (TEXT)     4.5.2025--20:35:30
+USB     Нет флеш-накопителей     4.5.2025--20:35:30
+MODIFIED DIRECTORY     d:\TEST FOLDER\compressed_pics     4.5.2025--20:35:30
+USB     Нет флеш-накопителей     4.5.2025--20:35:32
+MODIFIED DIRECTORY     d:\TEST FOLDER\newfold     4.5.2025--20:35:32
+USB     Нет флеш-накопителей     4.5.2025--20:35:34
+MODIFIED DIRECTORY     d:\TEST FOLDER\pics     4.5.2025--20:35:34
+USB     Нет флеш-накопителей     4.5.2025--20:35:36
+MODIFIED DIRECTORY     d:\TEST FOLDER\Новая папка     4.5.2025--20:35:36
+USB     Нет флеш-накопителей     4.5.2025--20:35:39
+MODIFIED FILE     d:\TEST FOLDER\doc3.txt     4.5.2025--20:35:39
+USB     Нет флеш-накопителей     4.5.2025--20:35:41
+MODIFIED FILE     d:\TEST FOLDER\doc3_copy.txt     4.5.2025--20:35:41
+USB     Нет флеш-накопителей     4.5.2025--20:41:20
+Буфер     print(bcrypt.checkpw('password123'.encode('utf-8'), hash)) (TEXT)     4.5.2025--20:41:20
+Буфер     ValueError: Must have exactly one of create/read/write/append mode and at most one plus (TEXT)     4.5.2025--20:42:1
+USB     Нет флеш-накопителей     4.5.2025--20:42:50
+Буфер     ValueError: Must have exactly one of create/read/write/append mode and at most one plus (TEXT)     4.5.2025--20:42:50
+USB     Нет флеш-накопителей     4.5.2025--20:44:47
+Буфер     ValueError: Must have exactly one of create/read/write/append mode and at most one plus (TEXT)     4.5.2025--20:44:47
+Буфер     ValueError: Invalid salt (TEXT)     4.5.2025--20:45:6
+USB     Нет флеш-накопителей     4.5.2025--20:46:16
+Буфер     ValueError: Invalid salt (TEXT)     4.5.2025--20:46:16
+Буфер     EXT (TEXT)     4.5.2025--20:46:20
+USB     Нет флеш-накопителей     4.5.2025--20:47:52
+Система     Программа была выключена      4.5.2025--20:48:3
+USB     Нет флеш-накопителей     4.5.2025--20:49:44
+Система     Программа была выключена      4.5.2025--20:49:50
+USB     Нет флеш-накопителей     4.5.2025--21:11:44
+Буфер      флеш-накопителей.sad.sa.d.eshke.re... (TEXT)     4.5.2025--21:11:53
+Буфер      ->  флеш-накопителей.sad.sa.d.eshke.re... (TEXT) (TEXT)     4.5.2025--21:11:55
+Буфер     TEXT). (TEXT)     4.5.2025--21:11:57
+Система     Программа была выключена      4.5.2025--21:12:5
+USB     Нет флеш-накопителей     4.5.2025--21:20:31
+USB     Нет флеш-накопителей     4.5.2025--21:21:4
+Буфер     телей.. (TEXT)     4.5.2025--21:21:7
+Буфер     TEXT (TEXT)     4.5.2025--21:21:9
+Система     Программа была выключена      4.5.2025--21:21:14
+USB     Нет флеш-накопителей     4.5.2025--21:25:1
+Буфер     флеш-накопителей.. (TEXT)     4.5.2025--21:25:4
+Буфер     ===================== (TEXT)     4.5.2025--21:25:5
+Система     Программа была выключена      4.5.2025--21:25:11
+USB     Нет флеш-накопителей     4.5.2025--21:31:47
+Буфер     флеш-накопителей....[This text may contain confidential data!!!]     4.5.2025--21:31:53
+Буфер     data!!!]... (TEXT)     4.5.2025--21:31:57
+Буфер     text[This text may contain confidential data!!!]     4.5.2025--21:32:0
+Буфер     confidential[This text may contain confidential data!!!]     4.5.2025--21:32:2
+Буфер     contain[This text may contain confidential data!!!]     4.5.2025--21:32:8
+Система     Программа была выключена      4.5.2025--21:32:40
+USB     Нет флеш-накопителей     4.5.2025--21:37:37
+USB     Нет флеш-накопителей     4.5.2025--21:37:37
+MODIFIED DIRECTORY     d:\test folder\compressed_pics     4.5.2025--21:37:37
+Буфер     флеш-накопителей[This text may contain confidential data!!!]     4.5.2025--21:37:52
+USB     Нет флеш-накопителей     4.5.2025--21:37:55
+MODIFIED DIRECTORY     d:\test folder\newfold     4.5.2025--21:37:55
+USB     Нет флеш-накопителей     4.5.2025--21:38:12
+MODIFIED DIRECTORY     d:\test folder\pics     4.5.2025--21:38:12
+Система     Программа была выключена      4.5.2025--21:38:19
+USB     Нет флеш-накопителей     4.5.2025--21:43:31
+Система     Неправильный пароль для выхода из программы      4.5.2025--21:46:7
+Система     Программа была выключена      4.5.2025--21:46:13
+USB     Нет флеш-накопителей     4.5.2025--21:48:44
+USB     Нет флеш-накопителей     4.5.2025--21:50:55
+Буфер     флеш-накопителей......... (TEXT)     4.5.2025--21:51:5
+Буфер     флеш-накопителей.......... (TEXT)     4.5.2025--21:51:17
+Буфер     (TEXT)... (TEXT)     4.5.2025--21:51:21
+Буфер     Буфер (TEXT)     4.5.2025--21:51:27
+Буфер     ТЕКУЩАЯ ДИРЕКТОРИЯ[This text may contain confidential data!!!]     4.5.2025--21:51:35
+Система     Программа была выключена      4.5.2025--21:51:51
+USB     Нет флеш-накопителей     4.5.2025--22:1:52
+Буфер     new_window.protocol("WM_DELETE_WINDOW", window_passwd) (TEXT)     4.5.2025--22:1:52
+USB     Нет флеш-накопителей     4.5.2025--22:3:10
+Буфер     from PIL import Image (TEXT)     4.5.2025--22:3:10
+Буфер     Image (TEXT)     4.5.2025--22:3:30
+USB     Нет флеш-накопителей     4.5.2025--22:4:31
+Буфер     Image (TEXT)     4.5.2025--22:4:32
+Буфер     (TEXT)............................................. (TEXT)     4.5.2025--22:5:47
+Буфер     ...............data:  (TEXT)............................................. (TEXT)     4.5.2025--22:6:16
+Система     Программа была выключена      4.5.2025--22:7:44
+USB     Нет флеш-накопителей     4.5.2025--22:9:8
+Буфер     ...............data:  (TEXT)............................................. (TEXT)     4.5.2025--22:9:8
+USB     Нет флеш-накопителей     4.5.2025--22:11:16
+Буфер     ...............data:  (TEXT)............................................. (TEXT)     4.5.2025--22:11:16
+Система     Программа была выключена      4.5.2025--22:11:56
+Система     Программа была выключена      4.5.2025--22:12:4
+USB     Нет флеш-накопителей     4.5.2025--22:13:8
+Буфер     window.after(0, window.deiconify) (TEXT)     4.5.2025--22:13:8
+USB     Нет флеш-накопителей     4.5.2025--22:14:14
+Буфер     new_window (TEXT)     4.5.2025--22:14:15

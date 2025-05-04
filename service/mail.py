@@ -6,7 +6,7 @@ import service.conf_utils
 
 
 def save_letter(data, path):
-    with open(path, "w") as file:
+    with open(path, "w", encoding="utf-8") as file:
         file.write(data)
 
 def get_sent_emails(mail_login, mail_passwd):

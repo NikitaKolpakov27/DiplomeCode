@@ -52,17 +52,13 @@ def get_data_from_clipboard():
 def get_data_from_clipboard2(window, last_data):
 
     data = ""
-    # last_data = None
 
     conf_hashes = conf_utils.get_conf_hashes()
     conf_files = conf_utils.get_conf_files()
 
-    # root = tk.Tk()
-    # root.withdraw()
-
     try:
-        # data = root.clipboard_get()
         data = window.clipboard_get()
+        print("data: ", data)
     except Exception as e:
         if e == "CLIPBOARD selection doesn't exist or form \"STRING\" not defined":
             print("Clipboard is empty")

@@ -58,14 +58,15 @@ def prepare_data_from_dataset(mode):
     for k, v in data_dict.items():
 
         if mode == 'normal':
-           if v == 0:
-               arr.append(k)
+            if v == 0:
+                arr.append(k)
 
         else:
             if v == 1:
                 arr.append(k)
 
     return arr
+
 
 def prepare_data(mode):
     """
@@ -79,7 +80,7 @@ def prepare_data(mode):
     data_array = []
     cur_path = os.path.dirname(__file__)
 
-    # Опеределение пути к датасету
+    # Определение пути к датасету
     if mode == 'normal':
         new_path = os.path.relpath("..\\dataset\\normal", cur_path)
     else:

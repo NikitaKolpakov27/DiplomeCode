@@ -6,10 +6,10 @@ D:\TEST FOLDER\new file sadas asd.txt-----bb3afbbdd168088002ddd8f5f41eb7da85150e
 D:\TEST FOLDER\skillbox_sql_dump.sql-----02903c6024806ed746309245c3b00d983857f1b1818a563eda60f7d7df682e96-----False
 D:\TEST FOLDER\vxcvxv.txt-----41d192e54e2ddcb2f9d0ceaf784727299a38069b236a513de44d85d2b6326a9b-----False
 D:\TEST FOLDER\wow_pop.txt-----8c30b4248337916551f3c49819a9e9f2c784a75153d9443a2b5c4f20ebdd9eb9-----False
-D:\TEST FOLDER\‚˚Ù‚Ù ó ÍÓÔËˇ.txt-----f79dd6ce871b3086a713aafabe1f21896601906a322d6659e56f92d588b9d08f-----False
-D:\TEST FOLDER\‚˚Ù‚Ù.txt-----eeaf18a95c2cc2665ded8a6b6f91d57c7a43bb68047a9c5570094a748dd13fee-----False
-D:\TEST FOLDER\‚˚Ù‚Ù_‚‡È.txt-----eeaf18a95c2cc2665ded8a6b6f91d57c7a43bb68047a9c5570094a748dd13fee-----False
-D:\TEST FOLDER\À‡·Ó‡ÚÓÌ‡ˇ_101.pdf-----7850a01e3f8ab5dd595d6c0c2f5e32f5ede62c36f494cf7353dede49b81a5809-----False
+D:\TEST FOLDER\–≤—ã—Ñ–≤—Ñ ‚Äî –∫–æ–ø–∏—è.txt-----f79dd6ce871b3086a713aafabe1f21896601906a322d6659e56f92d588b9d08f-----False
+D:\TEST FOLDER\–≤—ã—Ñ–≤—Ñ.txt-----eeaf18a95c2cc2665ded8a6b6f91d57c7a43bb68047a9c5570094a748dd13fee-----False
+D:\TEST FOLDER\–≤—ã—Ñ–≤—Ñ_–≤–∞–π.txt-----eeaf18a95c2cc2665ded8a6b6f91d57c7a43bb68047a9c5570094a748dd13fee-----False
+D:\TEST FOLDER\–õ–∞–±–æ—Ä–∞—Ç–æ—Ä–Ω–∞—è_101.pdf-----7850a01e3f8ab5dd595d6c0c2f5e32f5ede62c36f494cf7353dede49b81a5809-----False
 D:\TEST FOLDER\compressed_pics\2017Animals___Birds_Green-eyed_owl_sits_on_a_spruce_branch_113088_.jpg-----f98a4df08093385e0653123c00e8a91cf0d071d701bc2b7f366e3dd13e435708-----False
 D:\TEST FOLDER\compressed_pics\2020Animals___Birds_A_large_gray_owl_with_yellow_eyes_sits_on_the_grass_142198_.jpg-----3b1fc38538c380b432f48e031ef85b614b754fb058b5a28d98d9d442efe71ae3-----False
 D:\TEST FOLDER\compressed_pics\2048x1366-px-animals-owl-1090499.jpg-----fc29f33a19021d9a2bf804ee78fa0a621dbdaa22fa07cf6cd4e83129f0aadf23-----False
@@ -23,7 +23,7 @@ D:\TEST FOLDER\compressed_pics\d4eb3cf5247c9bd36ad9039a79c50146.jpg-----732e5bf0
 D:\TEST FOLDER\compressed_pics\maxresdefault (1).jpg-----b0b7cc408a803a7c26e43fd3baf6d24efe70d567a68daa799d1bd56a90e1c9ac-----False
 D:\TEST FOLDER\compressed_pics\maxresdefault.jpg-----c8f8104c805bca1f570a0540132a0b0deaff8d3a989883fdcf04e130bd9bbab5-----False
 D:\TEST FOLDER\newfold\doc44.txt-----ce4d6442c288edbde60dc93977cbef2a6958bc2427444adef94c60064cb55908-----False
-D:\TEST FOLDER\newfold\À‡·Ó‡ÚÓÌ‡ˇ_1.docx-----74b41192b8f0b45a73b51835155f6a880c33ea66f12bc7c39b3e96c226da9749-----False
+D:\TEST FOLDER\newfold\–õ–∞–±–æ—Ä–∞—Ç–æ—Ä–Ω–∞—è_1.docx-----74b41192b8f0b45a73b51835155f6a880c33ea66f12bc7c39b3e96c226da9749-----False
 D:\TEST FOLDER\pics\2017Animals___Birds_Green-eyed_owl_sits_on_a_spruce_branch_113088_.jpg-----91147055ea19415c9da0f5339d1d1bcf45ca69d9e1b383a0a5bac039bd41c259-----False
 D:\TEST FOLDER\pics\2020Animals___Birds_A_large_gray_owl_with_yellow_eyes_sits_on_the_grass_142198_.jpg-----bdaeea5ca58e1e04445ef6cbcffdec17c4b15ee43731f379b6fe6bb25e57a663-----False
 D:\TEST FOLDER\pics\2048x1366-px-animals-owl-1090499.jpg-----cde5f35bf12810aa3c05ace14b7144185c8d20b8f75620674771fafcbe578efa-----False
@@ -36,4 +36,4 @@ D:\TEST FOLDER\pics\ce6c3b9889fdd53cdc494be4ed2d6604--lamborghini-concept-lambor
 D:\TEST FOLDER\pics\d4eb3cf5247c9bd36ad9039a79c50146.jpg-----9e27708f927f02218a280c855ae343e3b9b7c451ed6024f51a5c460b88982475-----False
 D:\TEST FOLDER\pics\maxresdefault (1).jpg-----75541e37103ce6d805c1865110c53f8912d9682e04083d0135348e6c7dc65dcc-----False
 D:\TEST FOLDER\pics\maxresdefault.jpg-----b6abf505dad2fad2caf8cafa5cae0a3d8a91477a1dba5b3e026b8c08479a827d-----False
-D:\TEST FOLDER\ÕÓ‚‡ˇ Ô‡ÔÍ‡\Ogodaas.txt-----e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855-----True
+D:\TEST FOLDER\–ù–æ–≤–∞—è –ø–∞–ø–∫–∞\Ogodaas.txt-----e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855-----True

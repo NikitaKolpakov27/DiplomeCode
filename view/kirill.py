@@ -1,19 +1,25 @@
-import os
+from pystray import MenuItem as item
+import pystray
+from PIL import Image
+import tkinter as tk
 
-def remove_digits(array=None):
-    new_arr = []
+window = tk.Tk()
+window.title("Welcome")
 
-    for i in array:
-        try:
-            int(i)
-            continue
-        except ValueError:
-            new_arr.append(i)
+def quit_window(icon, item):
+    icon.stop()
+    window.destroy()
 
-    return new_arr
+def show_window(icon, item):
+    icon.stop()
+    window.after(0,window.deiconify)
 
+def withdraw_window():
+    window.withdraw()
+    image = Image.open("max.ico")
+    menu = (item('Quit', quit_window), item('Show', show_window))
+    icon = pystray.Icon("name", image, "title", menu)
+    icon.run()
 
-if __name__ == "__main__":
-    massive = ['dsadsad', '89', 'pop', '10', '921', 'dasd', 'ffff']
-    n_arr = remove_digits(massive)
-    print(n_arr)
+window.protocol('WM_DELETE_WINDOW', withdraw_window)
+window.mainloop()

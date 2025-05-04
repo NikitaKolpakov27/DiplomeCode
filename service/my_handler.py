@@ -12,7 +12,6 @@ class MyHandler(FileSystemEventHandler):
 
     def on_any_event(self, event):
         view.view_utils.usb_check(self.main_log)
-        passwd_utils.update_passwd()
 
         if not event.is_directory:
             conf_file = conf_utils.is_file_or_text_confidential(False, event.src_path)

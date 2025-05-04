@@ -443,11 +443,19 @@ def classify():
 
         :return: None
     """
+    global model
+    global vectorizer
+
+    # Получение пути для модели и вектора (т.к. находится все в другой, внешней папке)
+    cur_path = os.path.dirname(__file__)
+    correct_path = os.path.relpath("..\\ai_model", cur_path)
+    model_path = correct_path + "/model.joblib"
+    vectorizer_path = correct_path + "/vectorizer.joblib"
 
     # Загружаем модель и вектор признаков
     from joblib import load
-    model = load('model.joblib')
-    vectorizer = load('vectorizer.joblib')
+    model = load(model_path)
+    vectorizer = load(vectorizer_path)
 
     # Берем кастомные данные (с ввода с консоли пользователем)
     my_data = input("Введите ваше сообщение: ")
@@ -455,7 +463,6 @@ def classify():
     # test_data = "ты не видела куда он тогда пошел? мне очень интересно"
     # processed_text = preprocess_text(test_data)
     td = pd.Series(my_data)
-
     feature_test = new_old_vectorizer_process(td)
 
     # Предсказываем результат
@@ -464,12 +471,13 @@ def classify():
 
 # Запускаем, когда нужно пересохранить модель и вектор
 if __name__ == "__main__":
-    # make_model_mine()
+    make_model_mine()
 
     # make_model_custom_classifier(classifier='Random Forest')
     # make_model_custom_classifier(classifier='SVM')
     # make_model_custom_classifier(classifier='lda')
     # make_model_custom_classifier(classifier='KNN')
     # make_model_custom_classifier(classifier='Decision Tree')
-    make_model_custom_classifier(classifier='Bayes')
+    # make_model_custom_classifier(classifier='Bayes')
     # make_model_lstm()
+

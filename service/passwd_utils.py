@@ -1,39 +1,35 @@
+import os
 import random
+import bcrypt
 
 
-def create_passwd():
+def create_passwd(password):
     """
-        Создание пароля для входа в DLP-систему из случайных букв и цифр
+        Создание пароля (его хеша) для входа в DLP-систему из случайных букв и цифр
 
-        :return: str password: строку-пароль длиной в 10 символов
+        :return: str hashed_password: строку-пароль в виде хеша
     """
-    chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
-    password = ''
-    for i in range(10):
-        password += random.choice(chars)
+    password_bytes = password.encode("utf-8")
+    salt = bcrypt.gensalt()
+    hashed_password = bcrypt.hashpw(password_bytes, salt)
 
-    return password
+    cur_path = os.path.dirname(__file__)
+    correct_path = os.path.relpath("..\\view", cur_path)
+    passwd_file = correct_path + "\\passwd.txt"
 
+    with open(passwd_file, "wb") as file:
+        file.write(hashed_password)
 
-def update_passwd():
-    """
-        Обновление пароля для входа в DLP-систему
-        Нужно для надежности защиты (ибо пароль генерируется не слишком сложный => его нужно постоянно менять)
-
-        :return: None
-    """
-    open("./passwd", 'w').close()
-    with open("./passwd", "w") as f:
-        f.write(create_passwd())
+    return hashed_password
 
 
 def get_passwd():
     """
-        Получение пароля из файла
+        Получение пароля (хеша) из файла
 
         :return: str passwd: пароль, записанный в файле
     """
-    with open("./passwd") as f:
+    with open("./passwd.txt", "rb+") as f:
         passwd = f.read()
 
     return passwd
@@ -48,6 +44,7 @@ def check_passwd(entered_passwd) -> bool:
             * True - пароли совпадают
             * False - не совпадают
     """
-    right_passwd = get_passwd()
-
-    return entered_passwd == right_passwd
+    return bcrypt.checkpw(entered_passwd.encode('utf-8'), get_passwd())
+    # right_passwd = get_passwd()
+    #
+    # return entered_passwd == right_passwd

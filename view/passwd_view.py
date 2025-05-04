@@ -17,7 +17,7 @@ def main_process(passwd_window):
             file_utils.write_log("\nСистема     " + "Программа была выключена ")
             sys.exit("It's not the exception, program just finished")
         else:
-            tkinter.messagebox.showerror("Bad Password", "Incorrect password!")
+            tkinter.messagebox.showerror("Bad Password", "Пароль неправильный")
             file_utils.write_log("\nСистема     " + "Неправильный пароль для выхода из программы ")
 
     # passwd_window = Tk()
@@ -33,7 +33,7 @@ def main_process(passwd_window):
     passwd_text = Label(frame, text="Введите пароль", font=("Helvetica", 14))
     passwd_text.grid(row=1, column=2)
 
-    passwd_name = Entry(frame, width=20, font=("Helvetica", 14))
+    passwd_name = Entry(frame, width=20, font=("Helvetica", 14), show="*")
     passwd_name.grid(row=3, column=2, pady=5)
 
     passwd_btn = Button(frame, text='ОК', command=check_passwd, font=("Helvetica", 14))

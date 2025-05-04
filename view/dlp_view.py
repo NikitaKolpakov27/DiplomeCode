@@ -1,19 +1,20 @@
 import os.path
-import subprocess
-import time
 import tkinter.messagebox
 from tkinter import *
 from tkinter import filedialog, ttk
 import tkinter.tix
 
+import pystray
+from pystray import MenuItem as item
 from watchdog.observers import Observer
+from PIL import Image
 import service.my_handler
 import service.db_utils
 import service.usb_utils
 import service.clipboard_utils
 import browserhistory as bh
 
-from service import conf_detect, bayes, net_utils, mail, ai_conf
+from service import conf_detect, bayes, net_utils, mail, ai_conf, passwd_utils
 from service.file_utils import get_file_type, read_docx_file, read_pdf_file, read_txt_file
 from view import view_utils, passwd_view
 
@@ -129,10 +130,10 @@ def check_mail():
     mail_password = Label(mail_window, text="Введите пароль от внешнего ящика", font=("Helvetica", 14))
     mail_password.grid(row=2, column=1)
 
-    mail_passwd = Entry(mail_window, width=30, font=("Helvetica", 14))
+    mail_passwd = Entry(mail_window, width=30, font=("Helvetica", 14), show="*")
     mail_passwd.grid(row=2, column=2, pady=5)
 
-    mail_process = Button(mail_window, text='Проверить почту', command=receiving, font=("Helvetica", 14))
+    mail_process = Button(mail_window, text='Проверить почту', command=receiving, font=("Helvetica", 14), background="blue")
     mail_process.grid(row=3, column=1)
 
     mail_window.mainloop()
@@ -184,6 +185,12 @@ def main_process():
     # Временно
     # selected_path = "d:\\test folder"
     check_path = os.path.isdir(selected_path)
+
+    # Получаем пароль для хеширования
+    current_password = passwd_entry.get()
+
+    # Сохраняем его и записываем в файл
+    passwd_utils.create_passwd(current_password)
 
     if not check_path:
 
@@ -249,31 +256,42 @@ def main_process():
 
 window = Tk()
 window.title('DLP')
-window.geometry('715x200')
+window.geometry('725x200')
 
-frame = Frame(window, padx=10, pady=10)
+frame = Frame(window, padx=15, pady=15)
 frame.pack(expand=True)
 
 logo_text = Label(frame, text="DLP-система", font=("Helvetica", 18), foreground="blue")
 logo_text.grid(row=0, column=2)
 
+# Директория
 dir_text = Label(frame, text="Введите директорию: ", font=("Helvetica", 14))
 dir_text.grid(row=1, column=1)
 
-dir_name = Entry(frame, width=30, font=("Helvetica", 14))
+dir_name = Entry(frame, width=30, font=("Helvetica", 12))
 dir_name.grid(row=1, column=2, pady=5)
 
-dlp_btn = Button(frame, text='Начать процесс', command=main_process, font=("Helvetica", 14))
+# Пароль
+passwd_text = Label(frame, text="Введите пароль: ", font=("Helvetica", 14))
+passwd_text.grid(row=5, column=1)
+
+passwd_entry = Entry(frame, width=30, font=("Helvetica", 12), show="*")
+passwd_entry.grid(row=5, column=2, pady=5)
+
+
+dlp_btn = Button(frame, text='Начать процесс', command=main_process, font=("Helvetica", 12),
+                 background="blue", foreground="white", activebackground="blue")
 dlp_btn.grid(row=1, column=3)
 
-check_conf_btn = Button(frame, text='Проверить файл', command=check_file_for_conf, font=("Helvetica", 14))
-check_conf_btn.grid(row=5, column=1)
+# Кнопки
+check_conf_btn = Button(frame, text='Проверить файл', command=check_file_for_conf, font=("Helvetica", 12))
+check_conf_btn.grid(row=10, column=1)
 
-check_mail_btn = Button(frame, text='Проверить почту', command=check_mail, font=("Helvetica", 14))
-check_mail_btn.grid(row=5, column=2)
+check_mail_btn = Button(frame, text='Проверить почту', command=check_mail, font=("Helvetica", 12))
+check_mail_btn.grid(row=10, column=2)
 
 check_text_ai = Button(frame, text='Классификация AI', command=check_text_ai,
-                       font=("Helvetica", 14), foreground="purple")
-check_text_ai.grid(row=5, column=3)
+                       font=("Helvetica", 12), foreground="purple", activebackground="purple")
+check_text_ai.grid(row=10, column=3)
 
 window.mainloop()

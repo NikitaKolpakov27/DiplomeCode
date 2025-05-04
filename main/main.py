@@ -1,3 +1,5 @@
+import os
+
 from watchdog.observers import Observer
 import service.my_handler
 import service.db_utils
@@ -29,3 +31,19 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+    # Создание файлов с текстом из норм и конф файлов (пдф и ворд)
+    # cur_path = os.path.dirname(__file__)
+    # correct_path = os.path.relpath("..\\view", cur_path)
+    # file_path = correct_path + "/о про.txt"
+    #
+    # file_nice = ""
+    # with open(file_path, "r", encoding="utf-8") as file:
+    #     file_nice = file.readlines()
+    #
+    # file_nice = [s.strip() for s in file_nice]
+    # file_nice = " ".join(file_nice)
+    #
+    # new_file_path = correct_path + "/new_опро.txt"
+    # with open(new_file_path, "a+", encoding="utf-8") as file:
+    #     file.write(file_nice)

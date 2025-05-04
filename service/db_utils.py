@@ -5,9 +5,9 @@ from service.file_utils import hash_file
 
 def update_db():
     cur_path = os.path.dirname(__file__)
-    db_path = os.path.relpath("..\\view\\fileDatabase", cur_path)
+    db_path = os.path.relpath("..\\view\\fileDatabase.txt", cur_path)
 
-    open(db_path, 'w').close()
+    open(db_path, 'w', encoding="utf-8").close()
     _get_file_hashes()
 
 
@@ -17,12 +17,12 @@ def _write_file_to_db(elem):
     """
 
     cur_path = os.path.dirname(__file__)
-    db_path = os.path.relpath("..\\view\\fileDatabase", cur_path)
+    db_path = os.path.relpath("..\\view\\fileDatabase.txt", cur_path)
 
     text_conf = is_file_or_text_confidential(False, elem)
     hash_elem = hash_file(elem)
 
-    with open(db_path, "a") as file:
+    with open(db_path, "a", encoding="utf-8") as file:
         file.write(elem + "-----" + hash_elem + "-----" + str(text_conf) + "\n")
 
     file.close()
@@ -44,17 +44,17 @@ def _get_file_hashes(directory='D:\\TEST FOLDER'):
 
 def make_conf_file_db():
     cur_path = os.path.dirname(__file__)
-    conf_db_path = os.path.relpath("..\\view\\conf_fileDatabase", cur_path)
+    conf_db_path = os.path.relpath("..\\view\\conf_fileDatabase.txt", cur_path)
 
-    with open(conf_db_path, 'w') as conf_file:
+    with open(conf_db_path, 'w', encoding="utf-8") as conf_file:
         for i in get_conf_files():
             conf_file.write(i + "\n")
 
 
 def update_conf_db():
     cur_path = os.path.dirname(__file__)
-    db_path = os.path.relpath("..\\view\\conf_fileDatabase", cur_path)
+    db_path = os.path.relpath("..\\view\\conf_fileDatabase.txt", cur_path)
 
-    open(db_path, 'w').close()
+    open(db_path, 'w', encoding="utf-8").close()
     make_conf_file_db()
 

@@ -8,6 +8,7 @@ from nltk import word_tokenize
 from wordcloud import WordCloud
 from nltk.corpus import stopwords
 
+from service import ai_conf
 
 conf_words_array = ["тайна", "ограниченный", "доступ", "запрещено", "конфиденциально", "конфиденциальный",
                     "информация", "логин", "пароль", "токен", "карта", "кредитка", "паспорт", "секретно",
@@ -116,7 +117,7 @@ def find_phrases(array) -> int:
     return len(phrases)
 
 
-def check_conf_info(text) -> float:
+def check_conf_info(text) -> str:
     """
         Проверяем текст на наличие в нем конфиденциальной информации
 
@@ -125,22 +126,23 @@ def check_conf_info(text) -> float:
                 (согласно совпадениям по ключевым словам)
     """
     final_text = preprocessing(text)
-    count = 0
-
-    # Поиск по ключевым словам
-    for i in final_text:
-        if i in conf_words_array:
-            count += 1
-
-    # Поиск по ключевым фразам
-    also_count = find_phrases(final_text)
-    count += also_count
-
-    # Вычисления процента конфиденциальной информации в тексте
-    length_text = len(final_text) + 1
-    percentage = (count / length_text) * 100
-
-    return percentage
+    return ai_conf.classify_view_version(final_text)
+    # count = 0
+    #
+    # # Поиск по ключевым словам
+    # for i in final_text:
+    #     if i in conf_words_array:
+    #         count += 1
+    #
+    # # Поиск по ключевым фразам
+    # also_count = find_phrases(final_text)
+    # count += also_count
+    #
+    # # Вычисления процента конфиденциальной информации в тексте
+    # length_text = len(final_text) + 1
+    # percentage = (count / length_text) * 100
+    #
+    # return percentage
 
 
 if __name__ == "__main__":

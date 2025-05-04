@@ -11,9 +11,9 @@ def get_conf_hashes():
     conf_hashes_array = []
 
     cur_path = os.path.dirname(__file__)
-    db_path = os.path.relpath("..\\view\\fileDatabase", cur_path)
+    db_path = os.path.relpath("..\\view\\fileDatabase.txt", cur_path)
 
-    with open(db_path, "r") as file:
+    with open(db_path, "r", encoding="utf-8") as file:
         lines = file.readlines()
 
         for line in lines:
@@ -33,9 +33,9 @@ def get_conf_files():
     conf_files_array = []
 
     cur_path = os.path.dirname(__file__)
-    db_path = os.path.relpath("..\\view\\fileDatabase", cur_path)
+    db_path = os.path.relpath("..\\view\\fileDatabase.txt", cur_path)
 
-    with open(db_path, "r") as file:
+    with open(db_path, "r", encoding="utf-8") as file:
         lines = file.readlines()
 
         for line in lines:
@@ -54,9 +54,9 @@ def is_file_was_in_db(suspect_file):
     suspect_file = suspect_file + "\n"
 
     cur_path = os.path.dirname(__file__)
-    db_path = os.path.relpath("..\\view\\conf_fileDatabase", cur_path)
+    db_path = os.path.relpath("..\\view\\conf_fileDatabase.txt", cur_path)
 
-    with open(db_path, "r") as file:
+    with open(db_path, "r", encoding="utf-8") as file:
         lines = file.readlines()
 
         for line in lines:
@@ -95,7 +95,6 @@ def is_file_or_text_confidential(is_text, path_to_file) -> bool:
                 text = read_docx_file(path_to_file)
 
             elif file_type == ".txt":
-                print("Сейчас проверяется: " + path_to_file)
                 text = read_txt_file(path_to_file)
 
             # Случай с неподдерживаемыми типами для рассмотрения
@@ -127,13 +126,13 @@ def is_file_or_text_confidential(is_text, path_to_file) -> bool:
         return True
     else:
 
-        # Проверка текста на ключевые слова
-        precetnage_conf = conf_detect.check_conf_info(text)
+        # Проверка текста с помощью ИИ
+        precetnage_conf, status = conf_detect.check_conf_info(text)
 
-        if precetnage_conf > 10:
-            return True
+        if status == 'NORM':
+            return False
 
-        return False
+        return True
 
 
 def conf_info_detected(data, action) -> str:
