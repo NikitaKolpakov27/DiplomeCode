@@ -14,7 +14,7 @@ import service.usb_utils
 import service.clipboard_utils
 import browserhistory as bh
 
-from service import conf_detect, bayes, net_utils, mail, ai_conf, passwd_utils
+from service import net_utils, mail, ai_conf, passwd_utils
 from service.file_utils import get_file_type, read_docx_file, read_pdf_file, read_txt_file
 from view import view_utils, passwd_view
 
@@ -25,6 +25,7 @@ observer = Observer()
 def check_file_for_conf():
 
     def start_checking_file():
+        start_button.configure(background="gray")
 
         conf_label.configure(text="Проверяется файл: ")
         conf_file_label.configure(text="", foreground="black")
@@ -52,9 +53,6 @@ def check_file_for_conf():
             tkinter.messagebox.showerror(title="Ошибка", message="Файлы такого типа пока что не поддерживаются :(")
             conf_window.destroy()
 
-        # Старая реализация
-        # conf_result = bayes.bayes_text_classify(test_text=text)
-
         # Получаем данные о классификации сообщения (число и тип)
         conf_info = ai_conf.classify_view_version(text)
         conf_numbers = float(conf_info[0])
@@ -74,6 +72,7 @@ def check_file_for_conf():
 
         conf_label.configure(text="Файл проверен!")
         conf_file_label.configure(foreground=conf_file_color)
+        start_button.configure(background="blue")
 
     window.withdraw()
     conf_window = Toplevel(window)
@@ -83,14 +82,15 @@ def check_file_for_conf():
     conf_window.geometry("500x150")
 
     # Проверяется файл
-    conf_label = Label(conf_window)
+    conf_label = Label(conf_window, text="Выберете файл")
     conf_label.pack()
 
     # Что за файл проверяется
     conf_file_label = Label(conf_window)
     conf_file_label.pack()
 
-    start_button = Button(conf_window, text="Выбрать файл для проверки", command=start_checking_file)
+    start_button = Button(conf_window, text="Выбрать файл для проверки", command=start_checking_file,
+                          background="blue", foreground="white")
     start_button.pack()
 
     conf_window.mainloop()
@@ -119,21 +119,22 @@ def check_mail():
         tkinter.messagebox.showinfo(title="E-mail messages receiving", message="Отправленные письма были получены!")
 
     mail_window.title("DLP. Checking e-mail letters")
-    mail_window.geometry("600x200")
+    mail_window.geometry("650x180")
 
-    mail_name = Label(mail_window, text="Введите название ящика: ", font=("Helvetica", 14))
+    mail_name = Label(mail_window, text="Введите название ящика: ", font=("Helvetica", 14), justify="left")
     mail_name.grid(row=1, column=1)
 
-    mail_login = Entry(mail_window, width=30, font=("Helvetica", 14))
+    mail_login = Entry(mail_window, width=30, font=("Helvetica", 12))
     mail_login.grid(row=1, column=2, pady=5)
 
-    mail_password = Label(mail_window, text="Введите пароль от внешнего ящика", font=("Helvetica", 14))
+    mail_password = Label(mail_window, text="Введите пароль от внешнего ящика: ", font=("Helvetica", 14), justify="left")
     mail_password.grid(row=2, column=1)
 
-    mail_passwd = Entry(mail_window, width=30, font=("Helvetica", 14), show="*")
+    mail_passwd = Entry(mail_window, width=30, font=("Helvetica", 12), show="*")
     mail_passwd.grid(row=2, column=2, pady=5)
 
-    mail_process = Button(mail_window, text='Проверить почту', command=receiving, font=("Helvetica", 14), background="blue")
+    mail_process = Button(mail_window, text='Проверить почту', command=receiving, font=("Helvetica", 12),
+                          background="blue", foreground="white")
     mail_process.grid(row=3, column=1)
 
     mail_window.mainloop()
@@ -152,29 +153,35 @@ def check_text_ai():
         conf_result = "Результат: " + conf_type + " " + str(conf_numbers)
 
         temp_result_label.configure(text="")
-        result_label.configure(text=conf_result)
+
+        if conf_type == "NORM":
+            result_label.configure(text=conf_result, foreground="green")
+        else:
+            result_label.configure(text=conf_result, foreground="red")
 
     window.withdraw()
     ai_window = Toplevel(window)
     ai_window.protocol("WM_DELETE_WINDOW", lambda: window.destroy())
 
     ai_window.title("DLP. Checking text by AI")
-    ai_window.geometry("600x300")
+    ai_window.geometry("500x250")
 
     write_message = Label(ai_window, text="Введите ваше сообщение: ", font=("Helvetica", 14))
     write_message.grid(column=0, row=0)
 
     input_message = Text(ai_window, width=60, height=5)
-    input_message.grid(column=0, row=1)
+    input_message.grid(column=0, row=2)
 
-    classify_button = Button(ai_window, text="Получить результат", command=click_classify, font=("Helvetica", 14))
-    classify_button.grid(column=0, row=2)
-
+    # Для визуального отделения
     temp_result_label = Label(ai_window, font=("Helvetica", 12), foreground="gray")
-    temp_result_label.grid(column=0, row=4)
+    temp_result_label.grid(column=0, row=3)
+
+    classify_button = Button(ai_window, text="Получить результат", command=click_classify,
+                             font=("Helvetica", 12), background="blue", foreground="white")
+    classify_button.grid(column=0, row=4)
 
     result_label = Label(ai_window, font=("Helvetica", 14), foreground="blue")
-    result_label.grid(column=0, row=4)
+    result_label.grid(column=0, row=6)
 
     ai_window.mainloop()
 
