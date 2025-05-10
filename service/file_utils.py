@@ -55,7 +55,7 @@ def read_txt_file(txt_path) -> str:
     """
 
     text = ""
-    file = open(txt_path, "r")
+    file = open(txt_path, "r", encoding="utf-8")
 
     while True:
 

@@ -1,25 +1,30 @@
-from pystray import MenuItem as item
-import pystray
-from PIL import Image
-import tkinter as tk
+from fpdf import FPDF
 
-window = tk.Tk()
-window.title("Welcome")
-
-def quit_window(icon, item):
-    icon.stop()
-    window.destroy()
-
-def show_window(icon, item):
-    icon.stop()
-    window.after(0,window.deiconify)
-
-def withdraw_window():
-    window.withdraw()
-    image = Image.open("max.ico")
-    menu = (item('Quit', quit_window), item('Show', show_window))
-    icon = pystray.Icon("name", image, "title", menu)
-    icon.run()
-
-window.protocol('WM_DELETE_WINDOW', withdraw_window)
-window.mainloop()
+pdf = FPDF()
+pdf.add_page()
+pdf.set_font("Arial", "B", 8)
+pdf.write(txt="Text ", h=5)
+# задаем цвет текста
+pdf.set_text_color(255, 0, 0)
+pdf.write(txt="red color", h=5)
+# новая строка
+pdf.ln(15)
+# отключаем стиль текста
+pdf.set_font(family="Arial", style="B", size=18)
+pdf.write(txt="Globally", h=5)
+# Для отключения красного цвета
+# нужно задать черный цвет
+pdf.set_text_color(0)
+# новая строка
+pdf.ln(25)
+pdf.set_font_size(23)
+pdf.write(txt="Now", h=5)
+pdf.ln(15)
+# цвет заливки - желтый
+pdf.set_fill_color(255, 255, 0)
+pdf.set_font(family="Arial", style="I", size=18)
+pdf.write(txt="Good ", h=5)
+# текст для выделения выведем в ячейке
+pdf.cell(txt="Morning", w=5, fill=True)
+pdf.write(txt="in Python", h=5)
+pdf.output("style.pdf")

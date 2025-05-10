@@ -399,7 +399,8 @@ def new_old_vectorizer_process(text_data):
     features = features.toarray()
 
     # Логирование (потом убрать)
-    print("Слова: ", processed_text_data)
+    print("Слова (обработанные): ", processed_text_data)
+    print("Слова: ", ''.join(processed_text_data).split(" "))
     print("Хар-ка слов: ", features)
 
     print("Size of tokens: ", len(processed_text_data))
