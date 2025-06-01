@@ -12,6 +12,7 @@ from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer, HashingVectorizer
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import precision_score, recall_score, f1_score, roc_auc_score, log_loss
 
 model = None
 X_train, X_test, y_train, y_test = None, None, None, None
@@ -155,9 +156,9 @@ def make_model_custom_classifier(text_data=data['text'], classifier='SVM'):
         from sklearn.tree import DecisionTreeClassifier
         custom_model = DecisionTreeClassifier()
 
-    elif classifier == 'lda':
-        from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-        custom_model = LinearDiscriminantAnalysis()
+    elif classifier == 'Logistic Regression':
+        from sklearn.linear_model import LogisticRegression
+        custom_model = LogisticRegression()
 
     elif classifier == 'Bayes':
         from sklearn.naive_bayes import GaussianNB
@@ -197,7 +198,13 @@ def make_model_custom_classifier(text_data=data['text'], classifier='SVM'):
         file.write(''.join(['Creation time: ', str(create_model_time), '\n']))
         file.write(''.join(['Evaluation time: ', str(evaluation_time), '\n']))
         file.write(''.join(['Accuracy: ', str(accuracy), '\n']))
+        file.write(''.join(['Precision: ', str(precision_score(y_pred, y_test)), '\n']))
+        file.write(''.join(['Recall: ', str(recall_score(y_pred, y_test)), '\n']))
+        file.write(''.join(['F1-score: ', str(f1_score(y_pred, y_test)), '\n']))
+        file.write(''.join(['ROC-AUC: ', str(roc_auc_score(y_pred, y_test)), '\n']))
+        file.write(''.join(['Log Loss: ', str(log_loss(y_pred, y_test)), '\n']))
         file.write('********\n')
+    file.close()
 
 
 # Особенная, не подходит под другие простые
@@ -302,9 +309,19 @@ def make_model_mine(text_data=data['text']):
 
     # Вычисляем точность и функцию потерь модели
     loss, accuracy = model.evaluate(X_test, y_test)
+
+    # Получаем предсказанные результаты модели (для метрик)
+    y_pred_proba = model.predict(X_test).flatten()
+    y_pred = (y_pred_proba > 0.5).astype(int)
+
+    # Выводим метрики в консоль
     print('Потери на тестах:', loss)
     print('Тестовая точность:', accuracy)
     print('Время обучения:', evaluation_time)
+    print('Precision: ', str(precision_score(y_pred, y_test)))
+    print('Recall: ', str(recall_score(y_pred, y_test)))
+    print('F1-Score: ', str(f1_score(y_pred, y_test)))
+    print('ROC-AUC: ', str(roc_auc_score(y_pred, y_test)))
 
     # Построение графиков
     plt.figure(figsize=(12, 5))
@@ -401,7 +418,10 @@ def new_old_vectorizer_process(text_data):
     # Логирование (потом убрать)
     print("Слова (обработанные): ", processed_text_data)
     print("Слова: ", ''.join(processed_text_data).split(" "))
-    print("Хар-ка слов: ", features)
+    print("Хар-ка слов: ", features[0], "Features len: ", len(features[0]))
+
+    for i in features[0]:
+        print("i - > ", i)
 
     print("Size of tokens: ", len(processed_text_data))
     print("Size of features: ", len(features))
@@ -476,7 +496,8 @@ if __name__ == "__main__":
 
     # make_model_custom_classifier(classifier='Random Forest')
     # make_model_custom_classifier(classifier='SVM')
-    # make_model_custom_classifier(classifier='lda')
+
+    # make_model_custom_classifier(classifier='Logistic Regression')
     # make_model_custom_classifier(classifier='KNN')
     # make_model_custom_classifier(classifier='Decision Tree')
     # make_model_custom_classifier(classifier='Bayes')

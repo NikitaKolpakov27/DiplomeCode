@@ -1,42 +1,67 @@
+
 ********
 Model: Random Forest
-Creation time: 2025-04-20 22:07:30.990414
-Evaluation time: 0:01:41.710012
-Accuracy: 0.8017664376840039
+Creation time: 2025-06-01 18:36:28.363459
+Evaluation time: 0:01:34.637428
+Accuracy: 0.823860967590418
+Precision: 0.7915936952714536
+Recall: 0.8683957732949087
+F1-score: 0.8282180485570316
+ROC-AUC: 0.8248228866474543
+Log Loss: 6.348694232465445
 ********
 ********
-Model: SVM
-Creation time: 2025-04-20 22:09:13.730570
-Evaluation time: 0:10:22.276018
-Accuracy: 0.8277723258096172
-********
-********
-Model: lda
-Creation time: 2025-04-20 22:22:18.571579
-Evaluation time: 0:06:47.227860
-Accuracy: 0.7173699705593719
+Model: Logistic Regression
+Creation time: 2025-06-01 19:12:29.822157
+Evaluation time: 0:00:16.659432
+Accuracy: 0.814466885861907
+Precision: 0.8137254901960784
+Recall: 0.8307552320291174
+F1-score: 0.8221521837010356
+ROC-AUC: 0.8139213053349471
+Log Loss: 6.687291258196935
 ********
 ********
 Model: KNN
-Creation time: 2025-04-20 22:29:06.272384
-Evaluation time: 0:00:08.094879
-Accuracy: 0.7556427870461236
+Creation time: 2025-06-01 19:12:46.763653
+Evaluation time: 0:00:10.271264
+Accuracy: 0.7627994363550963
+Precision: 0.7333916083916084
+Recall: 0.8075072184793071
+F1-score: 0.7686669720568026
+ROC-AUC: 0.7638453523589196
+Log Loss: 8.549574899720135
 ********
 ********
 Model: Decision Tree
-Creation time: 2025-04-20 22:29:21.800005
-Evaluation time: 0:01:25.435912
-Accuracy: 0.7404317958783121
-********
-********
-Model: KNN
-Creation time: 2025-04-20 22:44:57.921854
-Evaluation time: 0:00:10.692422
-Accuracy: 0.7836113837095191
+Creation time: 2025-06-01 19:13:04.940376
+Evaluation time: 0:02:06.831977
+Accuracy: 0.7609206200093941
+Precision: 0.76657824933687
+Recall: 0.7796762589928058
+F1-score: 0.773071778867588
+ROC-AUC: 0.7600446191719191
+Log Loss: 8.617294304866432
 ********
 ********
 Model: Bayes
-Creation time: 2025-05-03 16:22:37.076789
-Evaluation time: 0:00:13.336974
-Accuracy: 0.7503526093088858
+Creation time: 2025-06-01 19:15:12.116430
+Evaluation time: 0:00:11.194224
+Accuracy: 0.7454203851573509
+Precision: 0.681740614334471
+Recall: 0.8254132231404959
+F1-score: 0.7467289719626168
+ROC-AUC: 0.7520692300026339
+Log Loss: 9.17597939732339
+********
+********
+Model: SVM
+Creation time: 2025-06-01 19:26:15.814158
+Evaluation time: 0:29:00.021375
+Accuracy: 0.84687646782527
+Precision: 0.8429541595925297
+Recall: 0.8756613756613757
+F1-score: 0.8589965397923875
+ROC-AUC: 0.8448658637100849
+Log Loss: 5.5191315194232935
 ********
