@@ -1,0 +1,54 @@
+{
+    "files": [
+        {
+            "file_path": "D:\\TEST FOLDER\\doc3.txt",
+            "file_hash": "6dbae8899abf0c0710e5940ce757559b0f31a28ca0aaaecf9bbcce13448a524a",
+            "status": false
+        },
+        {
+            "file_path": "D:\\TEST FOLDER\\doc3_copy.txt",
+            "file_hash": "8c495dc3cb1f7de02b0ff112792e308010e7cf416aed5a8a4c93402148608cc9",
+            "status": false
+        },
+        {
+            "file_path": "D:\\TEST FOLDER\\dsssss.docx",
+            "file_hash": "1ed0fb77d43c198e785db0e823e79b74d227ab8bbf7e50bed5f032d96f2d6767",
+            "status": false
+        },
+        {
+            "file_path": "D:\\TEST FOLDER\\hellothere.txt",
+            "file_hash": "791c71070dee94bdba85f5ca83f91da821977c56353dcd1ccf8047cda44d2c7d",
+            "status": false
+        },
+        {
+            "file_path": "D:\\TEST FOLDER\\new file sadas asd.txt",
+            "file_hash": "bb3afbbdd168088002ddd8f5f41eb7da85150e2c6978d4055d6f7d5095a3d9ed",
+            "status": false
+        },
+        {
+            "file_path": "D:\\TEST FOLDER\\skillbox_sql_dump.sql",
+            "file_hash": "02903c6024806ed746309245c3b00d983857f1b1818a563eda60f7d7df682e96",
+            "status": false
+        },
+        {
+            "file_path": "D:\\TEST FOLDER\\vxcvxv.txt",
+            "file_hash": "41d192e54e2ddcb2f9d0ceaf784727299a38069b236a513de44d85d2b6326a9b",
+            "status": false
+        },
+        {
+            "file_path": "D:\\TEST FOLDER\\wow_pop.txt",
+            "file_hash": "8c30b4248337916551f3c49819a9e9f2c784a75153d9443a2b5c4f20ebdd9eb9",
+            "status": false
+        },
+        {
+            "file_path": "D:\\TEST FOLDER\\\u0432\u044b\u0444\u0432\u0444 \u2014 \u043a\u043e\u043f\u0438\u044f.txt",
+            "file_hash": "f79dd6ce871b3086a713aafabe1f21896601906a322d6659e56f92d588b9d08f",
+            "status": false
+        },
+        {
+            "file_path": "D:\\TEST FOLDER\\\u0432\u044b\u0444\u0432\u0444.txt",
+            "file_hash": "eeaf18a95c2cc2665ded8a6b6f91d57c7a43bb68047a9c5570094a748dd13fee",
+            "status": false
+        }
+    ]
+}
