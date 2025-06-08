@@ -1,0 +1,19 @@
+{
+    "files": [
+        {
+            "file_path": "D:\\TEST FOLDER\\doc3.txt",
+            "file_hash": "6dbae8899abf0c0710e5940ce757559b0f31a28ca0aaaecf9bbcce13448a524a",
+            "status": false
+        },
+        {
+            "file_path": "D:\\TEST FOLDER\\doc3_copy.txt",
+            "file_hash": "8c495dc3cb1f7de02b0ff112792e308010e7cf416aed5a8a4c93402148608cc9",
+            "status": false
+        },
+        {
+            "file_path": "D:\\TEST FOLDER\\dsssss.docx",
+            "file_hash": "1ed0fb77d43c198e785db0e823e79b74d227ab8bbf7e50bed5f032d96f2d6767",
+            "status": false
+        }
+    ]
+}

@@ -1,18 +1,19 @@
-import csv
+import datetime
 import datetime
 import os
 import string
+
+import nltk
 import numpy as np
 import pandas as pd
-import nltk
+import tensorflow as tf
 from matplotlib import pyplot as plt
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer, SnowballStemmer
 from nltk.tokenize import word_tokenize
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer, HashingVectorizer
-import tensorflow as tf
-from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import precision_score, recall_score, f1_score, roc_auc_score, log_loss
+from sklearn.model_selection import train_test_split
 
 model = None
 X_train, X_test, y_train, y_test = None, None, None, None
@@ -116,21 +117,29 @@ def preprocess_text(text):
     return ' '.join(tokens)
 
 
-def prepare_text_for_model(text_data):
-    global vectorizer
+def prepare_text_for_model(train_texts, test_texts=None):
+    """
+    Векторизация текста с правильным разделением на train/test
 
-    # Получаем отредактированный текст (после токенезации и лемматизации)
-    data['processed_text'] = text_data.apply(preprocess_text)
+    :param train_texts: тексты для обучения
+    :param test_texts: тексты для тестирования (опционально)
+    :return: кортеж (vectorizer, train_features, test_features)
+    """
+    vectorizer = TfidfVectorizer(
+        max_features=20000,  # Ограничение количества фичей
+        ngram_range=(1, 2),  # Использование униграмм и биграмм
+        min_df=2,  # Игнорировать редкие слова
+        max_df=0.95,  # Игнорировать слишком частые слова
+        stop_words='english'  # Удаление стоп-слов
+    )
 
-    vectorizer = TfidfVectorizer()
+    # Обучение векторизатора только на тренировочных данных
+    train_features = vectorizer.fit_transform(train_texts).toarray()
 
-    # features = vectorizer.fit_transform(text_data)
-    features = vectorizer.fit_transform(data['processed_text'])
+    # Преобразование тестовых данных (если переданы)
+    test_features = vectorizer.transform(test_texts).toarray() if test_texts is not None else None
 
-    # Конвертируем признаки (features) в матрицу
-    features = features.toarray()
-
-    return vectorizer, features
+    return vectorizer, train_features, test_features
 
 def make_model_custom_classifier(text_data=data['text'], classifier='SVM'):
     """
@@ -275,15 +284,37 @@ def make_model_mine(text_data=data['text']):
     # Время отсчета создания модели
     create_model_time = datetime.datetime.now()
 
-    # Получаем признаки и вектор
-    vectorizer, features = prepare_text_for_model(text_data)
+    # Предобработка текста
+    data['processed_text'] = data['text'].apply(preprocess_text)
+
+    # 1. ПРАВИЛЬНОЕ РАЗДЕЛЕНИЕ ДАННЫХ ДО ВЕКТОРИЗАЦИИ
+    X_train_raw, X_test_raw, y_train, y_test = train_test_split(
+        data['processed_text'],
+        data['label'].astype(int),
+        test_size=0.2,
+        random_state=42
+    )
+
+    # 2. Векторизация с правильным разделением
+    vectorizer, X_train, X_test = prepare_text_for_model(X_train_raw, X_test_raw)
 
     # Определяем архитектуру нейросети
     model = tf.keras.models.Sequential()
-    model.add(tf.keras.layers.Dense(128, activation='relu', input_shape=(len(vectorizer.get_feature_names_out()),)))
-    model.add(tf.keras.layers.Dropout(0.5))
-    model.add(tf.keras.layers.Dense(64, activation='relu'))
-    model.add(tf.keras.layers.Dropout(0.5))
+    # model.add(tf.keras.layers.Dense(128, activation='relu', kernel_regularizer='l2',
+    #     input_shape=(len(vectorizer.get_feature_names_out()),)))
+    model.add(tf.keras.layers.Dense(64, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(1e-4),
+                                    input_shape=(X_train.shape[1],)))
+    model.add(tf.keras.layers.BatchNormalization())
+    model.add(tf.keras.layers.Dropout(0.55))
+
+    model.add(tf.keras.layers.Dense(32, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(1e-4)))
+    model.add(tf.keras.layers.BatchNormalization())
+    model.add(tf.keras.layers.Dropout(0.55))
+
+    model.add(tf.keras.layers.Dense(16, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(1e-4)))
+    model.add(tf.keras.layers.BatchNormalization())
+    model.add(tf.keras.layers.Dropout(0.55))
+
     model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
 
     # Компилируем модель
@@ -292,16 +323,13 @@ def make_model_mine(text_data=data['text']):
     # Приводим столбцы в тип int (для правильной работы в model.fit)
     data['label'] = data['label'].astype(int)
 
-    # Делим выборку на обучающую и тестовую
-    X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.2)
-
     # Добавляем кросс-валидационную выборку
     x_train, x_cv, y_train, y_cv = train_test_split(X_train, y_train, test_size=0.2)
 
     # Обучаем модель
     history = model.fit(
-        features, data['label'], epochs=12, batch_size=64, verbose=1,
-        validation_data=(x_cv, y_cv)
+        x_train, y_train, epochs=8, batch_size=32, verbose=1,
+        validation_data=(x_cv, y_cv),
     )
 
     # Вычисляем время обучения модели
@@ -347,6 +375,11 @@ def make_model_mine(text_data=data['text']):
     plt.tight_layout()
     plt.show()
 
+    # Точность с шумом
+    X_test_noisy = X_test + np.random.normal(0, 0.05, X_test.shape)  # Добавление 5% шума
+    loss, accuracy = model.evaluate(X_test_noisy, y_test)
+    print("Точность с шумом: ", accuracy)
+
     # Сохраняем графики в jpg
     save_name = ("mine_model_" + ".jpg")
     plt.savefig(save_name)
@@ -358,9 +391,9 @@ def make_model_mine(text_data=data['text']):
     vectorizer_path = correct_path + "/vectorizer.joblib"
 
     # Сохраняем полученную модель и вектор в отдельный файл (для его повторного использования в других задачах)
-    from joblib import dump
-    dump(model, model_path, compress=9)
-    dump(vectorizer, vectorizer_path, compress=9)
+    # from joblib import dump
+    # dump(model, model_path, compress=9)
+    # dump(vectorizer, vectorizer_path, compress=9)
 
 
 def predict_model(text_feature) -> str:
@@ -389,7 +422,6 @@ def predict_model(text_feature) -> str:
         else:
             str_pred = "NORM"
 
-        # result = "".join(["Результат: ", str(i), " Тип: ", str_pred])
         result = (i, str_pred)
         print(result)
 
