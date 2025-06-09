@@ -15,3 +15,7 @@ transformers~=4.51.3
 docx~=0.2.4
 pymorphy3~=2.0.3
 bcrypt~=4.3.0
+fpdf~=1.7.2
+pystray~=0.19.5
+pillow~=11.2.1
+keyboard~=0.13.5

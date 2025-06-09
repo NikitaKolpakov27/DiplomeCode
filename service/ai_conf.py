@@ -452,9 +452,6 @@ def new_old_vectorizer_process(text_data):
     print("Слова: ", ''.join(processed_text_data).split(" "))
     print("Хар-ка слов: ", features[0], "Features len: ", len(features[0]))
 
-    for i in features[0]:
-        print("i - > ", i)
-
     print("Size of tokens: ", len(processed_text_data))
     print("Size of features: ", len(features))
 

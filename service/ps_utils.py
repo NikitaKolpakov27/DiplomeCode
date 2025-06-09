@@ -20,7 +20,6 @@ def get_processes(flag, secs):
 
             # Запись в лог
             write_log("\n" + "Приложения     " + str_list)
-            print("write")
             current_process_list = new_process_list
 
 

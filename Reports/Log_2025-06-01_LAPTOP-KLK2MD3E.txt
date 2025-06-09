@@ -1,0 +1,7 @@
+
+USB     Нет флеш-накопителей     1.6.2025--21:23:17
+MODIFIED DIRECTORY     d:\test folder\compressed_pics     1.6.2025--21:23:17
+USB     Нет флеш-накопителей     1.6.2025--21:25:54
+Буфер     file_path (TEXT)     1.6.2025--21:25:55
+USB     Нет флеш-накопителей     1.6.2025--21:25:55
+MODIFIED FILE     d:\test folder\compressed_pics\95c326d3536543186ea4bde5bef2080f--animal-makeup-great-horned-owl.jpg     1.6.2025--21:25:56
