@@ -10,7 +10,7 @@ def phone_number_match(msg):
     return False
 
 def credit_card_match(msg):
-    matches = re.findall("[1-9]{4}[- ]?[0-9]{4}[- ]?[0-9]{4}[- ]?[0-9]{4}[- ]?", msg)
+    matches = re.findall("[0-9]{4}[- ]?[0-9]{4}[- ]?[0-9]{4}[- ]?[0-9]{4}[- ]?", msg)
     # print("Matches: ", matches)
 
     if len(matches) > 0:
@@ -67,7 +67,7 @@ def inn_match(msg):
 
 
 def snils_match(msg):
-    matches = re.findall(r'^\d{3}-\d{3}-\d{3} \d{2}', msg)
+    matches = re.findall(r'^\d{3}\D\d{3}\D\d{3}\D\d{2}', msg)
     return _is_match(matches)
 
 

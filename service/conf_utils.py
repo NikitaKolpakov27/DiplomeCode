@@ -1,28 +1,25 @@
-import datetime
+import json
 import os
-import service.conf_detect as conf_detect
+from service import ai_conf
 from service.file_utils import get_file_type, read_docx_file, read_pdf_file, read_txt_file, write_log
 from docx.opc.exceptions import PackageNotFoundError
 import service.reg_exp_utils as reg_exp_utils
 
 # Получает хэши конфиденциальных файлов
 def get_conf_hashes():
-    raw_array = []
     conf_hashes_array = []
 
     cur_path = os.path.dirname(__file__)
-    db_path = os.path.relpath("..\\view\\fileDatabase.txt", cur_path)
+    db_path = os.path.relpath("..\\view\\fileDB.json", cur_path)
 
     with open(db_path, "r", encoding="utf-8") as file:
-        lines = file.readlines()
+        fileDB = json.load(file)
+        total_files = len(fileDB["files"])
 
-        for line in lines:
-            raw_array.append(line.split("-----"))
+    for i in range(0, total_files):
 
-    for i in range(0, len(raw_array)):
-
-        if raw_array[i][2] == "True\n":
-            conf_hashes_array.append(raw_array[i][1])
+        if fileDB["files"][i]["status"]:
+            conf_hashes_array.append(fileDB["files"][i]["file_hash"])
 
     return conf_hashes_array
 
@@ -33,18 +30,16 @@ def get_conf_files():
     conf_files_array = []
 
     cur_path = os.path.dirname(__file__)
-    db_path = os.path.relpath("..\\view\\fileDatabase.txt", cur_path)
+    db_path = os.path.relpath("..\\view\\fileDB.json", cur_path)
 
     with open(db_path, "r", encoding="utf-8") as file:
-        lines = file.readlines()
+        fileDB = json.load(file)
+        total_files = len(fileDB["files"])
 
-        for line in lines:
-            raw_array.append(line.split("-----"))
+    for i in range(0, total_files):
 
-    for i in range(0, len(raw_array)):
-
-        if raw_array[i][2] == "True\n":
-            conf_files_array.append(raw_array[i][0])
+        if fileDB["files"][i]["status"]:
+            conf_files_array.append(fileDB["files"][i]["file_path"])
 
     return conf_files_array
 
@@ -127,7 +122,8 @@ def is_file_or_text_confidential(is_text, path_to_file) -> bool:
     else:
 
         # Проверка текста с помощью ИИ
-        precetnage_conf, status = conf_detect.check_conf_info(text)
+        # precetnage_conf, status = conf_detect.check_conf_info(text)
+        precetnage_conf, status = ai_conf.classify_view_version(text)
 
         if status == 'NORM':
             return False
@@ -156,8 +152,5 @@ def conf_info_detected(data, action) -> str:
 
 
 if __name__ == "__main__":
-    st = "d:/test folder\\"
-    st_2 = "D:\\TEST FOLDER\\"
-    st = st.replace("/", "\\")
-    print(st, "==", st_2.lower())
+    get_conf_files()
 

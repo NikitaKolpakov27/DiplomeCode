@@ -16,7 +16,6 @@ def update_db():
         db_str = "{\"files\":[]}"
         file.write(db_str)
     file.close()
-
     _get_file_hashes()
 
 

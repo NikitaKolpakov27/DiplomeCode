@@ -84,16 +84,3 @@ def check_flash_drives(flash_dirs):
         else:
             print("On flash drive (" + flash_dir + ")" + " was haven't been detected any confidential files.")
             return True, 0, flash_dir
-
-
-if __name__ == "__main__":
-    fl_dr = get_flash_directories()
-    print(fl_dr)
-
-    check_flash_drives(fl_dr)
-
-    # print('C диск информация:', d[0])
-    # print('D информация о диске:', d[1])
-    # print('Информация о диске:', d[2])
-    # print('Получить поле диска:', d[0][0], d[1][0], d[2][0])
-    # print('Тип данных:', type(d), '\n')

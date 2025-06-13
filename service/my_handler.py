@@ -2,7 +2,6 @@ from watchdog.events import FileSystemEventHandler
 import service.conf_utils as conf_utils
 import service.db_utils as db_utils
 import view.view_utils
-from service import passwd_utils
 
 
 class MyHandler(FileSystemEventHandler):

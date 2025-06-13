@@ -154,3 +154,4 @@ def write_log(message, path='..\\Reports'):
 
     with open(correct_path, "a") as file:
         file.write(str(message) + "     " + detection_date_log)
+    file.close()

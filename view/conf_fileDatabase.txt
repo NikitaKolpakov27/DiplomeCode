@@ -1,0 +1,6 @@
+D:\TEST FOLDER\conf.txt
+D:\TEST FOLDER\doc3.txt
+D:\TEST FOLDER\doc3_copy.txt
+D:\TEST FOLDER\new file sadas asd.txt
+D:\TEST FOLDER\teols.txt
+D:\TEST FOLDER\Новая папка\conf.txt

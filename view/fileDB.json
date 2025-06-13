@@ -1,14 +1,19 @@
 {
     "files": [
         {
+            "file_path": "D:\\TEST FOLDER\\conf.txt",
+            "file_hash": "bdd445926122bb3edfa0ff2218769f4c4aac5dc82f935e607ad39dece38108fe",
+            "status": true
+        },
+        {
             "file_path": "D:\\TEST FOLDER\\doc3.txt",
             "file_hash": "6dbae8899abf0c0710e5940ce757559b0f31a28ca0aaaecf9bbcce13448a524a",
-            "status": false
+            "status": true
         },
         {
             "file_path": "D:\\TEST FOLDER\\doc3_copy.txt",
             "file_hash": "8c495dc3cb1f7de02b0ff112792e308010e7cf416aed5a8a4c93402148608cc9",
-            "status": false
+            "status": true
         },
         {
             "file_path": "D:\\TEST FOLDER\\dsssss.docx",
@@ -17,17 +22,27 @@
         },
         {
             "file_path": "D:\\TEST FOLDER\\hellothere.txt",
-            "file_hash": "791c71070dee94bdba85f5ca83f91da821977c56353dcd1ccf8047cda44d2c7d",
+            "file_hash": "bd938bcaa53e1691d248fbe0210ae50301c23c69acd25cc9d50006d0dd7073ef",
             "status": false
         },
         {
             "file_path": "D:\\TEST FOLDER\\new file sadas asd.txt",
             "file_hash": "bb3afbbdd168088002ddd8f5f41eb7da85150e2c6978d4055d6f7d5095a3d9ed",
-            "status": false
+            "status": true
         },
         {
             "file_path": "D:\\TEST FOLDER\\skillbox_sql_dump.sql",
             "file_hash": "02903c6024806ed746309245c3b00d983857f1b1818a563eda60f7d7df682e96",
+            "status": false
+        },
+        {
+            "file_path": "D:\\TEST FOLDER\\teols.txt",
+            "file_hash": "05fc39446e939097722fd86919122ffb47d1f92998727e8ba8914a46098be2b8",
+            "status": true
+        },
+        {
+            "file_path": "D:\\TEST FOLDER\\test file.txt",
+            "file_hash": "7353dbc8a79c21c204307ab47b3055649b3f9a0db0e5cc64399de7021d19ac96",
             "status": false
         },
         {
@@ -37,12 +52,7 @@
         },
         {
             "file_path": "D:\\TEST FOLDER\\wow_pop.txt",
-            "file_hash": "8c30b4248337916551f3c49819a9e9f2c784a75153d9443a2b5c4f20ebdd9eb9",
-            "status": false
-        },
-        {
-            "file_path": "D:\\TEST FOLDER\\\u0432\u044b\u0444\u0432\u0444 \u2014 \u043a\u043e\u043f\u0438\u044f.txt",
-            "file_hash": "f79dd6ce871b3086a713aafabe1f21896601906a322d6659e56f92d588b9d08f",
+            "file_hash": "5763824c95078322b1ab8a5edb7e0829c7bf36ab117150fc97ec684d79f9181a",
             "status": false
         },
         {
@@ -52,7 +62,7 @@
         },
         {
             "file_path": "D:\\TEST FOLDER\\\u0432\u044b\u0444\u0432\u0444_\u0432\u0430\u0439.txt",
-            "file_hash": "eeaf18a95c2cc2665ded8a6b6f91d57c7a43bb68047a9c5570094a748dd13fee",
+            "file_hash": "63720eb9e8a029e1eeb60df45a5cec2e95e2a520c371b60753f89185c5dd6055",
             "status": false
         },
         {
@@ -63,7 +73,7 @@
         {
             "file_path": "D:\\TEST FOLDER\\\u0422\u0435\u0441\u0442\u043e\u0432\u044b\u0439 \u0444\u0430\u0439\u043b.txt",
             "file_hash": "641f8cae70e8cfa5794e0a349890b6e75221ec722f2256fcfc0700d144e80d5b",
-            "status": true
+            "status": false
         },
         {
             "file_path": "D:\\TEST FOLDER\\compressed_pics\\2017Animals___Birds_Green-eyed_owl_sits_on_a_spruce_branch_113088_.jpg",
@@ -131,6 +141,16 @@
             "status": false
         },
         {
+            "file_path": "D:\\TEST FOLDER\\newfold\\doc44_1.txt",
+            "file_hash": "fc948738c7633168423bb54fad334e36be097b2543f3a9aea5a2cba90d80509c",
+            "status": false
+        },
+        {
+            "file_path": "D:\\TEST FOLDER\\newfold\\vxcvxv.txt",
+            "file_hash": "41d192e54e2ddcb2f9d0ceaf784727299a38069b236a513de44d85d2b6326a9b",
+            "status": false
+        },
+        {
             "file_path": "D:\\TEST FOLDER\\newfold\\\u041b\u0430\u0431\u043e\u0440\u0430\u0442\u043e\u0440\u043d\u0430\u044f_1.docx",
             "file_hash": "74b41192b8f0b45a73b51835155f6a880c33ea66f12bc7c39b3e96c226da9749",
             "status": false
@@ -186,19 +206,24 @@
             "status": false
         },
         {
-            "file_path": "D:\\TEST FOLDER\\pics\\maxresdefault (1).jpg",
+            "file_path": "D:\\TEST FOLDER\\pics\\maxresdefault .jpg",
             "file_hash": "75541e37103ce6d805c1865110c53f8912d9682e04083d0135348e6c7dc65dcc",
             "status": false
         },
         {
-            "file_path": "D:\\TEST FOLDER\\pics\\maxresdefault.jpg",
+            "file_path": "D:\\TEST FOLDER\\pics\\maxresdefault dsad.jpg",
             "file_hash": "b6abf505dad2fad2caf8cafa5cae0a3d8a91477a1dba5b3e026b8c08479a827d",
             "status": false
         },
         {
-            "file_path": "D:\\TEST FOLDER\\\u041d\u043e\u0432\u0430\u044f \u043f\u0430\u043f\u043a\u0430\\Ogodaas.txt",
-            "file_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "file_path": "D:\\TEST FOLDER\\\u041d\u043e\u0432\u0430\u044f \u043f\u0430\u043f\u043a\u0430\\conf.txt",
+            "file_hash": "a96ada42b29b4b5aad77764d52cb9e8d25531e59328762443780c5691a2ca472",
             "status": true
+        },
+        {
+            "file_path": "D:\\TEST FOLDER\\\u041d\u043e\u0432\u0430\u044f \u043f\u0430\u043f\u043a\u0430\\Ogodaas.txt",
+            "file_hash": "662551bf52c62b534f1a7dcb8689d2e7f13ea250382c775ae7ec0d3108084e1e",
+            "status": false
         }
     ]
 }

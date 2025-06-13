@@ -255,8 +255,8 @@ def main_process():
             view_utils.usb_check(main_log)
             # net_utils.disable_websites()
             view_utils.clipboard_info_view(main_log, new_window)
-            Keylogger(interval=5).start()
-            ps_utils.get_processes(True, 5)
+            # Keylogger(interval=5).start()
+            # ps_utils.get_processes(True, 5)
             new_window.protocol("WM_DELETE_WINDOW", window_passwd)
             new_window.mainloop()
         except KeyboardInterrupt:

@@ -1,0 +1,448 @@
+
+USB     Нет флеш-накопителей     13.6.2025--18:47:47
+Буфер     (array([0.00585257], dtype=float32 (TEXT)     13.6.2025--18:47:48
+Буфер     (TEXT)...... (TEXT)     13.6.2025--18:47:56
+Буфер     (array([0.00585257], (TEXT)     13.6.2025--18:47:58
+USB     Нет флеш-накопителей     13.6.2025--18:48:4
+MOVED FILE     d:\test folder\pics\maxresdefault ehsk.jpg     13.6.2025--18:48:4
+Система     Программа была выключена      13.6.2025--18:48:20
+USB     Нет флеш-накопителей     13.6.2025--18:56:54
+Кейлог     c[CTRL]     13.6.2025--18:57:5
+Кейлог     c[CTRL]h     13.6.2025--18:57:10
+Кейлог     ello[ENTER]      13.6.2025--18:57:15
+Кейлог     holy shit     13.6.2025--18:57:20
+Кейлог     [ENTER]      13.6.2025--18:57:25
+Буфер     накопителей (TEXT)     13.6.2025--18:57:28
+USB     Нет флеш-накопителей     13.6.2025--18:59:20
+Буфер     накопителей (TEXT)     13.6.2025--18:59:20
+Приложения     0: System Idle Process
+			4: System
+			148: Registry
+			516: svchost.exe
+			580: smss.exe
+			884: csrss.exe
+			892: svchost.exe
+			1000: atiesrxx.exe
+			1008: wininit.exe
+			1040: CCXProcess.exe
+			1068: services.exe
+			1080: lsass.exe
+			1132: RuntimeBroker.exe
+			1204: svchost.exe
+			1248: fontdrvhost.exe
+			1260: svchost.exe
+			1268: WUDFHost.exe
+			1388: svchost.exe
+			1444: svchost.exe
+			1496: WUDFHost.exe
+			1620: svchost.exe
+			1652: svchost.exe
+			1660: svchost.exe
+			1712: svchost.exe
+			1732: svchost.exe
+			1772: svchost.exe
+			1812: amdfendrsr.exe
+			1824: svchost.exe
+			1876: svchost.exe
+			1896: svchost.exe
+			2004: browser.exe
+			2148: svchost.exe
+			2208: svchost.exe
+			2276: svchost.exe
+			2368: svchost.exe
+			2468: svchost.exe
+			2484: svchost.exe
+			2488: svchost.exe
+			2504: conhost.exe
+			2524: svchost.exe
+			2672: browser.exe
+			2676: MemCompression
+			2724: svchost.exe
+			2764: svchost.exe
+			2772: svchost.exe
+			2804: pycharm64.exe
+			2824: svchost.exe
+			2844: svchost.exe
+			2884: HWVEAudioSession.exe
+			2896: svchost.exe
+			3052: svchost.exe
+			3088: svchost.exe
+			3104: svchost.exe
+			3192: vipnet_uanotify-vc140-mt-32.exe
+			3212: svchost.exe
+			3216: svchost.exe
+			3228: svchost.exe
+			3272: Video.UI.exe
+			3340: StartMenuExperienceHost.exe
+			3400: svchost.exe
+			3420: LCDAssistant.exe
+			3468: svchost.exe
+			3480: SearchApp.exe
+			3520: svchost.exe
+			3608: spoolsv.exe
+			3620: svchost.exe
+			3724: svchost.exe
+			3748: svchost.exe
+			3800: svchost.exe
+			3836: unsecapp.exe
+			3920: WUCSProxyService.exe
+			4052: browser.exe
+			4092: svchost.exe
+			4140: SecurityHealthService.exe
+			4152: taskhostw.exe
+			4252: svchost.exe
+			4292: svchost.exe
+			4352: ApplicationFrameHost.exe
+			4376: SystemSettingsBroker.exe
+			4524: SDXHelper.exe
+			4596: svchost.exe
+			4628: ast_service.exe
+			4640: svchost.exe
+			4648: svchost.exe
+			4656: svchost.exe
+			4664: agent_ovpnconnect_1675786017207.exe
+			4676: svchost.exe
+			4692: svchost.exe
+			4700: HuaweiHiSuiteService64.exe
+			4716: IpOverUsbSvc.exe
+			4732: BasicService.exe
+			4740: HWVEAudioService.exe
+			4748: HiConnectivityService.exe
+			4768: osdservice.exe
+			4776: SessionService.exe
+			4788: JetBrains.Etw.Collector.Host.exe
+			4804: Itcsnatproxy.Exe
+			4812: MateBookService.exe
+			4828: svchost.exe
+			4836: Mftp2-vc140-mt-32.Exe
+			4844: RtkBtManServ.exe
+			4868: svchost.exe
+			4876: ovpnhelper_service.exe
+			4896: MpDefenderCoreService.exe
+			4904: IplirControl.Exe
+			4924: Swagent.Exe
+			4940: LCD_Service.exe
+			4952: svchost.exe
+			4988: MsMpEng.exe
+			5016: NahimicService.exe
+			5144: SecurityHealthSystray.exe
+			5272: svchost.exe
+			5328: Itcsrvup64.Exe
+			5396: svchost.exe
+			5464: node.exe
+			6044: HwDistributedMainService.exe
+			6208: WmiPrvSE.exe
+			6496: browser.exe
+			6708: svchost.exe
+			6748: browser.exe
+			6752: dllhost.exe
+			6788: svchost.exe
+			6808: svchost.exe
+			6952: AggregatorHost.exe
+			6984: browser.exe
+			7188: svchost.exe
+			7352: LCDAssistant.exe
+			8408: RuntimeBroker.exe
+			8440: HiviewService.exe
+			8588: svchost.exe
+			8628: browser.exe
+			8792: browser.exe
+			8964: atieclxx.exe
+			9060: svchost.exe
+			9076: csrss.exe
+			9088: browser.exe
+			9208: browser.exe
+			9336: NisSrv.exe
+			9924: svchost.exe
+			10088: browser.exe
+			10116: svchost.exe
+			10256: svchost.exe
+			10340: MoUsoCoreWorker.exe
+			10620: python.exe
+			10680: ctfmon.exe
+			10684: sihost.exe
+			10808: CompPkgSrv.exe
+			10904: fontdrvhost.exe
+			11208: svchost.exe
+			11248: SearchIndexer.exe
+			11308: OfficeClickToRun.exe
+			12044: python.exe
+			12236: dwm.exe
+			12356: MusNotifyIcon.exe
+			12488: browser.exe
+			12756: LCDAssistant.exe
+			13020: browser.exe
+			13100: svchost.exe
+			13228: svchost.exe
+			13396: fsnotifier.exe
+			13508: svchost.exe
+			13516: RuntimeBroker.exe
+			14020: service_update.exe
+			14076: svchost.exe
+			14188: RuntimeBroker.exe
+			14304: jusched.exe
+			14600: Itcswpm.Exe
+			14612: svchost.exe
+			14636: taskhostw.exe
+			14640: browser.exe
+			14844: svchost.exe
+			14952: SystemSettings.exe
+			14964: browser.exe
+			14972: browser.exe
+			15024: TextInputHost.exe
+			15140: conhost.exe
+			15220: winlogon.exe
+			15500: svchost.exe
+			15652: svchost.exe
+			15728: conhost.exe
+			15732: dllhost.exe
+			16092: svchost.exe
+			16136: RuntimeBroker.exe
+			16444: svchost.exe
+			16552: taskhostw.exe
+			16628: svchost.exe
+			16648: RadeonSoftware.exe
+			17028: assistant.exe
+			17052: browser.exe
+			17080: svchost.exe
+			17544: browser.exe
+			17624: conhost.exe
+			17752: OSD_Daemon.exe
+			17780: unsecapp.exe
+			18144: UserOOBEBroker.exe
+			18368: audiodg.exe
+			18612: AMDRSServ.exe
+			18644: browser.exe
+			18648: browser.exe
+			18656: TGitCache.exe
+			18712: service_update.exe
+			18744: TSVNCache.exe
+			18820: browser.exe
+			18860: dllhost.exe
+			18912: svchost.exe
+			19080: ShellExperienceHost.exe
+			19164: AdobeIPCBroker.exe
+			19172: explorer.exe
+			19512: ai.exe
+			19580: WINWORD.EXE
+			19620: svchost.exe
+			19736: browser.exe
+			19928: browser.exe     13.6.2025--18:59:25
+USB     Нет флеш-накопителей     13.6.2025--19:5:27
+Буфер     e991:4ea2:2fd1:0b01:a817:4234:aafd:8631[This text may contain confidential data!!!]     13.6.2025--19:5:27
+Буфер     testmail@mailforspam.com[This text may contain confidential data!!!]     13.6.2025--19:5:35
+Буфер     2020 781901[This text may contain confidential data!!!]     13.6.2025--19:5:38
+Буфер     +79525112876[This text may contain confidential data!!!]     13.6.2025--19:5:41
+Буфер     2202 8901 8798 6751 (TEXT)     13.6.2025--19:5:44
+Буфер     192.168.89.10[This text may contain confidential data!!!]     13.6.2025--19:5:49
+Буфер     501 477 901 66 (TEXT)     13.6.2025--19:5:54
+Буфер     276707521143[This text may contain confidential data!!!]     13.6.2025--19:5:57
+Буфер     8A:38:69:BA:F7:98[This text may contain confidential data!!!]     13.6.2025--19:6:0
+Буфер     e991:4ea2:2fd1:0b01:a817:4234:aafd:8631[This text may contain confidential data!!!]     13.6.2025--19:6:3
+Система     Программа была выключена      13.6.2025--19:6:20
+USB     Нет флеш-накопителей     13.6.2025--19:10:2
+Буфер     e991:4ea2:2fd1:0b01:a817:4234:aafd:8631[This text may contain confidential data!!!]     13.6.2025--19:10:2
+Буфер     2202 8901 8798 6751 (TEXT)     13.6.2025--19:10:24
+Буфер     276707521143[This text may contain confidential data!!!]     13.6.2025--19:10:28
+Буфер     501 477 901 66[This text may contain confidential data!!!]     13.6.2025--19:10:30
+Буфер     507-477-901-66[This text may contain confidential data!!!]     13.6.2025--19:10:48
+Буфер     507-477-901 66[This text may contain confidential data!!!]     13.6.2025--19:10:53
+USB     Нет флеш-накопителей     13.6.2025--19:15:0
+Буфер     normal text test (TEXT)     13.6.2025--19:15:1
+Буфер     another normal text (TEXT)     13.6.2025--19:15:32
+Буфер     testmail@mailforspam.com[This text may contain confidential data!!!]     13.6.2025--19:15:36
+Буфер     2020 781901[This text may contain confidential data!!!]     13.6.2025--19:15:37
+Буфер     +79525112876[This text may contain confidential data!!!]     13.6.2025--19:15:39
+Буфер     2202 8901 8798 6751[This text may contain confidential data!!!]     13.6.2025--19:15:41
+Буфер     192.168.89.10[This text may contain confidential data!!!]     13.6.2025--19:15:44
+Буфер     501 477 901 66[This text may contain confidential data!!!]     13.6.2025--19:15:46
+Буфер     276707521143[This text may contain confidential data!!!]     13.6.2025--19:15:48
+Буфер     8A:38:69:BA:F7:98[This text may contain confidential data!!!]     13.6.2025--19:15:50
+Буфер     e991:4ea2:2fd1:0b01:a817:4234:aafd:8631[This text may contain confidential data!!!]     13.6.2025--19:15:52
+Буфер     507-477-901 66[This text may contain confidential data!!!]     13.6.2025--19:15:54
+Система     Программа была выключена      13.6.2025--19:16:20
+USB     Нет флеш-накопителей     13.6.2025--19:22:51
+Буфер     D:/TEST FOLDER/выфвф.txt (FILE)     13.6.2025--19:23:7
+Буфер     D:/TEST FOLDER/Лабораторная_101.pdf (FILE)     13.6.2025--19:23:15
+Буфер     D:/TEST FOLDER/Тестовый файл.txt (FILE)     13.6.2025--19:23:20
+Буфер     D:/TEST FOLDER/wow_pop.txt (FILE)     13.6.2025--19:23:24
+Буфер     D:/TEST FOLDER/newfold/doc44_1.txt (FILE)     13.6.2025--19:24:48
+Буфер     D:/TEST FOLDER/newfold/doc44.txt (FILE)     13.6.2025--19:24:53
+Буфер     D:/TEST FOLDER/compressed_pics/5c7330de16a406999607c87222ed0964.jpg (FILE)     13.6.2025--19:24:57
+Буфер     D:/TEST FOLDER/compressed_pics/44eb1537af06b754bd5871262b38c61b.jpg (FILE)     13.6.2025--19:25:0
+Буфер     D:/TEST FOLDER/compressed_pics/2017Animals___Birds_Green-eyed_owl_sits_on_a_spruce_branch_113088_.jpg (FILE)     13.6.2025--19:25:1
+Буфер     D:/TEST FOLDER/compressed_pics/2048x1366-px-animals-owl-1090499.jpg (FILE)     13.6.2025--19:25:2
+Буфер     D:/TEST FOLDER/compressed_pics/ab30db21e95215bdfbabb8010e357298.jpg (FILE)     13.6.2025--19:25:3
+Буфер     D:/TEST FOLDER/compressed_pics/maxresdefault.jpg (FILE)     13.6.2025--19:25:4
+Буфер     D:/TEST FOLDER/compressed_pics/d4eb3cf5247c9bd36ad9039a79c50146.jpg (FILE)     13.6.2025--19:25:5
+Буфер     D:/TEST FOLDER/compressed_pics/ce6c3b9889fdd53cdc494be4ed2d6604--lamborghini-concept-lamborghini-cars.jpg (FILE)     13.6.2025--19:25:6
+Буфер     D:/TEST FOLDER/newfold/Лабораторная_1.docx (FILE)     13.6.2025--19:25:10
+Буфер     D:/TEST FOLDER/Новая папка/Ogodaas.txt (FILE)     13.6.2025--19:25:13
+USB     Нет флеш-накопителей     13.6.2025--19:25:20created conf file      d:/test folder\Новая папка\Новый текстовый документ.txt     13.6.2025--19:25:20
+CREATED FILE (CONF)     d:/test folder\Новая папка\Новый текстовый документ.txt     13.6.2025--19:25:20
+Буфер     D:/TEST FOLDER/Новая папка/conf.txt (FILE)     13.6.2025--19:25:43
+Система     Программа была выключена      13.6.2025--19:26:2
+USB     Нет флеш-накопителей     13.6.2025--19:27:18
+Буфер     D:/TEST FOLDER/Новая папка/conf.txt (FILE)     13.6.2025--19:27:18
+Буфер     D:/TEST FOLDER/conf.txt (FILE)     13.6.2025--19:27:27
+USB     Нет флеш-накопителей     13.6.2025--19:27:33modified conf file      d:\test folder\conf.txt     13.6.2025--19:27:33
+MODIFIED FILE (CONF)     d:\test folder\conf.txt     13.6.2025--19:27:33
+Буфер     D:/TEST FOLDER/doc3_copy.txt (FILE)     13.6.2025--19:27:48
+Буфер     D:/TEST FOLDER/conf.txt (FILE)     13.6.2025--19:27:50
+USB     Нет флеш-накопителей     13.6.2025--19:38:27
+Буфер     file_path (TEXT)     13.6.2025--19:38:28
+USB     Нет флеш-накопителей     13.6.2025--19:38:28
+MODIFIED DIRECTORY     d:\test folder\compressed_pics     13.6.2025--19:38:28
+Буфер     D:/TEST FOLDER/conf.txt (FILE)     13.6.2025--19:38:38
+Буфер     D:/TEST FOLDER/doc3.txt (FILE)     13.6.2025--19:38:43
+Буфер     D:/TEST FOLDER/conf.txt (FILE)     13.6.2025--19:38:45
+USB     Нет флеш-накопителей     13.6.2025--19:38:45
+MODIFIED DIRECTORY     d:\test folder\newfold     13.6.2025--19:38:45
+Буфер     D:/TEST FOLDER/Новая папка/conf.txt (FILE)     13.6.2025--19:38:54
+USB     Нет флеш-накопителей     13.6.2025--19:44:24
+Буфер     D:/TEST FOLDER/выфвф.txt (FILE)     13.6.2025--19:44:24
+USB     Нет флеш-накопителей     13.6.2025--19:44:24
+MODIFIED FILE     d:\test folder\pics\maxresdefault dsad.jpg     13.6.2025--19:44:24
+Буфер     D:/TEST FOLDER/conf.txt (FILE)     13.6.2025--19:44:31
+Буфер     D:/TEST FOLDER/doc3.txt (FILE)     13.6.2025--19:44:36
+Буфер     D:/TEST FOLDER/doc3_copy.txt (FILE)     13.6.2025--19:44:38
+Буфер     D:/TEST FOLDER/hellothere.txt (FILE)     13.6.2025--19:44:42
+Буфер     D:/TEST FOLDER/test file.txt (FILE)     13.6.2025--19:44:43
+Буфер     D:/TEST FOLDER/Новая папка/conf.txt (FILE)     13.6.2025--19:44:45
+Система     Программа была выключена      13.6.2025--19:44:50
+USB     Нет флеш-накопителей     13.6.2025--19:47:3
+Буфер     D:/TEST FOLDER/Новая папка/conf.txt (FILE)     13.6.2025--19:47:3
+Буфер     D:/TEST FOLDER/conf.txt (FILE)     13.6.2025--19:47:11
+USB     Нет флеш-накопителей     13.6.2025--19:48:43
+Буфер     D:/TEST FOLDER/conf.txt (FILE)     13.6.2025--19:48:43
+USB     Нет флеш-накопителей     13.6.2025--19:48:43
+MODIFIED DIRECTORY     d:\test folder\pics     13.6.2025--19:48:43
+Буфер     D:/TEST FOLDER/doc3.txt (FILE)     13.6.2025--19:48:53
+Буфер     D:/TEST FOLDER/conf.txt (FILE)     13.6.2025--19:48:55
+USB     Нет флеш-накопителей     13.6.2025--19:49:1
+MODIFIED FILE     d:\test folder\pics\maxresdefault .jpg     13.6.2025--19:49:1
+USB     Нет флеш-накопителей     13.6.2025--19:50:34Copy conf file      D:/TEST FOLDER/conf.txt     13.6.2025--19:50:34
+||||||WARNING!|||||     13.6.2025--19:50:34Copy conf file      D:/TEST FOLDER/doc3.txt     13.6.2025--19:50:42
+||||||WARNING!|||||     13.6.2025--19:50:42Copy conf file      D:/TEST FOLDER/conf.txt     13.6.2025--19:50:43
+||||||WARNING!|||||     13.6.2025--19:50:43
+Система     Программа была выключена      13.6.2025--19:50:53
+USB     Нет флеш-накопителей     13.6.2025--20:10:41
+Буфер     D:/TEST FOLDER/test file.txt (FILE)     13.6.2025--20:10:41
+USB     Нет флеш-накопителей     13.6.2025--20:10:41
+MODIFIED FILE     d:\test folder\Новая папка\Ogodaas.txt     13.6.2025--20:10:41
+USB     Нет флеш-накопителей     13.6.2025--20:10:59created conf file      d:\test folder\Новый текстовый документ.txt     13.6.2025--20:10:59
+CREATED FILE (CONF)     d:\test folder\Новый текстовый документ.txt     13.6.2025--20:10:59
+USB     Нет флеш-накопителей     13.6.2025--20:11:33
+MOVED FILE     d:\test folder\Новый текстовый документ.txt     13.6.2025--20:11:33
+USB     Нет флеш-накопителей     13.6.2025--20:11:51modified conf file      d:\test folder\teols.txt     13.6.2025--20:11:51
+MODIFIED FILE (CONF)     d:\test folder\teols.txt     13.6.2025--20:11:51
+USB     Нет флеш-накопителей     13.6.2025--20:12:26
+MODIFIED FILE     d:\test folder\hellothere.txt     13.6.2025--20:12:27
+USB     Нет флеш-накопителей     13.6.2025--20:12:44
+MODIFIED FILE     d:\test folder\wow_pop.txt     13.6.2025--20:12:45
+Буфер     D:/Python/Python310/Lib/site-packages/asposeimagingcloudD:/Python/Python310/Lib/site-packages/aspose (TEXT)     13.6.2025--20:12:57
+USB     Нет флеш-накопителей     13.6.2025--20:13:3
+MODIFIED FILE     d:\test folder\выфвф_вай.txt     13.6.2025--20:13:3
+USB     Нет флеш-накопителей     13.6.2025--20:13:21
+DELETED FILE     d:\test folder\выфвф — копия.txt     13.6.2025--20:13:21
+USB     Нет флеш-накопителей     13.6.2025--20:13:40
+MODIFIED FILE (CONF)     d:\test folder\teols.txt     13.6.2025--20:13:40
+Буфер     D:/Python/Python310/Scripts/pip3.10.exe (FILE)     13.6.2025--20:14:0
+Буфер     D:/TEST FOLDER/vxcvxv.txt (FILE)     13.6.2025--20:14:30
+USB     Нет флеш-накопителей     13.6.2025--20:14:31
+CREATED FILE     d:\test folder\Новая папка\vxcvxv.txt     13.6.2025--20:14:31
+Буфер     D:/TEST FOLDER/Новая папка/vxcvxv.txt (FILE)     13.6.2025--20:14:39
+Система     Программа была выключена      13.6.2025--20:16:54
+USB     Флеш-накопитель(-и) был(-и) подключен(-ы)     13.6.2025--22:0:59
+USB     На флеш-накопителе (E:\) было обнаружено 234 конф. файлов.     13.6.2025--22:0:59
+Буфер     4.10 Демонстрация работы приложения[This text may contain confidential data!!!]     13.6.2025--22:1:0
+USB     Флеш-накопитель(-и) был(-и) подключен(-ы)     13.6.2025--22:1:0
+USB     На флеш-накопителе (E:\) было обнаружено 234 конф. файлов.     13.6.2025--22:1:0modified conf file      d:\test folder\doc3_copy.txt     13.6.2025--22:1:0
+MODIFIED FILE (CONF)     d:\test folder\doc3_copy.txt     13.6.2025--22:1:0
+USB     Флеш-накопитель(-и) был(-и) подключен(-ы)     13.6.2025--22:5:38
+USB     На флеш-накопителе (E:\) было обнаружено 234 конф. файлов.     13.6.2025--22:5:38
+MODIFIED FILE     d:\test folder\dsssss.docx     13.6.2025--22:5:39
+USB     Флеш-накопитель(-и) был(-и) подключен(-ы)     13.6.2025--22:6:13
+USB     На флеш-накопителе (E:\) было обнаружено 21 конф. файлов.     13.6.2025--22:6:13
+MODIFIED FILE     d:\test folder\hellothere.txt     13.6.2025--22:6:13
+USB     Нет флеш-накопителей     13.6.2025--22:6:31modified conf file      d:\test folder\new file sadas asd.txt     13.6.2025--22:6:31
+MODIFIED FILE (CONF)     d:\test folder\new file sadas asd.txt     13.6.2025--22:6:31
+USB     Нет флеш-накопителей     13.6.2025--22:7:5
+MODIFIED FILE     d:\test folder\skillbox_sql_dump.sql     13.6.2025--22:7:5
+USB     Нет флеш-накопителей     13.6.2025--22:7:22modified conf file      d:\test folder\teols.txt     13.6.2025--22:7:22
+MODIFIED FILE (CONF)     d:\test folder\teols.txt     13.6.2025--22:7:22
+USB     Нет флеш-накопителей     13.6.2025--22:7:57
+MODIFIED FILE     d:\test folder\test file.txt     13.6.2025--22:7:58
+USB     Нет флеш-накопителей     13.6.2025--22:8:15
+MODIFIED FILE     d:\test folder\vxcvxv.txt     13.6.2025--22:8:15
+USB     Нет флеш-накопителей     13.6.2025--22:8:32
+MODIFIED FILE     d:\test folder\wow_pop.txt     13.6.2025--22:8:33
+USB     Нет флеш-накопителей     13.6.2025--22:8:50
+MODIFIED FILE     d:\test folder\выфвф.txt     13.6.2025--22:8:50
+USB     Нет флеш-накопителей     13.6.2025--22:9:8
+MODIFIED FILE     d:\test folder\выфвф_вай.txt     13.6.2025--22:9:8
+USB     Нет флеш-накопителей     13.6.2025--22:9:26
+MODIFIED FILE     d:\test folder\Лабораторная_101.pdf     13.6.2025--22:9:26
+USB     Нет флеш-накопителей     13.6.2025--22:9:43
+MODIFIED FILE     d:\test folder\Тестовый файл.txt     13.6.2025--22:9:44
+USB     Нет флеш-накопителей     13.6.2025--22:10:1
+MODIFIED FILE     d:\test folder\compressed_pics\2017Animals___Birds_Green-eyed_owl_sits_on_a_spruce_branch_113088_.jpg     13.6.2025--22:10:1
+USB     Нет флеш-накопителей     13.6.2025--22:10:19
+MODIFIED FILE     d:\test folder\compressed_pics\2020Animals___Birds_A_large_gray_owl_with_yellow_eyes_sits_on_the_grass_142198_.jpg     13.6.2025--22:10:19
+USB     Нет флеш-накопителей     13.6.2025--22:10:36
+MODIFIED FILE     d:\test folder\compressed_pics\2048x1366-px-animals-owl-1090499.jpg     13.6.2025--22:10:37
+USB     Нет флеш-накопителей     13.6.2025--22:10:56
+MODIFIED FILE     d:\test folder\compressed_pics\44eb1537af06b754bd5871262b38c61b.jpg     13.6.2025--22:10:56
+USB     Нет флеш-накопителей     13.6.2025--22:11:16
+MODIFIED FILE     d:\test folder\compressed_pics\5c7330de16a406999607c87222ed0964.jpg     13.6.2025--22:11:16
+USB     Нет флеш-накопителей     13.6.2025--22:11:37
+MODIFIED FILE     d:\test folder\compressed_pics\95c326d3536543186ea4bde5bef2080f--animal-makeup-great-horned-owl.jpg     13.6.2025--22:11:37
+USB     Нет флеш-накопителей     13.6.2025--22:11:58
+MODIFIED FILE     d:\test folder\compressed_pics\ab30db21e95215bdfbabb8010e357298.jpg     13.6.2025--22:11:58
+USB     Нет флеш-накопителей     13.6.2025--22:12:19
+MODIFIED FILE     d:\test folder\compressed_pics\b2795c298fdb20455ea34d9de7295e28.jpg     13.6.2025--22:12:19
+USB     Нет флеш-накопителей     13.6.2025--22:12:40
+MODIFIED FILE     d:\test folder\compressed_pics\ce6c3b9889fdd53cdc494be4ed2d6604--lamborghini-concept-lamborghini-cars.jpg     13.6.2025--22:12:40
+USB     Нет флеш-накопителей     13.6.2025--22:13:1
+MODIFIED FILE     d:\test folder\compressed_pics\d4eb3cf5247c9bd36ad9039a79c50146.jpg     13.6.2025--22:13:1
+USB     Нет флеш-накопителей     13.6.2025--22:13:21
+MODIFIED FILE     d:\test folder\compressed_pics\maxresdefault (1).jpg     13.6.2025--22:13:21
+USB     Нет флеш-накопителей     13.6.2025--22:13:42
+MODIFIED FILE     d:\test folder\compressed_pics\maxresdefault.jpg     13.6.2025--22:13:42
+USB     Нет флеш-накопителей     13.6.2025--22:14:2
+MODIFIED FILE     d:\test folder\newfold\doc44.txt     13.6.2025--22:14:3
+USB     Нет флеш-накопителей     13.6.2025--22:14:23
+MODIFIED FILE     d:\test folder\newfold\doc44_1.txt     13.6.2025--22:14:24
+USB     Нет флеш-накопителей     13.6.2025--22:14:44
+MODIFIED FILE     d:\test folder\newfold\vxcvxv.txt     13.6.2025--22:14:44
+USB     Нет флеш-накопителей     13.6.2025--22:15:4
+MODIFIED FILE     d:\test folder\newfold\Лабораторная_1.docx     13.6.2025--22:15:5
+USB     Нет флеш-накопителей     13.6.2025--22:15:26
+MODIFIED FILE     d:\test folder\pics\2017Animals___Birds_Green-eyed_owl_sits_on_a_spruce_branch_113088_.jpg     13.6.2025--22:15:26
+USB     Нет флеш-накопителей     13.6.2025--22:15:47
+MODIFIED FILE     d:\test folder\pics\2020Animals___Birds_A_large_gray_owl_with_yellow_eyes_sits_on_the_grass_142198_.jpg     13.6.2025--22:15:47
+USB     Нет флеш-накопителей     13.6.2025--22:16:7
+MODIFIED FILE     d:\test folder\pics\2048x1366-px-animals-owl-1090499.jpg     13.6.2025--22:16:8
+USB     Нет флеш-накопителей     13.6.2025--22:16:28
+MODIFIED FILE     d:\test folder\pics\44eb1537af06b754bd5871262b38c61b.jpg     13.6.2025--22:16:28
+USB     Нет флеш-накопителей     13.6.2025--22:16:49
+MODIFIED FILE     d:\test folder\pics\5c7330de16a406999607c87222ed0964.jpg     13.6.2025--22:16:49
+USB     Нет флеш-накопителей     13.6.2025--22:17:10
+MODIFIED FILE     d:\test folder\pics\95c326d3536543186ea4bde5bef2080f--animal-makeup-great-horned-owl.jpg     13.6.2025--22:17:10
+USB     Нет флеш-накопителей     13.6.2025--22:17:31
+MODIFIED FILE     d:\test folder\pics\ab30db21e95215bdfbabb8010e357298.jpg     13.6.2025--22:17:31
+USB     Нет флеш-накопителей     13.6.2025--22:17:51
+MODIFIED FILE     d:\test folder\pics\b2795c298fdb20455ea34d9de7295e28.jpg     13.6.2025--22:17:52
+USB     Нет флеш-накопителей     13.6.2025--22:18:12
+MODIFIED FILE     d:\test folder\pics\ce6c3b9889fdd53cdc494be4ed2d6604--lamborghini-concept-lamborghini-cars.jpg     13.6.2025--22:18:13
+USB     Нет флеш-накопителей     13.6.2025--22:18:32
+MODIFIED FILE     d:\test folder\pics\d4eb3cf5247c9bd36ad9039a79c50146.jpg     13.6.2025--22:18:33
+USB     Нет флеш-накопителей     13.6.2025--22:18:54
+MODIFIED FILE     d:\test folder\pics\maxresdefault .jpg     13.6.2025--22:18:54
+USB     Нет флеш-накопителей     13.6.2025--22:19:15
+MODIFIED FILE     d:\test folder\pics\maxresdefault dsad.jpg     13.6.2025--22:19:15
+USB     Нет флеш-накопителей     13.6.2025--22:19:35modified conf file      d:\test folder\Новая папка\conf.txt     13.6.2025--22:19:35
+MODIFIED FILE (CONF)     d:\test folder\Новая папка\conf.txt     13.6.2025--22:19:35
+USB     Нет флеш-накопителей     13.6.2025--22:20:16
+MODIFIED FILE     d:\test folder\Новая папка\Ogodaas.txt     13.6.2025--22:20:17
+Система     Программа была выключена      13.6.2025--22:37:55
