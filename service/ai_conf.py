@@ -117,18 +117,20 @@ def preprocess_text(text):
 
 def prepare_text_for_model(train_texts, test_texts=None):
     """
-    Векторизация текста с правильным разделением на train/test
+        Векторизация текста с правильным разделением на train/test
 
-    :param train_texts: тексты для обучения
-    :param test_texts: тексты для тестирования (опционально)
-    :return: кортеж (vectorizer, train_features, test_features)
+        :param train_texts: тексты для обучения
+        :param test_texts: тексты для тестирования (опционально)
+        :return: кортеж (vectorizer, train_features, test_features)
     """
     vectorizer = TfidfVectorizer(
-        max_features=20000,  # Ограничение количества фичей
-        ngram_range=(1, 2),  # Использование униграмм и биграмм
-        min_df=2,  # Игнорировать редкие слова
-        max_df=0.95,  # Игнорировать слишком частые слова
-        stop_words='english'  # Удаление стоп-слов
+        max_features=10000,  # Ограничение количества фичей
+        ngram_range=(1, 4),  # Использование униграмм и биграмм
+        min_df=3,  # Игнорировать редкие слова
+        max_df=0.93,  # Игнорировать слишком частые слова
+        stop_words='english',  # Удаление стоп-слов
+        sublinear_tf=True,  # Логарифмическое масштабирование
+        binary=True  # Бинарная векторизация
     )
 
     # Обучение векторизатора только на тренировочных данных
@@ -147,6 +149,18 @@ def make_model_custom_classifier(text_data=data['text'], classifier='SVM'):
         :param classifier: указанный пользователем классификатор
         :return: None
     """
+
+    data['processed_text'] = data['text'].apply(preprocess_text)
+
+    X_train_raw, X_test_raw, y_train, y_test = train_test_split(
+        data['processed_text'],
+        data['label'].astype(int),
+        test_size=0.2,
+        random_state=42
+    )
+
+    # 2. Векторизация с правильным разделением
+    vectorizer, X_train, X_test = prepare_text_for_model(X_train_raw, X_test_raw)
 
     custom_model = None
 
@@ -176,9 +190,6 @@ def make_model_custom_classifier(text_data=data['text'], classifier='SVM'):
         custom_model = SVC(kernel='linear')
 
     create_model_time = datetime.datetime.now()
-    vectorizer, features = prepare_text_for_model(text_data)
-
-    X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.2)
 
     # Обучаем модель
     print("Модель", classifier, "обучается...")
@@ -298,22 +309,30 @@ def make_model_mine(text_data=data['text']):
 
     # Определяем архитектуру нейросети
     model = tf.keras.models.Sequential()
-    # model.add(tf.keras.layers.Dense(128, activation='relu', kernel_regularizer='l2',
-    #     input_shape=(len(vectorizer.get_feature_names_out()),)))
-    model.add(tf.keras.layers.Dense(64, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(1e-4),
-                                    input_shape=(X_train.shape[1],)))
+    model.add(tf.keras.layers.Dense(256, activation='relu',
+                                    kernel_regularizer=tf.keras.regularizers.l2(1e-4)))
     model.add(tf.keras.layers.BatchNormalization())
-    model.add(tf.keras.layers.Dropout(0.55))
 
-    model.add(tf.keras.layers.Dense(32, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(1e-4)))
+    model.add(tf.keras.layers.Dense(128, activation='relu',
+                                    kernel_regularizer=tf.keras.regularizers.l2(1e-4)))
     model.add(tf.keras.layers.BatchNormalization())
-    model.add(tf.keras.layers.Dropout(0.55))
-
-    model.add(tf.keras.layers.Dense(16, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(1e-4)))
-    model.add(tf.keras.layers.BatchNormalization())
-    model.add(tf.keras.layers.Dropout(0.55))
 
     model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
+
+    # model = tf.keras.Sequential()
+    # model.add(tf.keras.layers.Reshape((-1, 1),))
+    # model.add(tf.keras.layers.Conv1D(64, 3, activation='relu'))
+    # model.add(tf.keras.layers.GlobalMaxPooling1D())
+    # model.add(tf.keras.layers.Dense(32, activation='relu', kernel_regularizer='l2'))
+    # model.add(tf.keras.layers.Dropout(0.25))
+    # model.add(tf.keras.layers.BatchNormalization())
+    # model.add(tf.keras.layers.Dense(16, activation='relu', kernel_regularizer='l2'))
+    # model.add(tf.keras.layers.Dropout(0.25))
+    # model.add(tf.keras.layers.BatchNormalization())
+    # model.add(tf.keras.layers.Dense(8, activation='relu', kernel_regularizer='l2'))
+    # model.add(tf.keras.layers.Dropout(0.25))
+    # model.add(tf.keras.layers.BatchNormalization())
+    # model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
 
     # Компилируем модель
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
@@ -322,11 +341,11 @@ def make_model_mine(text_data=data['text']):
     data['label'] = data['label'].astype(int)
 
     # Добавляем кросс-валидационную выборку
-    x_train, x_cv, y_train, y_cv = train_test_split(X_train, y_train, test_size=0.2)
+    X_train, x_cv, y_train, y_cv = train_test_split(X_train, y_train, test_size=0.2)
 
     # Обучаем модель
     history = model.fit(
-        x_train, y_train, epochs=8, batch_size=32, verbose=1,
+        X_train, y_train, epochs=12, batch_size=128, verbose=1,
         validation_data=(x_cv, y_cv),
     )
 
@@ -523,7 +542,6 @@ if __name__ == "__main__":
 
     # make_model_custom_classifier(classifier='Random Forest')
     # make_model_custom_classifier(classifier='SVM')
-
     # make_model_custom_classifier(classifier='Logistic Regression')
     # make_model_custom_classifier(classifier='KNN')
     # make_model_custom_classifier(classifier='Decision Tree')
