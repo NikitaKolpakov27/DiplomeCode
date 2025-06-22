@@ -1,7 +1,6 @@
 import os
 import bcrypt
 
-
 def create_passwd(password):
     """
         Создание пароля (его хеша) для входа в DLP-систему из случайных букв и цифр
@@ -44,6 +43,3 @@ def check_passwd(entered_passwd) -> bool:
             * False - не совпадают
     """
     return bcrypt.checkpw(entered_passwd.encode('utf-8'), get_passwd())
-    # right_passwd = get_passwd()
-    #
-    # return entered_passwd == right_passwd

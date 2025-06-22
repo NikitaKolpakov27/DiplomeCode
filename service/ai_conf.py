@@ -124,13 +124,13 @@ def prepare_text_for_model(train_texts, test_texts=None):
         :return: кортеж (vectorizer, train_features, test_features)
     """
     vectorizer = TfidfVectorizer(
-        max_features=10000,  # Ограничение количества фичей
-        ngram_range=(1, 4),  # Использование униграмм и биграмм
-        min_df=3,  # Игнорировать редкие слова
-        max_df=0.93,  # Игнорировать слишком частые слова
-        stop_words='english',  # Удаление стоп-слов
-        sublinear_tf=True,  # Логарифмическое масштабирование
-        binary=True  # Бинарная векторизация
+        max_features=3000,
+        ngram_range=(1, 4),
+        min_df=3,
+        max_df=0.93,
+        stop_words='english',
+        sublinear_tf=True,
+        binary=True
     )
 
     # Обучение векторизатора только на тренировочных данных
@@ -141,7 +141,7 @@ def prepare_text_for_model(train_texts, test_texts=None):
 
     return vectorizer, train_features, test_features
 
-def make_model_custom_classifier(text_data=data['text'], classifier='SVM'):
+def make_model_custom_classifier(classifier='SVM'):
     """
         Создание модели и предсказание результатов
 
@@ -225,61 +225,7 @@ def make_model_custom_classifier(text_data=data['text'], classifier='SVM'):
     file.close()
 
 
-# Особенная, не подходит под другие простые
-def make_model_lstm(text_data=data['text']):
-    """
-        Создание модели на основе LSTM-сетей и предсказание результатов
-        P.S. Пока не работает, нужно больше мощностей!
-
-        :param text_data: обработанные данные из датасета (после лематизации и пр.)
-        :return: None
-    """
-    global X_train, X_test, y_train, y_test
-
-    vectorizer, features = prepare_text_for_model(text_data)
-
-    # Divide the dataset into test and training sets.
-    X_train, X_test, y_train, y_test = train_test_split(features, data['label'], test_size=0.2)
-
-    # Reshape input data
-    X_train = X_train.reshape((X_train.shape[0], X_train.shape[1], 1))
-    X_test = X_test.reshape((X_test.shape[0], X_test.shape[1], 1))
-
-    print('Размерность X_train:', X_train.shape)
-    print('Размерность X_test:', X_test.shape)
-
-    print(u'Собираем модель...')
-    print("Len special: ", len(vectorizer.get_feature_names_out()), )
-    lstm_model = tf.keras.models.Sequential()
-    # lstm_model.add(tf.keras.layers.Embedding(input_dim=500, output_dim=64))
-    lstm_model.add(
-        tf.keras.layers.LSTM(units=64, return_sequences=True, input_shape=(X_train.shape[1], X_train.shape[2])))
-    lstm_model.add(tf.keras.layers.LSTM(units=64, return_sequences=True))
-    lstm_model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
-
-    lstm_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-
-    print(lstm_model.summary())
-
-    print(u'Преобразуем категории в матрицу двоичных чисел '
-          u'(для использования categorical_crossentropy)')
-
-    num_classes = 2
-
-    # y_train = keras.utils.to_categorical(y_train, num_classes)
-    # y_test = keras.utils.to_categorical(y_test, num_classes)
-    print('y_train shape:', y_train.shape)
-    print('y_test shape:', y_test.shape)
-
-    print(u'Тренируем модель...')
-    history = lstm_model.fit(X_train, y_train, batch_size=128, epochs=10, verbose=1)
-    score = lstm_model.evaluate(X_test, y_test)
-    print()
-    print(u'Оценка теста: {}'.format(score[0]))
-    print(u'Оценка точности модели: {}'.format(score[1]))
-
-
-def make_model_mine(text_data=data['text']):
+def make_model_mine():
     """
         Создание модели на основе MLP (multilayer perceptron) и предсказание результатов
 
@@ -296,7 +242,6 @@ def make_model_mine(text_data=data['text']):
     # Предобработка текста
     data['processed_text'] = data['text'].apply(preprocess_text)
 
-    # 1. ПРАВИЛЬНОЕ РАЗДЕЛЕНИЕ ДАННЫХ ДО ВЕКТОРИЗАЦИИ
     X_train_raw, X_test_raw, y_train, y_test = train_test_split(
         data['processed_text'],
         data['label'].astype(int),
@@ -306,6 +251,8 @@ def make_model_mine(text_data=data['text']):
 
     # 2. Векторизация с правильным разделением
     vectorizer, X_train, X_test = prepare_text_for_model(X_train_raw, X_test_raw)
+
+    print("Len: ", len(X_train[0]))
 
     # Определяем архитектуру нейросети
     model = tf.keras.models.Sequential()
@@ -319,21 +266,6 @@ def make_model_mine(text_data=data['text']):
 
     model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
 
-    # model = tf.keras.Sequential()
-    # model.add(tf.keras.layers.Reshape((-1, 1),))
-    # model.add(tf.keras.layers.Conv1D(64, 3, activation='relu'))
-    # model.add(tf.keras.layers.GlobalMaxPooling1D())
-    # model.add(tf.keras.layers.Dense(32, activation='relu', kernel_regularizer='l2'))
-    # model.add(tf.keras.layers.Dropout(0.25))
-    # model.add(tf.keras.layers.BatchNormalization())
-    # model.add(tf.keras.layers.Dense(16, activation='relu', kernel_regularizer='l2'))
-    # model.add(tf.keras.layers.Dropout(0.25))
-    # model.add(tf.keras.layers.BatchNormalization())
-    # model.add(tf.keras.layers.Dense(8, activation='relu', kernel_regularizer='l2'))
-    # model.add(tf.keras.layers.Dropout(0.25))
-    # model.add(tf.keras.layers.BatchNormalization())
-    # model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
-
     # Компилируем модель
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
@@ -345,7 +277,7 @@ def make_model_mine(text_data=data['text']):
 
     # Обучаем модель
     history = model.fit(
-        X_train, y_train, epochs=12, batch_size=128, verbose=1,
+        X_train, y_train, epochs=11, batch_size=128, verbose=1,
         validation_data=(x_cv, y_cv),
     )
 
@@ -408,9 +340,9 @@ def make_model_mine(text_data=data['text']):
     vectorizer_path = correct_path + "/vectorizer.joblib"
 
     # Сохраняем полученную модель и вектор в отдельный файл (для его повторного использования в других задачах)
-    # from joblib import dump
-    # dump(model, model_path, compress=9)
-    # dump(vectorizer, vectorizer_path, compress=9)
+    from joblib import dump
+    dump(model, model_path, compress=9)
+    dump(vectorizer, vectorizer_path, compress=9)
 
 
 def predict_model(text_feature) -> str:
